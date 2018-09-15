@@ -4,3 +4,30 @@ body,
   height: 100%;
   margin: 0;
 }
+
+/* global list css */
+
+li {
+  padding: 10px;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+/* Footer global css */
+
+Footer {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+}
+
+/* Custom css */
+#mt {
+  margin-top: 10%;
+}
+
+.section {
+  min-height: 100%;
+}

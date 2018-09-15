@@ -1,10 +1,14 @@
-$(document).ready(function() {
-	$('#fullpage').fullpage({
-		//options here
-		autoScrolling:true,
-		scrollHorizontally: true
-	});
+$(document).ready(() => {
+  $('#fullpage').fullpage({
+    // options here
+    autoScrolling: true,
+    scrollHorizontally: true,
+  });
 
-	//methods
-	// $.fn.fullpage.setAllowScrolling(false);
+  // methods
+  // $.fn.fullpage.setAllowScrollingI(false);
+});
+
+$(document).ready(() => {
+  $('.tabs').tabs();
 });
