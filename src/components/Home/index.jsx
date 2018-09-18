@@ -11,7 +11,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="fullpage">
         <div className="section" id="gradient">
           <div className="row center">
             <div className="col s12">

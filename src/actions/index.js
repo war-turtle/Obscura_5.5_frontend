@@ -87,9 +87,10 @@ const getLevel = (alias, jwtToken) => (dispatch) => {
   );
 };
 
-const getAlias = jwtToken => (dispatch) => {
-  services.getAlias(jwtToken).then(
+const getAlias = () => (dispatch) => {
+  services.getAlias().then(
     (response) => {
+      console.log(response);
       if (response.status === 'success') {
         dispatch(success('ALIAS_SUCCESS', response.alias));
       } else {

@@ -68,10 +68,11 @@ const fetchLevel = (alias, jwtToken) => {
     });
 };
 
-const getAlias = (jwtToken) => {
-  reqOptions.headers.jwtToken = jwtToken;
+const getAlias = () => {
+  console.log('hi-- ');
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
-  return fetch(`${config.api.url}alias`, reqOptions)
+  return fetch(`${config.api.url}/levels?action=getLevelAlias`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
