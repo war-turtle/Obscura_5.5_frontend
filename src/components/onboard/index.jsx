@@ -1,14 +1,12 @@
 import React from 'react';
+import loadjs from 'loadjs';
 import Form from './form';
-import Avatar from './avatar';
 import Team from './team';
 
 class Onboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
+  constructor() {
+    super();
+    loadjs('/js/init.js');
   }
 
   render() {
@@ -27,11 +25,6 @@ class Onboard extends React.Component {
                       </a>
                     </li>
                     <li className="tab col s3">
-                      <a className="active" href="#test2">
-                        Test 2
-                      </a>
-                    </li>
-                    <li className="tab col s3">
                       <a href="#test3">
                         test 3
                       </a>
@@ -42,10 +35,6 @@ class Onboard extends React.Component {
 
                 <div id="test1" className="col s12">
                   <Form />
-                </div>
-
-                <div id="test2" className="col s12">
-                  <Avatar />
                 </div>
                 <div id="test3" className="col s12">
                   <Team />
@@ -58,5 +47,6 @@ class Onboard extends React.Component {
     );
   }
 }
+
 
 export default Onboard;

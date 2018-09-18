@@ -4,7 +4,7 @@ class Avatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedAvatar: null
+      selectedAvatar: null,
     };
 
     this.selectAvatar = this.selectAvatar.bind(this);
@@ -12,8 +12,10 @@ class Avatar extends React.Component {
 
   selectAvatar = (e) => {
     this.setState({
-      selectedAvatar: e.currentTarget.dataset.id
-    })
+      selectedAvatar: e.currentTarget.dataset.id,
+    });
+    const { onSelectAvatar } = this.props;
+    onSelectAvatar(e.currentTarget.dataset.id);
   }
 
   render() {
@@ -26,7 +28,7 @@ class Avatar extends React.Component {
         <div className="col s12">
           {
             avatarName.map(i => (
-              <img data-id={i} className={(i === this.state.selectedAvatar) ? "circle responsive-img z-depth-5" : "circle responsive-img"} onClick={this.selectAvatar} key={i} src={i} alt="img" width="100" />
+              <img data-id={i} className={(i === this.state.selectedAvatar) ? 'circle responsive-img z-depth-5' : 'circle responsive-img'} onClick={this.selectAvatar} key={i} src={i} alt="img" width="100" />
             ))
           }
         </div>
@@ -34,5 +36,13 @@ class Avatar extends React.Component {
     );
   }
 }
+
+Avatar.defaultProps = {
+  onSelectAvatar: () => null,
+};
+
+Avatar.propTypes = {
+  onSelectAvatar: () => null,
+};
 
 export default Avatar;

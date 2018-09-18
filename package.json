@@ -6,6 +6,8 @@
     "crypto-json": "^2.0.2",
     "eslint-config-airbnb-bundle": "^2.0.4",
     "history": "^4.7.2",
+    "jwt-decode": "^2.2.0",
+    "loadjs": "^3.5.4",
     "node-fetch": "^2.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",

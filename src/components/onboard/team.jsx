@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import actions from '../../actions';
+import Avatar from './avatar';
 
 class Team extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Team extends React.Component {
       name: '',
       picture: '',
     };
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -25,13 +26,25 @@ class Team extends React.Component {
     console.log(nextProps);
   }
 
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    const { createTeam } = this.props;
+    createTeam(this.state);
+  }
+
+  changeAvatar = (avatar) => {
+    this.setState({ picture: avatar });
+    console.log(avatar);
+  }
+
   sendRequest(id) {
     const { sendTeamRequest } = this.props;
     sendTeamRequest(id);
-  }
-
-  createTeam() {
-    const { createTeam } = this.props;
   }
 
   render() {
@@ -104,32 +117,25 @@ class Team extends React.Component {
                     Create Your Own Team
                   </h4>
                   <div className="row">
-                    <form className="col s12" onSubmit={(e) => { e.preventDefault(); }}>
+                    <form className="col s12" onSubmit={this.handleSubmit}>
                       <div className="row">
                         <div className="input-field col s12">
-                          <input id="name" type="text" name="name" className="validate" />
+                          <input id="name" type="text" name="name" value={name} className="validate" onChange={this.onChange} />
                           <label htmlFor="name">
                             Team name
                           </label>
                         </div>
                       </div>
                       <div className="input-field col s12">
-                        <select className="icons" name="picture">
-                          <option value="" disabled>
-                            Choose your option
-                          </option>
-                          {
-                            avatarName.map((i, index) => (
-                              <option key={i} value={i} data-icon={i} className="left circle">
-                                Avatar
-                                {` ${index + 1}`}
-                              </option>
-                            ))
-                          }
-                        </select>
-                        <label>
-                          Images in select
-                        </label>
+                        <a href="#modal2" className="btn-floating btn-large modal-trigger" />
+                        <div id="modal2" className="modal">
+                          <div className="modal-content">
+                            <h4>
+                              Select your avatar
+                            </h4>
+                            <Avatar onSelectAvatar={this.changeAvatar} />
+                          </div>
+                        </div>
                       </div>
                       <button className="modal-close btn waves-effect waves-light" type="submit">
                         Submit

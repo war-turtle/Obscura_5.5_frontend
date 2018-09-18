@@ -1,6 +1,8 @@
 import fetch from 'node-fetch';
 import config from '../config';
 
+const jwtDecode = require('jwt-decode');
+
 const cryptoJSON = require('crypto-json');
 
 
@@ -30,17 +32,19 @@ const login = (token, provider) => {
     });
 };
 
-const signupUser = (formData) => {
-  reqOptions.method = 'POST';
+const onBoardUser = (formData) => {
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  console.log(jwtDecode(localStorage.getItem('jwtToken')).user._id);
+  reqOptions.method = 'PUT';
   reqOptions.body = JSON.stringify(formData);
-  return fetch(`${config.api.url}signup`, reqOptions)
+  return fetch(`${config.api.url}/players/${jwtDecode(localStorage.getItem('jwtToken')).user._id}`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
 
 const fetchLeaderboard = (jwtToken) => {
   reqOptions.headers.jwtToken = jwtToken;
-  return fetch(`${config.api.url}leaderboard`, reqOptions)
+  return fetch(`${config.api.url}/leaderboard`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
@@ -97,9 +101,18 @@ const sendTeamRequest = (teamId) => {
     .then(response => response);
 };
 
+const createTeam = (formData) => {
+  reqOptions.body = JSON.stringify(formData);
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.method = 'POST';
+  return fetch(`${config.api.url}/teams`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
 export default {
   login,
-  signupUser,
+  onBoardUser,
   fetchLeaderboard,
   getAlias,
   fetchLevel,
@@ -107,4 +120,5 @@ export default {
   getLevelList,
   getTeamList,
   sendTeamRequest,
+  createTeam,
 };

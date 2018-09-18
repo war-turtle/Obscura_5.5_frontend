@@ -1,49 +1,52 @@
-import React from "react";
-import { FacebookLogin } from "react-facebook-login-component";
-import { GoogleLogin } from "react-google-login";
+import React from 'react';
+import { FacebookLogin } from 'react-facebook-login-component';
+import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
-import actions from '../../actions';
 import {
-  withRouter
+  withRouter,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import actions from '../../actions';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
 
-    }
-  };
-
-  responseGoogle = (response) => {
-    // this.setState({
-    //     classname: "preloader-wrapper big active loader"
-    // })
-    if(!response.tokenId) {
-      alert('try aganin');
-      return;
-    }
-    this.props.login(response.tokenId, 'google');
-  };
-
-  responseFacebook = response => {
-    // this.setState({
-    //   classname: "preloader-wrapper big active loader"
-    // });
-    if(!response.accessToken) {
-      alert('try aganin');
-      return;
-    }
-    this.props.login(response.accessToken, 'facebook');
-  };
+    };
+    console.log(this.props, 'hello');
+  }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    const { history } = this.props;
     if (nextProps.loggedin && nextProps.onboard) {
-      this.props.history.push('/dashboard');
+      history.push('/dashboard');
     } else if (nextProps.loggedin && !nextProps.onboard) {
-      this.props.history.push('/onboard');
+      history.push('/onboard');
     }
   }
+
+  responseGoogle = (response) => {
+    if (!response.tokenId) {
+      alert('try aganin');
+      return;
+    }
+    console.log(this.props);
+    const { login } = this.props;
+    login(response.tokenId, 'google');
+  }
+
+  responseFacebook = (response) => {
+    if (!response.accessToken) {
+      alert('try aganin');
+      return;
+    }
+    console.log(this.props);
+    const { login } = this.props;
+    login(response.accessToken, 'facebook');
+  }
+
 
   render() {
     return (
@@ -60,7 +63,7 @@ class Login extends React.Component {
           language="en_US"
           scope="public_profile,email"
           responseHandler={this.responseFacebook}
-          xfbml={true}
+          xfbml
           fields="id,email,name,picture"
           version="v2.5"
           className="btn waves-effect waves-light login indigo"
@@ -70,20 +73,31 @@ class Login extends React.Component {
     );
   }
 }
+Login.propTypes = {
+  login: () => null,
+  loggedin: PropTypes.bool,
+  onboard: PropTypes.bool,
+  history: () => null,
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    loggedin: state.user.loggedin
-  }
-}
+
+Login.defaultProps = {
+  login: () => null,
+  loggedin: false,
+  onboard: false,
+  history: () => null,
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  onboard: state.user.onboard,
+  loggedin: state.user.loggedin,
+});
 
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    login: (token, provider) => {
-      dispatch(actions.login(token, provider))
-    }
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  login: (token, provider) => {
+    dispatch(actions.login(token, provider));
+  },
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

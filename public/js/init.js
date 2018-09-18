@@ -20,3 +20,7 @@ $(document).ready(() => {
 $(document).ready(() => {
   $('select').formSelect();
 });
+
+$(document).ready(() => {
+  $('.sidenav').sidenav();
+});

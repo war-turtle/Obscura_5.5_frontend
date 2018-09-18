@@ -1,5 +1,6 @@
 import { showSnack } from 'react-redux-snackbar';
 import services from '../services';
+import history from '../utils/history';
 
 const success = (type, data) => ({
   type,
@@ -45,7 +46,7 @@ const getLevelList = token => (dispatch) => {
 };
 
 const onboard = formData => (dispatch) => {
-  services.onboardUser(formData).then(
+  services.onBoardUser(formData).then(
     (response) => {
       if (response.jwtToken) {
         dispatch(success('SIGNUP_SUCCESS', response));
@@ -151,6 +152,19 @@ const sendTeamRequest = teamId => (dispatch) => {
   );
 };
 
+const createTeam = formData => (dispatch) => {
+  services.createTeam(formData).then(
+    (response) => {
+      if (response.success) {
+        history.push('/dashboard');
+      } else {
+        dispatch(failure('ERROR_TEAM_CREATE', null));
+      }
+    },
+  );
+};
+
+
 export default {
   login,
   getLevelList,
@@ -161,4 +175,5 @@ export default {
   postAns,
   getTeamList,
   sendTeamRequest,
+  createTeam,
 };

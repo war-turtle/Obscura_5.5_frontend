@@ -3,6 +3,9 @@ import { snackbarReducer } from 'react-redux-snackbar';
 import initialState from './initialState';
 import history from '../utils/history';
 
+const jwtDecode = require('jwt-decode');
+
+
 const url = (state = initialState, action) => {
   switch (action.type) {
     case 'URL':
@@ -20,6 +23,7 @@ const user = (state = initialState.user, action) => {
         jwtToken: action.data.data.jwtToken,
         loggedin: true,
         registered: true,
+        onboard: !!(jwtDecode(action.data.data.token).user.onboard),
       });
 
     case 'SIGNUP_REQUIRED':
@@ -29,16 +33,13 @@ const user = (state = initialState.user, action) => {
       });
 
     case 'SIGNUP_SUCCESS':
-      localStorage.setItem('jwtToken', action.user.jwtToken);
-      localStorage.setItem('name', action.user.name);
-      localStorage.setItem('username', action.user.username);
-      localStorage.setItem('email', action.user.email);
-      localStorage.setItem('phone', action.user.phone);
-      localStorage.setItem('picture', action.user.picture);
+      console.log(action.data);
+      localStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
         loggedin: true,
-        jwtToken: action.user.jwtToken,
+        jwtToken: action.data.data.token,
         registered: true,
+        onboard: true,
       });
 
     case 'SIGNUP_ERROR':
