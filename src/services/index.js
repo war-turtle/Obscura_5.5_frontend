@@ -81,6 +81,22 @@ const postAns = (ans, jwtToken, alias) => {
     .then(response => response);
 };
 
+const getTeamList = () => {
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.method = 'GET';
+  return fetch(`${config.api.url}/teams`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
+const sendTeamRequest = (teamId) => {
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.method = 'PUT';
+  return fetch(`${config.api.url}/teams/${teamId}?action=request`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
 export default {
   login,
   signupUser,
@@ -89,4 +105,6 @@ export default {
   fetchLevel,
   postAns,
   getLevelList,
+  getTeamList,
+  sendTeamRequest,
 };

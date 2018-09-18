@@ -12,3 +12,11 @@ $(document).ready(() => {
 $(document).ready(() => {
   $('.tabs').tabs();
 });
+
+$(document).ready(() => {
+  $('.modal').modal();
+});
+
+$(document).ready(() => {
+  $('select').formSelect();
+});

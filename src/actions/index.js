@@ -127,6 +127,30 @@ const postAns = (ans, jwtToken, alias) => (dispatch) => {
   });
 };
 
+const getTeamList = () => (dispatch) => {
+  services.getTeamList().then(
+    (response) => {
+      if (response.success) {
+        dispatch(success('TEAM_LIST_FETCHED', response.data));
+      } else {
+        dispatch(success('TEAM_LIST_FAILURE', response.data));
+      }
+    },
+  );
+};
+
+const sendTeamRequest = teamId => (dispatch) => {
+  services.sendTeamRequest(teamId).then(
+    (response) => {
+      if (response.success) {
+        dispatch(success('SUCCESSFULLY_SENT_REQUEST', teamId));
+      } else {
+        dispatch(failure('ERROR_SENDING_REQUEST', null));
+      }
+    },
+  );
+};
+
 export default {
   login,
   getLevelList,
@@ -135,4 +159,6 @@ export default {
   getLevel,
   getAlias,
   postAns,
+  getTeamList,
+  sendTeamRequest,
 };

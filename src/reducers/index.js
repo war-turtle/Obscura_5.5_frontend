@@ -47,6 +47,20 @@ const user = (state = initialState.user, action) => {
         signupRequired: false,
       });
 
+    case 'SUCCESSFULLY_SENT_REQUEST':
+      return Object.assign({}, state, {
+        sentRequests: state.sentRequests.push(action.data),
+      });
+
+    default:
+      return state;
+  }
+};
+
+const teams = (state = initialState.teams, action) => {
+  switch (action.type) {
+    case 'TEAM_LIST_FETCHED':
+      return action.data;
     default:
       return state;
   }
@@ -123,6 +137,7 @@ const rootReducer = combineReducers({
   leaderboard,
   level,
   url,
+  teams,
   snackbar: snackbarReducer,
 });
 

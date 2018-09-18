@@ -19,23 +19,28 @@ class Login extends React.Component {
     // this.setState({
     //     classname: "preloader-wrapper big active loader"
     // })
-    console.log(this.props);
+    if(!response.tokenId) {
+      alert('try aganin');
+      return;
+    }
     this.props.login(response.tokenId, 'google');
-    console.log(response);
   };
 
   responseFacebook = response => {
     // this.setState({
     //   classname: "preloader-wrapper big active loader"
     // });
-    console.log(response);
+    if(!response.accessToken) {
+      alert('try aganin');
+      return;
+    }
+    this.props.login(response.accessToken, 'facebook');
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.loggedin && nextProps.onboard) {
       this.props.history.push('/dashboard');
     } else if (nextProps.loggedin && !nextProps.onboard) {
-      console.log('yeh');
       this.props.history.push('/onboard');
     }
   }
