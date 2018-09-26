@@ -4,9 +4,14 @@ import Footer from '../Footer';
 import Login from '../Login';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     loadjs('/js/init.js');
+  }
+
+  componentDidMount = () => {
+    const { socket } = this.props;
+    console.log(socket);
   }
 
   render() {

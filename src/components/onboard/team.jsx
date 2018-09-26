@@ -22,8 +22,22 @@ class Team extends React.Component {
     getTeamList();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = (nextProps) => {
     console.log(nextProps);
+    nextProps.teams.map((t) => {
+      nextProps.userRequests.map((i) => {
+        console.log(i, t._id);
+        if (i === t._id) {
+          console.log('matched');
+          t.className = 'waves-effect waves-light btn disabled';
+          t.content = 'Sent';
+        } else {
+          t.className = 'waves-effect waves-light btn';
+          t.content = 'Send Request';
+        }
+        console.log(t);
+      });
+    });
   }
 
   onChange = (e) => {
@@ -32,14 +46,12 @@ class Team extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
     const { createTeam } = this.props;
     createTeam(this.state);
   }
 
   changeAvatar = (avatar) => {
     this.setState({ picture: avatar });
-    console.log(avatar);
   }
 
   sendRequest(id) {
@@ -48,7 +60,7 @@ class Team extends React.Component {
   }
 
   render() {
-    const { teams } = this.props;
+    const { teams, userRequests } = this.props;
     const avatarName = [];
     for (let i = 2; i <= 60; i += 1) {
       avatarName.push(`/images/avatars/${i}.png`);
@@ -58,6 +70,9 @@ class Team extends React.Component {
     return (
       <div className="row">
         <div className="col s12 black-text">
+          <h6>
+            Create/Join a Team
+          </h6>
           <table className="highlight centered responsive-table">
             <thead>
               <tr>
@@ -83,7 +98,7 @@ class Team extends React.Component {
               {teams.map(t => (
                 <tr key={t.name}>
                   <td>
-                    {t.picture}
+                    <img className="responsive-img" src={t.picture} alt="avatar" width="45" />
                   </td>
                   <td>
                     {t.name}
@@ -95,8 +110,12 @@ class Team extends React.Component {
                     {t.level_no}
                   </td>
                   <td>
-                    <button type="submit" onClick={(event) => { event.preventDefault(); this.sendRequest(t._id); }} className="waves-effect waves-light btn">
-                      Send Request
+                    <button
+                      type="submit"
+                      onClick={(event) => { event.preventDefault(); this.sendRequest(t._id); }}
+                      className={t.className}
+                    >
+                      {t.content}
                     </button>
                   </td>
                 </tr>
@@ -105,7 +124,7 @@ class Team extends React.Component {
           </table>
           <div className="row center">
             <div className="col s12">
-              <a href="#modal1" className="btn-floating btn-large waves-effect waves-light red modal-trigger">
+              <a href="#modal1" className="btn-floating btn-large waves-effect waves-light red modal-trigger create-team-button">
                 <i className="material-icons">
                   add
                 </i>
@@ -116,25 +135,36 @@ class Team extends React.Component {
                   <h4>
                     Create Your Own Team
                   </h4>
+                  <div className="input-field col s12">
+                    <div className="row">
+                      <img src={picture} className="circle responsive-img" alt="img" width="100" />
+                    </div>
+                    <a className="waves-effect waves-light btn modal-trigger" href="#modal2">
+                      <i className="material-icons left">
+                        cloud
+                      </i>
+                      Choose your Avatar
+                    </a>
+                    <div id="modal2" className="modal">
+                      <div className="modal-content">
+                        <h4>
+                          Select your Team avatar
+                          {/* <i href="#modal1" className="material-icons right modal-close">
+                            cancel
+                          </i> */}
+                        </h4>
+                        <Avatar onSelectAvatar={this.changeAvatar} />
+                      </div>
+                    </div>
+                  </div>
                   <div className="row">
                     <form className="col s12" onSubmit={this.handleSubmit}>
                       <div className="row">
                         <div className="input-field col s12">
-                          <input id="name" type="text" name="name" value={name} className="validate" onChange={this.onChange} />
+                          <input id="name" type="text" name="name" value={name} className="validate" onChange={this.onChange} required />
                           <label htmlFor="name">
                             Team name
                           </label>
-                        </div>
-                      </div>
-                      <div className="input-field col s12">
-                        <a href="#modal2" className="btn-floating btn-large modal-trigger" />
-                        <div id="modal2" className="modal">
-                          <div className="modal-content">
-                            <h4>
-                              Select your avatar
-                            </h4>
-                            <Avatar onSelectAvatar={this.changeAvatar} />
-                          </div>
                         </div>
                       </div>
                       <button className="modal-close btn waves-effect waves-light" type="submit">

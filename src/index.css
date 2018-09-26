@@ -32,6 +32,13 @@ Footer {
   min-height: 100%;
 }
 
+.editor {
+  max-height: 30vh;
+  position: absolute;
+  bottom: 10%;
+  overflow-y: auto;
+}
+
 /* SideNAv css */
 header, main, footer {
   padding-left: 300px;
@@ -41,4 +48,22 @@ header, main, footer {
   header, main, footer {
     padding-left: 0;
   }
+}
+
+/* Onboard back */
+.onboard-back {
+  min-height: 100vh;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.create-team-button {
+  margin-top: 5%;
+}
+
+/* Team-card-css */
+.team-card {
+  min-height: 80%;
+  position: absolute;
+  width: 100%;
 }

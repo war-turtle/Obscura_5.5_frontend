@@ -14,10 +14,9 @@ class Login extends React.Component {
     this.state = {
 
     };
-    console.log(this.props, 'hello');
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = (nextProps) => {
     console.log(nextProps);
     const { history } = this.props;
     if (nextProps.loggedin && nextProps.onboard) {
@@ -32,7 +31,6 @@ class Login extends React.Component {
       alert('try aganin');
       return;
     }
-    console.log(this.props);
     const { login } = this.props;
     login(response.tokenId, 'google');
   }
@@ -42,7 +40,6 @@ class Login extends React.Component {
       alert('try aganin');
       return;
     }
-    console.log(this.props);
     const { login } = this.props;
     login(response.accessToken, 'facebook');
   }

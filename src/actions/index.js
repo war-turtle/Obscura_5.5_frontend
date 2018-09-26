@@ -2,6 +2,8 @@ import { showSnack } from 'react-redux-snackbar';
 import services from '../services';
 import history from '../utils/history';
 
+const jwtDecode = require('jwt-decode');
+
 const success = (type, data) => ({
   type,
   data,
@@ -14,27 +16,27 @@ const failure = (type, data) => ({
 
 const login = (token, provider) => (dispatch) => {
   services.login(token, provider).then(
-    (user) => {
-      if (user.status === 'failure') {
-        dispatch(failure('SIGNUP_REQUIRED', user));
-      } else if (user.status === 'error') {
+    (data) => {
+      if (!data.success) {
+        dispatch(failure('SIGNUP_REQUIRED', data));
+      } else if (data.status === 'error') {
         dispatch(showSnack('myUniqueId', {
-          label: user.message,
+          label: data.message,
           timeout: 2000,
           button: {
             label: 'OK, GOT IT',
           },
         }));
       } else {
-        dispatch(success('SUCCESS_LOGIN', user));
+        dispatch(success('SUCCESS_LOGIN', data));
       }
     },
   );
 };
 
 
-const getLevelList = token => (dispatch) => {
-  services.getLevelList(token).then(
+const getLevelList = () => (dispatch) => {
+  services.getLevelList().then(
     (list) => {
       if (list.status === 'failure') {
         dispatch(failure('FAILURE_LIST', list));
@@ -48,7 +50,7 @@ const getLevelList = token => (dispatch) => {
 const onboard = formData => (dispatch) => {
   services.onBoardUser(formData).then(
     (response) => {
-      if (response.jwtToken) {
+      if (response.success) {
         dispatch(success('SIGNUP_SUCCESS', response));
       } else {
         dispatch(failure('SIGNUP_ERROR', null));
@@ -57,23 +59,23 @@ const onboard = formData => (dispatch) => {
   );
 };
 
-const getLeaderboard = jwtToken => (dispatch) => {
-  services.fetchLeaderboard(jwtToken).then(
+const getLeaderboard = (skip, limit) => (dispatch) => {
+  services.fetchLeaderboard(skip, limit).then(
     (response) => {
-      if (response.status === 'success') {
-        dispatch(success('LEADERBOARD_SUCCESS', response.data));
+      if (response.success) {
+        dispatch(success('LEADERBOARD_SUCCESS', response));
       } else {
-        dispatch(failure('LEADERBOARD_FAILURE', response.status));
+        dispatch(failure('LEADERBOARD_FAILURE', response));
       }
     },
   );
 };
 
-const getLevel = (alias, jwtToken) => (dispatch) => {
-  services.fetchLevel(alias, jwtToken).then(
+const getLevel = alias => (dispatch) => {
+  services.fetchLevel(alias).then(
     (response) => {
-      if (response.status === 'success') {
-        dispatch(success('LEVEL_SUCCESS', response.data));
+      if (response.success) {
+        dispatch(success('LEVEL_SUCCESS', response));
       } else {
         dispatch(failure('LEVEL_FAILURE', response.status));
         dispatch(showSnack('myUniqueId', {
@@ -90,28 +92,39 @@ const getLevel = (alias, jwtToken) => (dispatch) => {
 const getAlias = () => (dispatch) => {
   services.getAlias().then(
     (response) => {
-      console.log(response);
-      if (response.status === 'success') {
-        dispatch(success('ALIAS_SUCCESS', response.alias));
+      if (response.success) {
+        dispatch(success('ALIAS_SUCCESS', response));
       } else {
-        dispatch(failure('LEVEL_NOT_CREATED', response.status));
+        dispatch(failure('LEVEL_NOT_CREATED', response));
       }
     },
   );
 };
 
-const postAns = (ans, jwtToken, alias) => (dispatch) => {
-  services.postAns(ans, jwtToken, alias).then(
+const getTeam = teamId => (dispatch) => {
+  services.getTeam(teamId).then(
     (response) => {
-      if (response.status === 'success') {
-        dispatch(showSnack('myUniqueId', {
-          label: response.message,
-          timeout: 2000,
-          button: { label: 'OK, GOT IT' },
-        }));
-        dispatch(success('RIGHT_ANS', response.nextalias));
-      } else if (response.status === 'failure') {
-        dispatch(failure('WRONG_ANS', response.status));
+      if (response.success) {
+        dispatch(success('TEAM_FETCH_SUCCESS', response));
+      } else {
+        dispatch(failure('TEAM_FETCH_FAILURE', response));
+      }
+    },
+  );
+};
+
+const postAns = (ans, alias) => (dispatch) => {
+  services.postAns(ans, alias).then(
+    (response) => {
+      if (response.success) {
+        // dispatch(showSnack('myUniqueId', {
+        //   label: response.message,
+        //   timeout: 2000,
+        //   button: { label: 'OK, GOT IT' },
+        // }));
+        dispatch(success('RIGHT_ANS', response));
+      } else if (!response.success) {
+        dispatch(failure('WRONG_ANS', response));
         dispatch(showSnack('myUniqueId', {
           label: response.message,
           timeout: 2000,
@@ -133,7 +146,16 @@ const getTeamList = () => (dispatch) => {
   services.getTeamList().then(
     (response) => {
       if (response.success) {
+        const a = [];
+        response.data.teams.map((t) => {
+          t.requests.map((ri) => {
+            if (ri.requester_id === jwtDecode(localStorage.getItem('jwtToken')).user._id) {
+              a.push(t._id);
+            }
+          });
+        });
         dispatch(success('TEAM_LIST_FETCHED', response.data));
+        dispatch(success('SUCCESSFULLY_SENT_REQUEST', a));
       } else {
         dispatch(success('TEAM_LIST_FAILURE', response.data));
       }
@@ -145,7 +167,7 @@ const sendTeamRequest = teamId => (dispatch) => {
   services.sendTeamRequest(teamId).then(
     (response) => {
       if (response.success) {
-        dispatch(success('SUCCESSFULLY_SENT_REQUEST', teamId));
+        dispatch(success('SUCCESSFULLY_SENT_REQUEST', [teamId]));
       } else {
         dispatch(failure('ERROR_SENDING_REQUEST', null));
       }
@@ -157,7 +179,7 @@ const createTeam = formData => (dispatch) => {
   services.createTeam(formData).then(
     (response) => {
       if (response.success) {
-        history.push('/dashboard');
+        dispatch(success('TEAM_CREATE_SUCCESS', response));
       } else {
         dispatch(failure('ERROR_TEAM_CREATE', null));
       }
@@ -165,6 +187,17 @@ const createTeam = formData => (dispatch) => {
   );
 };
 
+const sendMessage = data => (dispatch) => {
+  services.sendMessage(data).then(
+    (response) => {
+      if (response.success) {
+        dispatch(success('SUCCESSFULLY_SENT_MESSAGE', data));
+      } else {
+        dispatch(failure('ERROR_SENDING_MESSAGE', null));
+      }
+    },
+  );
+};
 
 export default {
   login,
@@ -177,4 +210,6 @@ export default {
   getTeamList,
   sendTeamRequest,
   createTeam,
+  sendMessage,
+  getTeam,
 };

@@ -22,5 +22,12 @@ $(document).ready(() => {
 });
 
 $(document).ready(() => {
+  // $('.left').sidenav().options.edge = 'right';
+  ($('.left').sidenav({ edge: 'right' }));
+});
+
+$(document).ready(() => {
   $('.sidenav').sidenav();
 });
+
+$('.dropdown-trigger').dropdown();

@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 import { snackbarReducer } from 'react-redux-snackbar';
+import { Redirect } from 'react-router-dom';
+import React from 'react';
 import initialState from './initialState';
 import history from '../utils/history';
 
@@ -15,25 +17,34 @@ const url = (state = initialState, action) => {
   }
 };
 
+const message = (state = initialState.messageSent, action) => {
+  switch (action.type) {
+    case 'SUCCESSFULLY_SENT_MESSAGE':
+      return true;
+    default:
+      return state;
+  }
+};
+
 const user = (state = initialState.user, action) => {
+  console.log(action.type, action.data);
   switch (action.type) {
     case 'SUCCESS_LOGIN':
       localStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
-        jwtToken: action.data.data.jwtToken,
+        userData: jwtDecode(action.data.data.token).user,
         loggedin: true,
-        registered: true,
         onboard: !!(jwtDecode(action.data.data.token).user.onboard),
       });
 
     case 'SIGNUP_REQUIRED':
+      localStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
-        userData: action.userData,
-        signupRequired: true,
+        loggedin: true,
+        onboard: false,
       });
 
     case 'SIGNUP_SUCCESS':
-      console.log(action.data);
       localStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
         loggedin: true,
@@ -50,9 +61,17 @@ const user = (state = initialState.user, action) => {
 
     case 'SUCCESSFULLY_SENT_REQUEST':
       return Object.assign({}, state, {
-        sentRequests: state.sentRequests.push(action.data),
+        sentRequests: state.sentRequests.concat(action.data),
       });
-
+    case 'TEAM_CREATE_SUCCESS':
+      localStorage.setItem('jwtToken', action.data.data.token);
+      return Object.assign({}, state, {
+        team: action.data.data.team,
+      });
+    case 'TEAM_FETCH_SUCCESS':
+      return Object.assign({}, state, {
+        team: action.data.data,
+      });
     default:
       return state;
   }
@@ -61,7 +80,7 @@ const user = (state = initialState.user, action) => {
 const teams = (state = initialState.teams, action) => {
   switch (action.type) {
     case 'TEAM_LIST_FETCHED':
-      return action.data;
+      return action.data.teams;
     default:
       return state;
   }
@@ -70,7 +89,10 @@ const teams = (state = initialState.teams, action) => {
 const leaderboard = (state = initialState.leaderboard, action) => {
   switch (action.type) {
     case 'LEADERBOARD_SUCCESS':
-      return (action.Leaderboard);
+      return {
+        count: action.data.data.count,
+        list: action.data.data.teams,
+      };
     case 'LEADERBOARD_FAILURE':
       return Object.assign({}, state, {
         error: action.status,
@@ -84,7 +106,7 @@ const level = (state = initialState.level, action) => {
   switch (action.type) {
     case 'SUCCESS_LIST':
       return Object.assign({}, state, {
-        levellist: action.list,
+        levellist: action.data.data,
       });
 
     case 'FAILURE_LIST':
@@ -92,7 +114,7 @@ const level = (state = initialState.level, action) => {
 
     case 'ALIAS_SUCCESS':
       return Object.assign({}, state, {
-        alias: action.alias,
+        alias: action.data.data.alias,
       });
 
     case 'LEVEL_NOT_CREATED':
@@ -101,9 +123,7 @@ const level = (state = initialState.level, action) => {
       });
 
     case 'LEVEL_SUCCESS':
-      return Object.assign({}, state, {
-        levelData: action.level,
-      });
+      return Object.assign({}, state, action.data.data);
 
     case 'LEVEL_FAILURE':
       return Object.assign({}, state, {
@@ -113,7 +133,8 @@ const level = (state = initialState.level, action) => {
     case 'RIGHT_ANS':
       return Object.assign({}, state, {
         ansCheck: true,
-        nextalias: action.nextalias,
+        nextalias: action.data.data.alias,
+        alias: action.data.data.alias,
       });
 
     case 'WRONG_ANS':
@@ -140,6 +161,7 @@ const rootReducer = combineReducers({
   url,
   teams,
   snackbar: snackbarReducer,
+  message,
 });
 
 export default rootReducer;

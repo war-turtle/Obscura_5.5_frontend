@@ -3,23 +3,23 @@ import config from '../config';
 
 const jwtDecode = require('jwt-decode');
 
-const cryptoJSON = require('crypto-json');
+// const cryptoJSON = require('crypto-json');
 
 
-const decrypt = data => cryptoJSON.decrypt(data, config.cypher.passKey, {
-  algorithm: config.cypher.algo,
-  encoding: config.cypher.encoding,
-  keys: [],
-});
+// const decrypt = data => cryptoJSON.decrypt(data, config.cypher.passKey, {
+//   algorithm: config.cypher.algo,
+//   encoding: config.cypher.encoding,
+//   keys: [],
+// });
 
-const reqOptions = {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-};
 
 const login = (token, provider) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.body = JSON.stringify({ token, provider });
   reqOptions.method = 'POST';
   return fetch(`${config.api.url}/auth/login`, reqOptions)
@@ -33,8 +33,13 @@ const login = (token, provider) => {
 };
 
 const onBoardUser = (formData) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
-  console.log(jwtDecode(localStorage.getItem('jwtToken')).user._id);
   reqOptions.method = 'PUT';
   reqOptions.body = JSON.stringify(formData);
   return fetch(`${config.api.url}/players/${jwtDecode(localStorage.getItem('jwtToken')).user._id}`, reqOptions)
@@ -42,34 +47,52 @@ const onBoardUser = (formData) => {
     .then(response => response);
 };
 
-const fetchLeaderboard = (jwtToken) => {
-  reqOptions.headers.jwtToken = jwtToken;
-  return fetch(`${config.api.url}/leaderboard`, reqOptions)
+const fetchLeaderboard = (skip, limit) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/teams?skip=${skip}&limit=${limit}&sort=true`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
 
-const getLevelList = (jwtToken) => {
-  reqOptions.headers.jwtToken = jwtToken;
-  return fetch(`${config.api.url}levellist`, reqOptions)
+const getLevelList = () => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/levels?action=getAllLevels`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
 
-const fetchLevel = (alias, jwtToken) => {
-  reqOptions.headers.jwtToken = jwtToken;
-  return fetch(`${config.api.url}level/${alias}`, reqOptions)
-    .then(response => response.json())
-    .then((response) => {
-      if (response.data) {
-        response.data = decrypt(response.data);
-      }
-      return response;
-    });
+const fetchLevel = (alias) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.method = 'GET';
+  console.log('fetching', alias, `${config.api.url}/levels?action=getAliasLevel&alias=${alias}`);
+  return fetch(`${config.api.url}/levels?action=getAliasLevel&alias=${alias}`, reqOptions).then(response => response.json());
 };
 
 const getAlias = () => {
-  console.log('hi-- ');
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
   return fetch(`${config.api.url}/levels?action=getLevelAlias`, reqOptions)
@@ -77,16 +100,28 @@ const getAlias = () => {
     .then(response => response);
 };
 
-const postAns = (ans, jwtToken, alias) => {
+const postAns = (ans, alias) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.method = 'POST';
   reqOptions.body = JSON.stringify(ans);
-  reqOptions.headers.jwtToken = jwtToken;
-  return fetch(`${config.api.url}level/${alias}`, reqOptions)
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/levels/${alias}`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
 
 const getTeamList = () => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
   return fetch(`${config.api.url}/teams`, reqOptions)
@@ -94,7 +129,27 @@ const getTeamList = () => {
     .then(response => response);
 };
 
+const getTeam = (teamId) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.method = 'GET';
+  return fetch(`${config.api.url}/teams/${teamId}`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
 const sendTeamRequest = (teamId) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
   reqOptions.method = 'PUT';
   return fetch(`${config.api.url}/teams/${teamId}?action=request`, reqOptions)
@@ -103,10 +158,31 @@ const sendTeamRequest = (teamId) => {
 };
 
 const createTeam = (formData) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
   reqOptions.body = JSON.stringify(formData);
   reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
   reqOptions.method = 'POST';
   return fetch(`${config.api.url}/teams`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
+const sendMessage = (formData) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.body = JSON.stringify(formData);
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.method = 'POST';
+  return fetch(`${config.api.url}/messages?action=email&to=admin`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
@@ -122,4 +198,6 @@ export default {
   getTeamList,
   sendTeamRequest,
   createTeam,
+  sendMessage,
+  getTeam,
 };

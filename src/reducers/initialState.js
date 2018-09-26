@@ -1,11 +1,13 @@
 const initialState = {
   loading: false,
-  leaderboard: [],
+  leaderboard: {
+    count: 0,
+    list: [],
+  },
   teams: [],
   user: {
     loggedin: false,
     signupRequired: false,
-    jwtToken: '',
     registered: false,
     userData: {},
     onboard: false,
@@ -16,6 +18,7 @@ const initialState = {
   },
   url: '/',
   nextalias: '',
+  messageSent: false,
 };
 
 export default initialState;
