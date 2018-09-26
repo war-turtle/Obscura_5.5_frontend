@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
 import Navigation from '../components/navigator';
 import Chat from '../components/chat';
+import Footer from '../components/Footer';
 
 
 const jwtDecode = require('jwt-decode');
@@ -36,21 +37,7 @@ const SideBar = ({ component: Component, ...rest }) => {
           }
         />
       </main>
-      {/* <ul id="slide-out" className="sidenav left">
-        <li>
-          <a className="sidenav-close" href="#!">
-            Clicking this will close Sidenav
-          </a>
-        </li>
-        <li>
-          <Chat />
-        </li>
-      </ul>
-      <a href="#" data-target="slide-out" className="sidenav-trigger right">
-        <i className="material-icons">
-          menu
-        </i>
-      </a> */}
+      <Footer />
     </div>
   );
 };

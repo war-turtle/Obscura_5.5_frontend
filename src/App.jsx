@@ -67,6 +67,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   getTeam: (team_id) => {
     dispatch(actions.getTeam(team_id));
   },
+  getCurrentLevelAlias: () => {
+    dispatch(actions.getAlias());
+  },
+  getLevelList: () => {
+    dispatch(actions.getLevelList());
+  },
 });
 
 
