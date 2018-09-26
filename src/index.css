@@ -74,6 +74,11 @@ footer {
     min-height: 80%;
     position: absolute;
     width: 100%;
+  }
+  
+/* Request card */
+.request-back {
+padding: 2%;
 }
 
 .imageDisplay {

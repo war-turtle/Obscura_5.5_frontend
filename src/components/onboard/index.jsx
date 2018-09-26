@@ -106,6 +106,7 @@ Teams
 
 const mapStateToProps = (state, ownProps) => ({
   onboard: state.user.onboard,
+  userData: state.user.userData,
 });
 
 export default withRouter(connect(mapStateToProps)(Onboard));

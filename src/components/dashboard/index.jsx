@@ -8,10 +8,10 @@ import Team from '../onboard/team';
 const jwtDecode = require('jwt-decode');
 
 const Decide = (props) => {
-  const { teamExist, team } = props;
+  const { teamExist, team, socket } = props;
   console.log(teamExist, '-------');
   if (teamExist) {
-    return <TeamDetails team={team} />;
+    return <TeamDetails team={team} socket={socket} />;
   }
   return <Team />;
 };
@@ -59,7 +59,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { teamExist } = this.state;
-    const { team } = this.props;
+    const { team, socket } = this.props;
     console.log(team, 'got it');
     return (
       <div className="row center">
@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
           <h4>
             Dashboard
           </h4>
-          <Decide teamExist={teamExist} team={team} />
+          <Decide teamExist={teamExist} team={team} socket={socket} />
         </div>
       </div>
     );
