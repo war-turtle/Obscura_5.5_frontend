@@ -40,6 +40,7 @@ const user = (state = initialState.user, action) => {
     case 'SIGNUP_REQUIRED':
       localStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
+        userData: jwtDecode(action.data.data.token).user,
         loggedin: true,
         onboard: false,
       });

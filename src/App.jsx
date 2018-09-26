@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter, Redirect, Switch,
+  BrowserRouter, Switch,
 } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import Home from './components/Home';
@@ -23,10 +23,14 @@ class App extends React.Component {
       endpoint: 'http://localhost:8000',
     };
     this.socket = socketIOClient(this.state.endpoint);
-    // if (localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null) {
-    //   this.socket.username = user.user.username;
-    //   this.socket.emit('checkUser', user.user);
-    // }
+    if (localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null) {
+      this.socket.username = jwtDecode(localStorage.getItem('jwtToken')).user.username;
+      this.socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
+      this.socket.on('accepted', (token) => {
+        console.log(token);
+        localStorage.setItem('jwtToken', token);
+      });
+    }
   }
 
   componentDidMount = () => {

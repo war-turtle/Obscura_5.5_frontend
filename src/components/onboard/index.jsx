@@ -21,7 +21,8 @@ class Onboard extends React.Component {
   componentDidMount = () => {
     const { user } = this.props;
     console.log(user);
-    if (user.user.onboard) {
+    const userInfo = user ? user.user : this.props.userData;
+    if (userInfo.onboard) {
       this.setState({
         formTabClass: 'tab col s6 disabled',
         teamTabClass: 'tab col s6 active',
@@ -96,6 +97,7 @@ class Onboard extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   onboard: state.user.onboard,
+  userData: state.user.userData,
 });
 
 
