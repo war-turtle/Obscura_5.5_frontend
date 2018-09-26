@@ -4,13 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#000000">
+  <meta name='theme-color' content='#7028e4'>
+  <meta name="author" content="Avinash Bharti | @avinashbharti97">
+
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="%PUBLIC_URL%/css/materialize.min.css" media="screen,projection" />
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/fullpage.css" /> -->
   <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/buttons.css" />
@@ -38,3 +40,157 @@
 </body>
 
 </html>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name='theme-color' content='#7028e4'>
+  <meta name="author" content="Avinash Bharti | @avinashbharti97">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.2/fullpage.css">
+  <link href="https://fonts.googleapis.com/css?family=Anton|Open+Sans+Condensed:300" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+
+  <title>Obscura</title>
+</head>
+
+<style>
+  html {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: linear-gradient(115deg, #7028e4 0%, #e5b2ca 100%);
+    overflow-x: hidden;
+  }
+
+  #menu {
+    position: fixed;
+    height: 100vh;
+    display: block;
+    width: 5%;
+    background: #fff;
+    z-index: 9;
+    color: #262626;
+    padding: 20px 0 0 0;
+    left: 0px;
+    box-shadow: 5px 0px 6px rgba(0, 0, 0, 0.25);
+  }
+
+  a {
+    color: #5a5656;
+  }
+
+  #GAWDSLink {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.3rem;
+  }
+
+  #GAWDSLink svg {
+    display: block;
+    width: 8rem;
+    height: auto;
+    fill: #262626;
+    margin-top: 0.5rem;
+  }
+
+  .menu-container {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+    #menu {
+      position: fixed;
+      height: 50px;
+      width: 100vw;
+      bottom: 0px;
+      display: block;
+      background: #fff;
+      z-index: 9;
+
+    }
+
+    .menu-container {
+      min-height: auto;
+      display: block;
+    }
+
+    .home {
+      margin: 0 auto;
+      padding-left: 40px;
+    }
+
+    #obscura-text {
+      font-size: 40px;
+    }
+
+    #fullpage {
+      overflow-x: hidden;
+    }
+
+    #GAWDSLink {
+      position: fixed;
+      bottom: 3.5rem;
+      right: 1rem;
+      font-size: 1.3rem;
+    }
+
+    #GAWDSLink svg {
+      display: block;
+      width: 4rem;
+      height: auto;
+      fill: #262626;
+      margin-top: 0.5rem;
+    }
+  }
+
+
+
+  #spinning-circle {
+    animation-name: spinning-circle;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+
+  }
+
+  .login-row {
+    margin-top: 150px;
+  }
+
+  @-webkit-keyframes spinning-circle {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+      -webkit-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+    }
+  }
+</style>
+
+<body>
