@@ -3,6 +3,7 @@ import {
   BrowserRouter, Switch,
 } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
+import { connect } from 'react-redux';
 import Home from './components/Home';
 import Onboard from './components/onboard';
 import SideBar from './container/sidebar';
@@ -13,12 +14,14 @@ import Support from './components/support';
 import Team from './components/ourteam';
 import Leaderboard from './components/Leaderboard/index';
 import './App.css';
+import actions from './actions';
+
 
 const jwtDecode = require('jwt-decode');
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       endpoint: 'http://localhost:8000',
     };
@@ -28,6 +31,7 @@ class App extends React.Component {
       this.socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
       this.socket.on('accepted', (token) => {
         console.log(token);
+        props.getTeam(jwtDecode(token).user.team_id);
         localStorage.setItem('jwtToken', token);
       });
     }
@@ -54,4 +58,16 @@ class App extends React.Component {
   )
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => ({
+  team: state.user.team,
+});
+
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getTeam: (team_id) => {
+    dispatch(actions.getTeam(team_id));
+  },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
