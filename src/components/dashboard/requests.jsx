@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import actions from '../../actions';
 
 class Requests extends React.Component {
   constructor(props) {
@@ -10,10 +13,15 @@ class Requests extends React.Component {
   }
 
   render = () => {
-    const { requests } = this.props;
+    const {
+      requests, acceptRequest, deleteRequest, socket,
+    } = this.props;
     if (requests.length) {
       return (
-        <div>
+        <div className="card z-index-5 request-back">
+          <h5>
+            Team Requests
+          </h5>
           <table className="highlight centered responsive-table">
             <thead>
               <tr>
@@ -23,38 +31,32 @@ class Requests extends React.Component {
                 <th>
                   Username
                 </th>
-                <th>
-                  Action
-                </th>
+                <th />
+                <th />
               </tr>
             </thead>
 
             <tbody>
-              {/* {teams.map(t => (
+              {requests.map(t => (
                 <tr key={t.name}>
                   <td>
-                    <img className="responsive-img" src={t.picture} alt="avatar" width="45" />
+                    <img className="responsive-img circle" src={t.picture} alt="avatar" width="45" />
                   </td>
                   <td>
-                    {t.name}
+                    {t.username}
                   </td>
                   <td>
-                    {t.players.length}
+                    <i className="material-icons" onClick={() => { acceptRequest(t.requester_id, socket); }}>
+                      check
+                    </i>
                   </td>
                   <td>
-                    {t.level_no}
-                  </td>
-                  <td>
-                    <button
-                      type="submit"
-                      onClick={(event) => { event.preventDefault(); this.sendRequest(t._id); }}
-                      className={t.className}
-                    >
-                      {t.content}
-                    </button>
+                    <i className="material-icons" onClick={() => { deleteRequest(t.requester_id, socket); }}>
+                      cancel
+                    </i>
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </div>
@@ -69,5 +71,19 @@ class Requests extends React.Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => ({
 
-export default Requests;
+});
+
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  acceptRequest: (requesterId, socket) => {
+    dispatch(actions.acceptRequest(requesterId, socket));
+  },
+  deleteRequest: (requesterId, socket) => {
+    dispatch(actions.deleteRequest(requesterId, socket));
+  },
+});
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Requests));

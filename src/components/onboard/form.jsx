@@ -6,11 +6,12 @@ import Avatar from './avatar';
 class Form extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.userData);
     this.state = {
       username: '',
       college: '',
       phone: '',
-      picture: props.user.user.picture,
+      picture: (!props.user) ? props.userData.picture : props.user.user.picture,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -120,6 +121,7 @@ const mapStateToProps = (state, ownProps) => ({
   loggedin: state.user.loggedin,
   registered: state.user.registered,
   onboard: state.user.registered,
+  userData: state.user.userData,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

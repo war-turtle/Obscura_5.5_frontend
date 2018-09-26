@@ -67,3 +67,8 @@ header, main, footer {
   position: absolute;
   width: 100%;
 }
+
+/* Request card */
+.request-back {
+  padding: 2%;
+}

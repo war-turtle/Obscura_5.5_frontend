@@ -20,6 +20,7 @@ class Team extends React.Component {
   componentDidMount() {
     const { getTeamList } = this.props;
     getTeamList();
+    console.log(this.props);
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -113,9 +114,9 @@ class Team extends React.Component {
                     <button
                       type="submit"
                       onClick={(event) => { event.preventDefault(); this.sendRequest(t._id); }}
-                      className={t.className}
+                      className={t.className ? t.className : 'waves-effect waves-light btn'}
                     >
-                      {t.content}
+                      {t.content ? t.content : 'Send Request'}
                     </button>
                   </td>
                 </tr>

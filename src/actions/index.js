@@ -47,6 +47,18 @@ const getLevelList = () => (dispatch) => {
   );
 };
 
+const getTeam = teamId => (dispatch) => {
+  services.getTeam(teamId).then(
+    (response) => {
+      if (response.success) {
+        dispatch(success('TEAM_FETCH_SUCCESS', response));
+      } else {
+        dispatch(failure('TEAM_FETCH_FAILURE', response));
+      }
+    },
+  );
+};
+
 const onboard = formData => (dispatch) => {
   services.onBoardUser(formData).then(
     (response) => {
@@ -66,6 +78,32 @@ const getLeaderboard = (skip, limit) => (dispatch) => {
         dispatch(success('LEADERBOARD_SUCCESS', response));
       } else {
         dispatch(failure('LEADERBOARD_FAILURE', response));
+      }
+    },
+  );
+};
+
+const acceptRequest = (requesterId, socket) => (dispatch) => {
+  services.acceptRequest(requesterId).then(
+    (response) => {
+      if (response.success) {
+        dispatch(success('ACCEPT_SUCCESS', response));
+        dispatch(getTeam(jwtDecode(localStorage.getItem('jwtToken')).user.team_id));
+      } else {
+        dispatch(failure('ACCEPT_FAILURE', response));
+      }
+    },
+  );
+};
+
+const deleteRequest = (requesterId, socket) => (dispatch) => {
+  services.deleteRequest(requesterId).then(
+    (response) => {
+      if (response.success) {
+        dispatch(success('DELETE_SUCCESS', response));
+        dispatch(getTeam(jwtDecode(localStorage.getItem('jwtToken')).user.team_id));
+      } else {
+        dispatch(failure('DELETE_FAILURE', response));
       }
     },
   );
@@ -101,17 +139,6 @@ const getAlias = () => (dispatch) => {
   );
 };
 
-const getTeam = teamId => (dispatch) => {
-  services.getTeam(teamId).then(
-    (response) => {
-      if (response.success) {
-        dispatch(success('TEAM_FETCH_SUCCESS', response));
-      } else {
-        dispatch(failure('TEAM_FETCH_FAILURE', response));
-      }
-    },
-  );
-};
 
 const postAns = (ans, alias) => (dispatch) => {
   services.postAns(ans, alias).then(
@@ -212,4 +239,6 @@ export default {
   createTeam,
   sendMessage,
   getTeam,
+  acceptRequest,
+  deleteRequest,
 };

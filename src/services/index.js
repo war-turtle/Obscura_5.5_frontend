@@ -187,6 +187,36 @@ const sendMessage = (formData) => {
     .then(response => response);
 };
 
+const acceptRequest = (reqId) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.body = JSON.stringify({ reqId });
+  reqOptions.method = 'PUT';
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/teams/${jwtDecode(localStorage.getItem('jwtToken')).user.team_id}?action=accept_request`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
+const deleteRequest = (reqId) => {
+  const reqOptions = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  reqOptions.body = JSON.stringify({ reqId });
+  reqOptions.method = 'PUT';
+  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/teams/${jwtDecode(localStorage.getItem('jwtToken')).user.team_id}?action=delete`, reqOptions)
+    .then(response => response.json())
+    .then(response => response);
+};
+
 export default {
   login,
   onBoardUser,
@@ -200,4 +230,6 @@ export default {
   createTeam,
   sendMessage,
   getTeam,
+  acceptRequest,
+  deleteRequest,
 };
