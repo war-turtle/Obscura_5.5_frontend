@@ -1,6 +1,6 @@
 const dev = {
     api: {
-        url: "http://0cef828b.ngrok.io"
+        url: "http://d7c54796.ngrok.io"
     },
     cypher: {
         algo: "aes256",
