@@ -37,25 +37,81 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    this.socket.on('stopUser', () => {
-      console.log('hey');
-    });
-  }
+    componentDidMount = () => {
+      this.socket.on('stopUser', () => {
+        console.log('hey');
+      });
+    };
 
-  render = () => (
-    <BrowserRouter>
-      <Switch>
-        <Socket exact path="/" component={Home} socket={this.socket} />
-        <Socket exact path="/onboard" component={Onboard} socket={this.socket} user={localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null} />
-        <SideBar exact path="/dashboard" component={Dashboard} user={localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null} socket={this.socket} />
-        <SideBar path="/level/:alias" component={Level} user={localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null} socket={this.socket} />
-        <SideBar path="/our-team" component={Team} user={localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null} socket={this.socket} />
-        <SideBar path="/support" component={Support} user={localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null} socket={this.socket} />
-        <SideBar path="/leaderboard" component={Leaderboard} user={localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null} socket={this.socket} />
-      </Switch>
-    </BrowserRouter>
-  )
+    render = () => (
+      <BrowserRouter>
+        <Switch>
+          <Socket exact path="/" component={Home} socket={this.socket} />
+          <Socket
+            exact
+            path="/onboard"
+            component={Onboard}
+            socket={this.socket}
+            user={
+                        localStorage.getItem('jwtToken')
+                          ? jwtDecode(localStorage.getItem('jwtToken'))
+                          : null
+                    }
+          />
+          <SideBar
+            exact
+            path="/dashboard"
+            component={Dashboard}
+            user={
+                        localStorage.getItem('jwtToken')
+                          ? jwtDecode(localStorage.getItem('jwtToken'))
+                          : null
+                    }
+            socket={this.socket}
+          />
+          <SideBar
+            path="/level/:alias"
+            component={Level}
+            user={
+                        localStorage.getItem('jwtToken')
+                          ? jwtDecode(localStorage.getItem('jwtToken'))
+                          : null
+                    }
+            socket={this.socket}
+          />
+          <SideBar
+            path="/our-team"
+            component={Team}
+            user={
+                        localStorage.getItem('jwtToken')
+                          ? jwtDecode(localStorage.getItem('jwtToken'))
+                          : null
+                    }
+            socket={this.socket}
+          />
+          <SideBar
+            path="/support"
+            component={Support}
+            user={
+                        localStorage.getItem('jwtToken')
+                          ? jwtDecode(localStorage.getItem('jwtToken'))
+                          : null
+                    }
+            socket={this.socket}
+          />
+          <SideBar
+            path="/leaderboard"
+            component={Leaderboard}
+            user={
+                        localStorage.getItem('jwtToken')
+                          ? jwtDecode(localStorage.getItem('jwtToken'))
+                          : null
+                    }
+            socket={this.socket}
+          />
+        </Switch>
+      </BrowserRouter>
+    );
 }
 
 const mapStateToProps = (state, ownProps) => ({
