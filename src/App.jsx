@@ -37,8 +37,11 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    this.socket.on('stopUser', () => {
-    });
+  //   const { history } = this.props;
+  //   this.socket.on('stopUser', () => {
+  //     SweetAlert('stop');
+  //     history.push('/');
+  //   });
   };
 
   render = () => (

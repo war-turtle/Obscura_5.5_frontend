@@ -34,7 +34,7 @@ class Navigation extends React.Component {
 
   render() {
     const {
-      user, history, levellist, getLevel,
+      user, history, levellist, getLevel, socket,
     } = this.props;
     return (
       <div>
@@ -143,7 +143,7 @@ class Navigation extends React.Component {
           <div className="divider" />
         </li>
         <li>
-          <a className="waves-effect red accent-2" href="#!" onClick={(e) => { e.preventDefault(); history.push('/'); }}>
+          <a className="waves-effect red accent-2" href="#!" onClick={(e) => { e.preventDefault(); socket.emit('disconnect', null); history.push('/'); }}>
             <i className="material-icons">
             exit_to_app
             </i>

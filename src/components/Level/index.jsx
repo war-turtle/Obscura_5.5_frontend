@@ -9,6 +9,8 @@ import Twitter from './twitter';
 import actions from '../../actions';
 import SweetAlert from '../sweetAlert';
 
+const jwtDecode = require('jwt-decode');
+
 class Level extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +21,8 @@ class Level extends React.Component {
       alias: '',
       html: '',
     };
+    const { socket } = props;
+    socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {

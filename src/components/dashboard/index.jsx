@@ -34,6 +34,9 @@ class Dashboard extends React.Component {
         props.getLevelList();
       },
     };
+
+    const { socket } = props;
+    socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
