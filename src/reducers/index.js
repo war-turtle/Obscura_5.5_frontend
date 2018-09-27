@@ -25,7 +25,6 @@ const message = (state = initialState.messageSent, action) => {
 };
 
 const user = (state = initialState.user, action) => {
-  console.log(action.type, action.data);
   switch (action.type) {
     case 'CLEAR_USER':
       return {

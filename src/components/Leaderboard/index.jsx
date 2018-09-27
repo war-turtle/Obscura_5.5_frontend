@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-import LineChart from './linechart';
+// import LineChart from './linechart';
+import SweetAlert from '../sweetAlert';
 
 class Leaderboard extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Leaderboard extends React.Component {
     this.state = {
       index: 1,
     };
+    SweetAlert();
   }
 
   componentDidMount = () => {
@@ -53,7 +55,7 @@ class Leaderboard extends React.Component {
           <h4>
             Leaderboard
           </h4>
-          <LineChart data={list} />
+          {/* <LineChart data={list} /> */}
           <div className="row">
             <div className="col s12">
 

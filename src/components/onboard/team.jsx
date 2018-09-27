@@ -13,6 +13,7 @@ class Team extends React.Component {
     this.state = {
       name: '',
       picture: '',
+      secretKey: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -62,7 +63,7 @@ class Team extends React.Component {
       avatarName.push(`/images/avatars/${i}.png`);
     }
 
-    const { name, picture } = this.state;
+    const { name, picture, secretKey } = this.state;
     return (
       <div className="row">
         <div className="col s12 black-text">
@@ -160,6 +161,14 @@ class Team extends React.Component {
                           <input id="name" type="text" name="name" value={name} className="validate" onChange={this.onChange} required />
                           <label htmlFor="name">
                             Team name
+                          </label>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="input-field col s12">
+                          <input id="secret" type="text" name="secretKey" value={secretKey} className="validate" onChange={this.onChange} required />
+                          <label htmlFor="secret">
+                            Team Secret Key
                           </label>
                         </div>
                       </div>

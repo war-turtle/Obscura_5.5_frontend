@@ -23,7 +23,7 @@ class Onboard extends React.Component {
 
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.onboard) {
-      nextProps.history('/dashboard');
+      nextProps.history.push('/dashboard');
     }
   };
 
@@ -63,7 +63,7 @@ const mapStateToProps = state => ({
 });
 
 Onboard.propTypes = {
-  history: PropTypes.func.isRequired,
+  // history: PropTypes.func.isRequired,
   onboard: PropTypes.bool.isRequired,
   user: PropTypes.objectOf(PropTypes.string).isRequired,
 };

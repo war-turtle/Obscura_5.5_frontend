@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import LevelView from './levelView';
 import Twitter from './twitter';
 import actions from '../../actions';
+import SweetAlert from '../sweetAlert';
 
 class Level extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class Level extends React.Component {
     });
 
     if (nextProps.nextalias !== nextalias && nextProps.nextalias !== '' && nextProps.ansCheck) {
+      SweetAlert('Congratulations');
       const { history } = this.props;
       history.push(`/level/${nextProps.nextalias}`);
       const { getLevel, getLevelList } = this.props;
