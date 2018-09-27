@@ -32,23 +32,25 @@ const SideBar = ({ component: Component, ...rest }) => {
       <ul id="slide-out0" className="sidenav sidenav-fixed">
         <Navigation user={user} />
       </ul>
-      <a href="#" data-target="slide-out0" className="sidenav-trigger">
-        <i className="material-icons">
+      <div className="row">
+        <a href="#" data-target="slide-out0" className="sidenav-trigger hide-on-med-and-up">
+          <i className="material-icons">
           menu
-        </i>
-      </a>
-      <main>
-        <Route
-          {...rest}
-          render={(matchProps) => {
-            if (!localStorage.getItem('jwtToken')) {
-              return <Redirect to="/" />;
+          </i>
+        </a>
+        <main>
+          <Route
+            {...rest}
+            render={(matchProps) => {
+              if (!localStorage.getItem('jwtToken')) {
+                return <Redirect to="/" />;
+              }
+              return jwtDecode(localStorage.getItem('jwtToken')).user.onboard ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/onboard" />;
             }
-            return jwtDecode(localStorage.getItem('jwtToken')).user.onboard ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/onboard" />;
           }
-          }
-        />
-      </main>
+          />
+        </main>
+      </div>
       <Footer />
     </div>
   );
