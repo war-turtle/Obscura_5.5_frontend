@@ -82,7 +82,6 @@ const fetchLevel = (alias) => {
   };
   reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
-  console.log('fetching', alias, `${config.api.url}/levels?action=getAliasLevel&alias=${alias}`);
   return fetch(`${config.api.url}/levels?action=getAliasLevel&alias=${alias}`, reqOptions).then(response => response.json());
 };
 

@@ -13,7 +13,7 @@ class Navigation extends React.Component {
     this.state = {
 
     };
-    loadjs('/js/init.js');
+    loadjs('/js/init.js', '/js/materialize.min.js');
   }
 
   componentDidMount = () => {

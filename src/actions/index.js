@@ -1,6 +1,5 @@
 import { showSnack } from 'react-redux-snackbar';
 import services from '../services';
-import history from '../utils/history';
 
 const jwtDecode = require('jwt-decode');
 

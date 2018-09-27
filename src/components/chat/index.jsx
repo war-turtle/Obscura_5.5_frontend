@@ -13,12 +13,10 @@ class Chat extends React.Component {
 
   handleChange = (value) => {
     this.setState({ mdeValue: value });
-    console.log(value);
   };
 
   sendMessage = () => {
     this.setState({ textValue: '' });
-    console.log(this.state.textValue);
   }
 
   render = () => {

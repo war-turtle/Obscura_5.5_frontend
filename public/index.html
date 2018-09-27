@@ -4,37 +4,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#000000">
+  <meta name='theme-color' content='#7028e4'>
+  <meta name="author" content="Avinash Bharti | @avinashbharti97">
+
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="%PUBLIC_URL%/css/materialize.min.css" media="screen,projection" />
-  <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/fullpage.css" /> -->
-  <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/buttons.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/buttons.css" /> -->
 
-  <style type="text/css">
-    html,
-    body {
-      height: 100%;
-      margin: 0px;
-      font-family: 'Roboto', sans-serif;
-    }
-  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.2/fullpage.css">
+  <link href="https://fonts.googleapis.com/css?family=Anton|Open+Sans+Condensed:300" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+
+  <style>
+    
+    </style>
   <title>Obscura</title>
 </head>
 
 <body>
   <div id="root" style="flex-grow: 1"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="%PUBLIC_URL%/js/materialize.min.js"></script>
-  <script src="%PUBLIC_URL%/js/easings.min.js"></script>
-  <script type="text/javascript" src="%PUBLIC_URL%/js/scrolloverflow.min.js"></script>
-  <script type="text/javascript" src="%PUBLIC_URL%/js/fullpage.js"></script>
+  <!-- <script src="%PUBLIC_URL%/js/easings.min.js"></script> -->
+  <!-- <script type="text/javascript" src="%PUBLIC_URL%/js/scrolloverflow.min.js"></script> -->
+  <!-- <script type="text/javascript" src="%PUBLIC_URL%/js/fullpage.js"></script> -->
   <script type="text/javascript" src="%PUBLIC_URL%/js/fullpage.extensions.min.js"></script>
   <script type="text/javascript" src="%PUBLIC_URL%/js/init.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script> -->
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.2/fullpage.js"></script> -->
+  <script type="text/javascript" src="%PUBLIC_URL%/js/materialize.min.js"></script>
+  <script>
+    new fullpage('#fullpage', {
+      //options here
+      autoScrolling: true,
+      scrollHorizontally: true,
+      anchors: ['firstPage', 'secondPage', 'thirdPage'],
+      menu: '#menu',
+      navigation: true,
+      responsiveWidth: 1100,
+      afterResponsive: function (isResponsive) {
+
+      }
+    });
+
+    methods
+    fullpage_api.setAllowScrolling(false);
+  </script>
 </body>
 
 </html>

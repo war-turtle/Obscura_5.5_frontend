@@ -1,9 +1,8 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
+import $ from 'jquery';
 import Navigation from '../components/navigator';
-import Chat from '../components/chat';
 import Footer from '../components/Footer';
-
 
 const jwtDecode = require('jwt-decode');
 
@@ -15,6 +14,7 @@ const renderMergedProps = (component, ...rest) => {
 };
 
 const SideBar = ({ component: Component, ...rest }) => {
+  $('link[rel=stylesheet][href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"]').remove();
   const user = localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null;
 
   if (!user) {

@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 import { snackbarReducer } from 'react-redux-snackbar';
-import { Redirect } from 'react-router-dom';
-import React from 'react';
 import initialState from './initialState';
 import history from '../utils/history';
 

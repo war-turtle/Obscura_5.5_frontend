@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../actions';
 import TeamDetails from './teamDetails';
@@ -9,7 +9,6 @@ const jwtDecode = require('jwt-decode');
 
 const Decide = (props) => {
   const { teamExist, team, socket } = props;
-  console.log(teamExist, '-------');
   if (teamExist) {
     return <TeamDetails team={team} socket={socket} />;
   }
@@ -27,9 +26,8 @@ class Dashboard extends React.Component {
 
   componentDidMount = () => {
     const {
-      user, getTeam, history, socket,
+      user, getTeam, history,
     } = this.props;
-    console.log(user, socket);
     if (user === null) {
       history.push('/');
     }
@@ -39,17 +37,14 @@ class Dashboard extends React.Component {
         teamExist: false,
       });
     } else {
-      console.log(this.user.user);
       getTeam(this.user.user.team_id);
       this.setState({
         teamExist: true,
       });
     }
-    console.log(this.state);
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
     if (nextProps.team) {
       this.setState({
         teamExist: true,
@@ -60,7 +55,6 @@ class Dashboard extends React.Component {
   render() {
     const { teamExist } = this.state;
     const { team, socket } = this.props;
-    console.log(team, 'got it');
     return (
       <div className="row center">
         <div className="col s12">
