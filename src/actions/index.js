@@ -1,5 +1,6 @@
 import { showSnack } from 'react-redux-snackbar';
 import services from '../services';
+import SweetAlert from '../components/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -143,14 +144,10 @@ const postAns = (ans, alias) => (dispatch) => {
   services.postAns(ans, alias).then(
     (response) => {
       if (response.success) {
-        // dispatch(showSnack('myUniqueId', {
-        //   label: response.message,
-        //   timeout: 2000,
-        //   button: { label: 'OK, GOT IT' },
-        // }));
         dispatch(success('RIGHT_ANS', response));
       } else if (!response.success) {
         dispatch(failure('WRONG_ANS', response));
+        SweetAlert('Wrong Answer');
         dispatch(showSnack('myUniqueId', {
           label: response.message,
           timeout: 2000,

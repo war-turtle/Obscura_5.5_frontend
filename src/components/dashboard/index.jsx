@@ -17,12 +17,6 @@ const Decide = (props) => {
   return <Team />;
 };
 
-const cb = () => {
-  console.log('expired');
-  // history.push('/level/0');
-};
-const OPTIONS = { endDate: config.startDate, prefix: 'until game starts!', cb };
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +26,14 @@ class Dashboard extends React.Component {
     };
     this.startTime = config.startTimestamp;
     this.user = localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null;
+    this.OPTIONS = {
+      endDate: config.startDate,
+      prefix: 'until game starts!',
+      cb: () => {
+        props.getCurrentLevelAlias();
+        props.getLevelList();
+      },
+    };
   }
 
   componentDidMount = () => {
@@ -60,6 +62,9 @@ class Dashboard extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
+    if (nextProps.alias) {
+      nextProps.history.push(`/level/${nextProps.alias}`);
+    }
     if (nextProps.team) {
       this.setState({
         teamExist: true,
@@ -67,12 +72,12 @@ class Dashboard extends React.Component {
     }
   }
 
-  renderTimer() {
+  renderTimer = () => {
     const shouldShowTimer = this.startTime > new Date();
     if (shouldShowTimer) {
       return (
         <h5>
-          <Countdown options={OPTIONS} />
+          <Countdown options={this.OPTIONS} />
         </h5>
       );
     }
@@ -108,6 +113,7 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   team: state.user.team,
+  alias: state.level.alias,
 });
 
 
@@ -115,7 +121,15 @@ const mapDispatchToProps = dispatch => ({
   getTeam: (teamId) => {
     dispatch(actions.getTeam(teamId));
   },
+  getCurrentLevelAlias: () => {
+    dispatch(actions.getAlias());
+  },
+  getLevelList: () => {
+    dispatch(actions.getLevelList());
+  },
+  getLevel: (alias) => {
+    dispatch(actions.getLevel(alias));
+  },
 });
-
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));

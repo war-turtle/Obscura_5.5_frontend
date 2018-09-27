@@ -6,6 +6,9 @@ import {
 import PropTypes from 'prop-types';
 import loadjs from 'loadjs';
 import actions from '../../actions';
+import SweetAlert from '../sweetAlert';
+
+const jwtDecode = require('jwt-decode');
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -24,7 +27,9 @@ class Navigation extends React.Component {
 
   openCurrentLevel = () => {
     const { history, alias } = this.props;
-    history.push(`/level/${alias}`);
+    if (alias !== '') {
+      history.push(`/level/${alias}`);
+    }
   }
 
   render() {
@@ -66,7 +71,7 @@ class Navigation extends React.Component {
           <div className="divider" />
         </li>
         <li>
-          <a className="waves-effect" onClick={this.openCurrentLevel}>
+          <a className="waves-effect" onClick={() => { jwtDecode(localStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new!'); }}>
             <i className="material-icons">
             location_searching
             </i>
