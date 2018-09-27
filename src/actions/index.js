@@ -1,6 +1,5 @@
 import { showSnack } from 'react-redux-snackbar';
 import services from '../services';
-import history from '../utils/history';
 
 const jwtDecode = require('jwt-decode');
 
@@ -226,6 +225,10 @@ const sendMessage = data => (dispatch) => {
   );
 };
 
+const clearUser = () => (dispatch) => {
+  dispatch(success('CLEAR_USER', null));
+};
+
 export default {
   login,
   getLevelList,
@@ -241,4 +244,5 @@ export default {
   getTeam,
   acceptRequest,
   deleteRequest,
+  clearUser,
 };

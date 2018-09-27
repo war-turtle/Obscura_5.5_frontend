@@ -11,7 +11,7 @@ class LineChart extends React.Component {
   }
 
   componentDidMount = () => {
-    const { data } = this.props;
+    // const { data } = this.props;
   }
 
   componentWillReceiveProps = (nextProps) => {

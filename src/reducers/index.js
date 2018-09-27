@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 import { snackbarReducer } from 'react-redux-snackbar';
-import { Redirect } from 'react-router-dom';
-import React from 'react';
 import initialState from './initialState';
 import history from '../utils/history';
 
@@ -29,6 +27,15 @@ const message = (state = initialState.messageSent, action) => {
 const user = (state = initialState.user, action) => {
   console.log(action.type, action.data);
   switch (action.type) {
+    case 'CLEAR_USER':
+      return {
+        loggedin: false,
+        signupRequired: false,
+        registered: false,
+        userData: {},
+        onboard: false,
+        sentRequests: [],
+      };
     case 'SUCCESS_LOGIN':
       localStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {

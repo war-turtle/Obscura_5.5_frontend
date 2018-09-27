@@ -20,23 +20,18 @@ class Team extends React.Component {
   componentDidMount() {
     const { getTeamList } = this.props;
     getTeamList();
-    console.log(this.props);
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
     nextProps.teams.map((t) => {
       nextProps.userRequests.map((i) => {
-        console.log(i, t._id);
         if (i === t._id) {
-          console.log('matched');
           t.className = 'waves-effect waves-light btn disabled';
           t.content = 'Sent';
         } else {
           t.className = 'waves-effect waves-light btn';
           t.content = 'Send Request';
         }
-        console.log(t);
       });
     });
   }
@@ -61,7 +56,7 @@ class Team extends React.Component {
   }
 
   render() {
-    const { teams, userRequests } = this.props;
+    const { teams } = this.props;
     const avatarName = [];
     for (let i = 2; i <= 60; i += 1) {
       avatarName.push(`/images/avatars/${i}.png`);
@@ -201,13 +196,13 @@ Team.propTypes = {
   teams: PropTypes.arrayOf(PropTypes.object),
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   teams: state.teams,
   userRequests: state.user.sentRequests,
 });
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getTeamList: () => {
     dispatch(actions.getTeamList());
   },

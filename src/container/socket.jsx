@@ -1,5 +1,14 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Redirect } from 'react-router-dom';
+
+const jwtDecode = require('jwt-decode');
+
+const checkOnboard = () => {
+  if (!localStorage.getItem('jwtToken')) {
+    return false;
+  }
+  return (!jwtDecode(localStorage.getItem('jwtToken')).user.onboard);
+};
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
@@ -9,13 +18,11 @@ const renderMergedProps = (component, ...rest) => {
 };
 
 const Socket = ({ component: Component, ...rest }) => (
-
   <Route
     {...rest}
-    render={matchProps => renderMergedProps(Component, matchProps, rest)
+    render={matchProps => (checkOnboard() ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/" />)
     }
   />
-
 );
 
 Socket.propTypes = {

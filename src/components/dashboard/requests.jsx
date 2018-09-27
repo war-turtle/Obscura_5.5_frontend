@@ -9,7 +9,6 @@ class Requests extends React.Component {
     this.state = {
 
     };
-    console.log(props.requests);
   }
 
   render = () => {

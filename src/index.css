@@ -1,8 +1,7 @@
 html,
-body,
-  {
-  height: 100%;
-  margin: 0;
+body {
+    height: 100%;
+    margin: 0;
 }
 
 /* global list css */
@@ -12,63 +11,94 @@ body,
 } */
 
 ul {
-  list-style-type: circle;
+    list-style-type: circle;
 }
 
 /* Footer global css */
 
-Footer {
-  position: absolute;
-  bottom: 0%;
-  width: 100%;
+footer {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+}
+
+.login {
+    background-color: transparent !important;
+    box-shadow: 0px 0px !important;
 }
 
 /* Custom css */
 #mt {
-  margin-top: 10%;
+    margin-top: 10%;
 }
 
 .section {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 .editor {
-  max-height: 30vh;
-  position: absolute;
-  bottom: 10%;
-  overflow-y: auto;
+    max-height: 30vh;
+    position: absolute;
+    bottom: 10%;
+    overflow-y: auto;
 }
 
 /* SideNAv css */
-header, main, footer {
-  padding-left: 300px;
+header,
+main,
+footer {
+    padding-left: 300px;
 }
 
-@media only screen and (max-width : 992px) {
-  header, main, footer {
-    padding-left: 0;
-  }
+@media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
+        padding-left: 0;
+    }
 }
 
 /* Onboard back */
 .onboard-back {
-  min-height: 100vh;
-  padding: 0;
-  margin-bottom: 0;
+    min-height: 100vh;
+    padding: 0;
+    margin-bottom: 0;
 }
 
 .create-team-button {
-  margin-top: 5%;
+    margin-top: 5%;
 }
 
 /* Team-card-css */
 .team-card {
-  min-height: 80%;
-  position: absolute;
-  width: 100%;
-}
-
+    min-height: 80%;
+    position: absolute;
+    width: 100%;
+  }
+  
 /* Request card */
 .request-back {
   padding: 2%;
+}
+
+.imageDisplay {
+    padding: 50px;
+}
+
+.team-img {
+    max-width: 70%;
+    height: 70%;
+    border-radius: 50%;
+}
+
+.feedback-card {
+    background-color: rgb(114, 114, 114);
+}
+
+.feedback-form {
+    padding: 30px;
+}
+
+.feedback-form .input-field textarea {
+    border-bottom: 1px white solid;
 }

@@ -1,13 +1,3 @@
-$(document).ready(() => {
-  $('#fullpage').fullpage({
-    // options here
-    autoScrolling: true,
-    scrollHorizontally: true,
-  });
-
-  // methods
-  // $.fn.fullpage.setAllowScrollingI(false);
-});
 
 $(document).ready(() => {
   $('.tabs').tabs();
@@ -23,7 +13,7 @@ $(document).ready(() => {
 
 $(document).ready(() => {
   // $('.left').sidenav().options.edge = 'right';
-  ($('.left').sidenav({ edge: 'right' }));
+  $('.left').sidenav({ edge: 'right' });
 });
 
 $(document).ready(() => {

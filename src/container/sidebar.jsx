@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
+import $ from 'jquery';
 import Navigation from '../components/navigator';
-import Chat from '../components/chat';
-
+import Footer from '../components/Footer';
 
 const jwtDecode = require('jwt-decode');
 
@@ -13,7 +13,15 @@ const renderMergedProps = (component, ...rest) => {
   );
 };
 
+const checkOnboard = () => {
+  if (!localStorage.getItem('jwtToken')) {
+    return false;
+  }
+  return (!jwtDecode(localStorage.getItem('jwtToken')).user.onboard);
+};
+
 const SideBar = ({ component: Component, ...rest }) => {
+  $('link[rel=stylesheet][href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"]').remove();
   const user = localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null;
 
   if (!user) {
@@ -32,25 +40,16 @@ const SideBar = ({ component: Component, ...rest }) => {
       <main>
         <Route
           {...rest}
-          render={matchProps => renderMergedProps(Component, matchProps, rest)
+          render={(matchProps) => {
+            if (!localStorage.getItem('jwtToken')) {
+              return <Redirect to="/" />;
+            }
+            return jwtDecode(localStorage.getItem('jwtToken')).user.onboard ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/onboard" />;
+          }
           }
         />
       </main>
-      {/* <ul id="slide-out" className="sidenav left">
-        <li>
-          <a className="sidenav-close" href="#!">
-            Clicking this will close Sidenav
-          </a>
-        </li>
-        <li>
-          <Chat />
-        </li>
-      </ul>
-      <a href="#" data-target="slide-out" className="sidenav-trigger right">
-        <i className="material-icons">
-          menu
-        </i>
-      </a> */}
+      <Footer />
     </div>
   );
 };

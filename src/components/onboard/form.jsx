@@ -6,7 +6,6 @@ import Avatar from './avatar';
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.userData);
     this.state = {
       username: '',
       college: '',
