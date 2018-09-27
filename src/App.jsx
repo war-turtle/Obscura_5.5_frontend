@@ -15,6 +15,7 @@ import Team from './components/ourteam';
 import Leaderboard from './components/Leaderboard/index';
 import './App.css';
 import actions from './actions';
+import config from './config';
 
 
 const jwtDecode = require('jwt-decode');
@@ -22,10 +23,7 @@ const jwtDecode = require('jwt-decode');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      endpoint: 'http://eca8bbf3.ngrok.io',
-    };
-    this.socket = socketIOClient(this.state.endpoint);
+    this.socket = socketIOClient(config.api);
     if (localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null) {
       this.socket.username = jwtDecode(localStorage.getItem('jwtToken')).user.username;
       this.socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);

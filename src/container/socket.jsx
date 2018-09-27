@@ -13,23 +13,25 @@ const checkOnboard = () => {
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
+  return (
+    React.createElement(component, finalProps)
+  );
+};
+
+const Socket = ({ component: Component, ...rest }) => {
   const { history, socket } = rest;
   socket.on('stopUser', () => {
     history.push('/');
     SweetAlert('Someone is active from this account on another device.');
   });
   return (
-    React.createElement(component, finalProps)
+    <Route
+      {...rest}
+      render={matchProps => (checkOnboard() ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/" />)
+    }
+    />
   );
 };
-
-const Socket = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={matchProps => (checkOnboard() ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/" />)
-    }
-  />
-);
 
 Socket.propTypes = {
   component: () => null,
