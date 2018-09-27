@@ -225,6 +225,10 @@ const sendMessage = data => (dispatch) => {
   );
 };
 
+const clearUser = () => (dispatch) => {
+  dispatch(success('CLEAR_USER', null));
+};
+
 export default {
   login,
   getLevelList,
@@ -240,4 +244,5 @@ export default {
   getTeam,
   acceptRequest,
   deleteRequest,
+  clearUser,
 };

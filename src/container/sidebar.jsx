@@ -13,6 +13,13 @@ const renderMergedProps = (component, ...rest) => {
   );
 };
 
+const checkOnboard = () => {
+  if (!localStorage.getItem('jwtToken')) {
+    return false;
+  }
+  return (!jwtDecode(localStorage.getItem('jwtToken')).user.onboard);
+};
+
 const SideBar = ({ component: Component, ...rest }) => {
   $('link[rel=stylesheet][href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"]').remove();
   const user = localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null;
@@ -33,7 +40,12 @@ const SideBar = ({ component: Component, ...rest }) => {
       <main>
         <Route
           {...rest}
-          render={matchProps => renderMergedProps(Component, matchProps, rest)
+          render={(matchProps) => {
+            if (!localStorage.getItem('jwtToken')) {
+              return <Redirect to="/" />;
+            }
+            return jwtDecode(localStorage.getItem('jwtToken')).user.onboard ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/onboard" />;
+          }
           }
         />
       </main>

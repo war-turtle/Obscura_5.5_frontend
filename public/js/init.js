@@ -1,32 +1,23 @@
+
 $(document).ready(() => {
-    // $('#fullpage').fullpage({
-    //   // options here
-    //   autoScrolling: true,
-    //   scrollHorizontally: true,
-    // });
-    // methods
-    // $.fn.fullpage.setAllowScrollingI(false);
+  $('.tabs').tabs();
 });
 
 $(document).ready(() => {
-    $(".tabs").tabs();
+  $('.modal').modal();
 });
 
 $(document).ready(() => {
-    $(".modal").modal();
+  $('select').formSelect();
 });
 
 $(document).ready(() => {
-    $("select").formSelect();
+  // $('.left').sidenav().options.edge = 'right';
+  $('.left').sidenav({ edge: 'right' });
 });
 
 $(document).ready(() => {
-    // $('.left').sidenav().options.edge = 'right';
-    $(".left").sidenav({ edge: "right" });
+  $('.sidenav').sidenav();
 });
 
-$(document).ready(() => {
-    $(".sidenav").sidenav();
-});
-
-$(".dropdown-trigger").dropdown();
+$('.dropdown-trigger').dropdown();

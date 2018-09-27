@@ -26,9 +26,9 @@ class Dashboard extends React.Component {
 
   componentDidMount = () => {
     const {
-      user, getTeam, history,
+      getTeam, history,
     } = this.props;
-    if (user === null) {
+    if (this.user === null) {
       history.push('/');
     }
 
@@ -69,14 +69,14 @@ class Dashboard extends React.Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   team: state.user.team,
 });
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  getTeam: (team_id) => {
-    dispatch(actions.getTeam(team_id));
+const mapDispatchToProps = dispatch => ({
+  getTeam: (teamId) => {
+    dispatch(actions.getTeam(teamId));
   },
 });
 

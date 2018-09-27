@@ -196,13 +196,13 @@ Team.propTypes = {
   teams: PropTypes.arrayOf(PropTypes.object),
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   teams: state.teams,
   userRequests: state.user.sentRequests,
 });
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getTeamList: () => {
     dispatch(actions.getTeamList());
   },

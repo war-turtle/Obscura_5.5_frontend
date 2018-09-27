@@ -1,6 +1,5 @@
 import React from 'react';
 import loadjs from 'loadjs';
-// import Footer from '../Footer';
 import Login from '../Login';
 
 import './index.css';
@@ -8,12 +7,16 @@ import './index.css';
 class Home extends React.Component {
   constructor(props) {
     super(props);
+
     loadjs('/js/init.js');
+
+    localStorage.clear();
   }
 
   render() {
     return (
       <div id="main">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossOrigin="anonymous" />
         <div id="menu">
           <div className="container menu-container">
             <div className="row">
@@ -46,7 +49,7 @@ class Home extends React.Component {
           id="GAWDSLink"
           href="http://gawds.in"
           title="Graphics and Web Development Squad, click to know more."
-          target="_blank"
+          // target="_blank"
         >
           <span className="glyphicon glyphicon-cutlery" />
 
@@ -131,6 +134,7 @@ class Home extends React.Component {
                       src="images/logo2.svg"
                       height="100%"
                       width="100%"
+                      alt="svg"
                     />
                   </div>
                 </div>

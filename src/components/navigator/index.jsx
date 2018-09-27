@@ -13,7 +13,7 @@ class Navigation extends React.Component {
     this.state = {
 
     };
-    loadjs('/js/init.js', '/js/materialize.min.js');
+    loadjs('/js/init.js');
   }
 
   componentDidMount = () => {
@@ -57,7 +57,7 @@ class Navigation extends React.Component {
         <li>
           <a className="waves-effect" href="#!" onClick={(e) => { e.preventDefault(); history.push('/dashboard'); }}>
             <i className="material-icons">
-              cloud
+            folder_shared
             </i>
             Dashboard
           </a>
@@ -68,7 +68,7 @@ class Navigation extends React.Component {
         <li>
           <a className="waves-effect" onClick={this.openCurrentLevel}>
             <i className="material-icons">
-              cloud
+            location_searching
             </i>
             Arena
           </a>
@@ -79,7 +79,7 @@ class Navigation extends React.Component {
         <li>
           <a className="waves-effect" href="#!" onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}>
             <i className="material-icons">
-              cloud
+            format_list_numbered
             </i>
             Leaderboard
           </a>
@@ -90,7 +90,7 @@ class Navigation extends React.Component {
         <li>
           <a className="waves-effect" href="#!" onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}>
             <i className="material-icons">
-              cloud
+            group
             </i>
             Our Team
           </a>
@@ -101,7 +101,7 @@ class Navigation extends React.Component {
         <li>
           <a className="waves-effect" href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
             <i className="material-icons">
-              cloud
+            headset_mic
             </i>
             Support
           </a>
@@ -112,7 +112,7 @@ class Navigation extends React.Component {
         <li>
           <a className="dropdown-trigger waves-effect" href="#" data-target="dropdown1">
             <i className="material-icons">
-              cloud
+            whatshot
             </i>
             Levels
           </a>
@@ -123,7 +123,7 @@ class Navigation extends React.Component {
                   <li>
                     <a href="#!">
                       <i className="material-icons">
-                        view_module
+                      whatshot
                       </i>
                       Level
                       {' '}
@@ -135,7 +135,15 @@ class Navigation extends React.Component {
               ))
             }
           </ul>
-
+          <div className="divider" />
+        </li>
+        <li>
+          <a className="waves-effect red accent-2" href="#!" onClick={(e) => { e.preventDefault(); history.push('/'); }}>
+            <i className="material-icons">
+            exit_to_app
+            </i>
+            Logout
+          </a>
         </li>
       </div>
     );
@@ -163,13 +171,13 @@ Navigation.defaultProps = {
   getLevel: () => null,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   alias: state.level.alias,
   levellist: state.level.levellist,
 });
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getCurrentLevelAlias: () => {
     dispatch(actions.getAlias());
   },

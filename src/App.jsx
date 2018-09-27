@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter, Switch,
+  BrowserRouter, Switch, Route,
 } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import { connect } from 'react-redux';
@@ -36,88 +36,87 @@ class App extends React.Component {
     }
   }
 
-    componentDidMount = () => {
-      this.socket.on('stopUser', () => {
-      });
-    };
+  componentDidMount = () => {
+    this.socket.on('stopUser', () => {
+    });
+  };
 
-    render = () => (
-      <BrowserRouter>
-        <Switch>
-          <Socket exact path="/" component={Home} socket={this.socket} />
-          <Socket
-            exact
-            path="/onboard"
-            component={Onboard}
-            socket={this.socket}
-            user={
-                        localStorage.getItem('jwtToken')
-                          ? jwtDecode(localStorage.getItem('jwtToken'))
-                          : null
-                    }
-          />
-          <SideBar
-            exact
-            path="/dashboard"
-            component={Dashboard}
-            user={
-                        localStorage.getItem('jwtToken')
-                          ? jwtDecode(localStorage.getItem('jwtToken'))
-                          : null
-                    }
-            socket={this.socket}
-          />
-          <SideBar
-            path="/level/:alias"
-            component={Level}
-            user={
-                        localStorage.getItem('jwtToken')
-                          ? jwtDecode(localStorage.getItem('jwtToken'))
-                          : null
-                    }
-            socket={this.socket}
-          />
-          <SideBar
-            path="/our-team"
-            component={Team}
-            user={
-                        localStorage.getItem('jwtToken')
-                          ? jwtDecode(localStorage.getItem('jwtToken'))
-                          : null
-                    }
-            socket={this.socket}
-          />
-          <SideBar
-            path="/support"
-            component={Support}
-            user={
-                        localStorage.getItem('jwtToken')
-                          ? jwtDecode(localStorage.getItem('jwtToken'))
-                          : null
-                    }
-            socket={this.socket}
-          />
-          <SideBar
-            path="/leaderboard"
-            component={Leaderboard}
-            user={
-                        localStorage.getItem('jwtToken')
-                          ? jwtDecode(localStorage.getItem('jwtToken'))
-                          : null
-                    }
-            socket={this.socket}
-          />
-        </Switch>
-      </BrowserRouter>
-    );
+  render = () => (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Socket
+          exact
+          path="/onboard"
+          component={Onboard}
+          socket={this.socket}
+          user={localStorage.getItem('jwtToken')
+            ? jwtDecode(localStorage.getItem('jwtToken'))
+            : null
+          }
+        />
+        <SideBar
+          exact
+          path="/dashboard"
+          component={Dashboard}
+          user={
+            localStorage.getItem('jwtToken')
+              ? jwtDecode(localStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          path="/level/:alias"
+          component={Level}
+          user={
+            localStorage.getItem('jwtToken')
+              ? jwtDecode(localStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          path="/our-team"
+          component={Team}
+          user={
+            localStorage.getItem('jwtToken')
+              ? jwtDecode(localStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          path="/support"
+          component={Support}
+          user={
+            localStorage.getItem('jwtToken')
+              ? jwtDecode(localStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          path="/leaderboard"
+          component={Leaderboard}
+          user={
+            localStorage.getItem('jwtToken')
+              ? jwtDecode(localStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   team: state.user.team,
 });
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getTeam: (team_id) => {
     dispatch(actions.getTeam(team_id));
   },

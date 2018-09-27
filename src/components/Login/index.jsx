@@ -12,6 +12,11 @@ class Login extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    const { clearUser } = this.props;
+    clearUser();
+  }
+
   componentWillReceiveProps = (nextProps) => {
     const { history } = this.props;
     if (nextProps.loggedin && nextProps.onboard) {
@@ -24,7 +29,7 @@ class Login extends React.Component {
   responseGoogle = (response) => {
     if (!response.tokenId) {
       alert('try aganin');
-      return;
+      // return;
     }
     const { login } = this.props;
     login(response.tokenId, 'google');
@@ -33,7 +38,7 @@ class Login extends React.Component {
   responseFacebook = (response) => {
     if (!response.accessToken) {
       alert('try aganin');
-      return;
+      // return;
     }
     const { login } = this.props;
     login(response.accessToken, 'facebook');
@@ -84,26 +89,31 @@ class Login extends React.Component {
 }
 Login.propTypes = {
   login: () => null,
+  clearUser: () => null,
   loggedin: PropTypes.bool,
   onboard: PropTypes.bool,
   history: () => null,
 };
 
 Login.defaultProps = {
+  clearUser: () => null,
   login: () => null,
   loggedin: false,
   onboard: false,
   history: () => null,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   onboard: state.user.onboard,
   loggedin: state.user.loggedin,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   login: (token, provider) => {
     dispatch(actions.login(token, provider));
+  },
+  clearUser: () => {
+    dispatch(actions.clearUser());
   },
 });
 

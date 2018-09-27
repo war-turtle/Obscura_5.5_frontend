@@ -1,21 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DisplayImage = (props) => {
   const { images } = props;
   return (
-    <div>
-      {images.map(Obj => (
-        <div className="col s12 m3">
-          <img
-            className="team-img"
-            src={`images/team/${Obj.url}`}
-            alt="team-pic"
-          />
-          <p>
-            {Obj.name}
-          </p>
-        </div>
-      ))}
+    <div className="row">
+      <div className="col s12">
+        {images.map((Obj, i) => (
+          <div key={i} className="col s12 m3">
+            <img
+              className="team-img"
+              src={`images/team/${Obj.url}`}
+              alt="team-pic"
+            />
+            <p>
+              {Obj.name}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -42,6 +45,10 @@ const Team = () => {
       </div>
     </div>
   );
+};
+
+DisplayImage.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Team;
