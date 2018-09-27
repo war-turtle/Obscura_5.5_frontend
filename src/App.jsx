@@ -23,7 +23,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      endpoint: 'http://localhost:8000',
+      endpoint: 'http://eca8bbf3.ngrok.io',
     };
     this.socket = socketIOClient(this.state.endpoint);
     if (localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null) {
