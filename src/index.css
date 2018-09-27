@@ -50,6 +50,10 @@ footer {
     padding-left: 300px;
 }
 
+.sidenav{
+    background-color: #424242;
+}
+
 @media only screen and (max-width: 992px) {
     header,
     main,
@@ -87,7 +91,7 @@ footer {
 
 .team-img {
     max-width: 70%;
-    height: 70%;
+    height: auto;
     border-radius: 50%;
 }
 

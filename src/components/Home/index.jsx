@@ -159,16 +159,21 @@ class Home extends React.Component {
               <div className="row">
                 <div className="col-12">
                   <div className="card p-2 my-3">
-                    #1 loreum ipsum dolor sit
+                    Use of Google is permitted. Whats more, we recommend the use of Google.
                   </div>
                   <div className="card p-2 my-3">
-                    #1 loreum ipsum dolor sit
+                    Upper case characters and spaces are not permitted in the answers.
                   </div>
                   <div className="card p-2 my-3">
-                    #1 loreum ipsum dolor sit
+                    Out of the box thinking is encouraged as ObscurA puts up
+                    questions which require unconventional line of thought.
                   </div>
                   <div className="card p-2 my-3">
-                    #1 loreum ipsum dolor sit
+                    We give hints only if asked properly.
+                  </div>
+                  <div className="card p-2 my-3">
+                    Keep an eye on our FB profile and Twitter
+                     handle as we will regularly post hints and updates there.
                   </div>
                 </div>
               </div>

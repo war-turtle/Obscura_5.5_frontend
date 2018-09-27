@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="page-footer  grey lighten-4 black-text center">
+  <footer className="page-footer white-text center" style={{ position: 'fixed', backgroundColor: '#424242' }}>
     <div className="row">
       <div className="col s12">
         <b>
