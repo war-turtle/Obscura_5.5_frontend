@@ -1,6 +1,6 @@
 const dev = {
   api: {
-    url: 'http://api.obscuranitkkr.co.in',
+    url: 'http://localhost:8000',
   },
   cypher: {
     algo: 'aes256',
@@ -13,7 +13,7 @@ const dev = {
 
 const prod = {
   api: {
-    url: 'http://api.obscuranitkkr.co.in',
+    url: '',
   },
   cypher: {
     algo: 'aes256',
@@ -25,6 +25,7 @@ const prod = {
 };
 
 const config = process.env.REACT_APP_STAGE === 'production' ? prod : dev;
+
 export default {
   // Add common config values here
   MAX_ATTACHMENT_SIZE: 5000000,

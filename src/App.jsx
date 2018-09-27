@@ -23,7 +23,7 @@ const jwtDecode = require('jwt-decode');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.socket = socketIOClient(config.api);
+    this.socket = socketIOClient(config.api.url);
     if (localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null) {
       this.socket.username = jwtDecode(localStorage.getItem('jwtToken')).user.username;
       this.socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
