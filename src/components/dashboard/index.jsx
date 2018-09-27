@@ -91,8 +91,8 @@ class Dashboard extends React.Component {
     return (
       <div>
         <nav className={css}>
-          <div className="nav-wrapper">
-            <a href="#" className="brand-logo right">
+          <div className="nav-wrapper" style={{ backgroundColor: '#424242' }}>
+            <a href="#" className="brand-logo center">
               {timer}
             </a>
           </div>
