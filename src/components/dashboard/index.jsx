@@ -92,7 +92,13 @@ class Dashboard extends React.Component {
     const { team, socket } = this.props;
     return (
       <div>
-        <nav className={css}>
+        <nav
+          className={css}
+          style={{
+            paddingBottom: '120px',
+            backgroundColor: '#424242',
+          }}
+        >
           <div className="nav-wrapper" style={{ backgroundColor: '#424242' }}>
             <a href="#" className="brand-logo center">
               {timer}
