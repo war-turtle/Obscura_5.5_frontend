@@ -30,6 +30,9 @@ class Leaderboard extends React.Component {
   goToPage = (index) => {
     const { getLeaderboard } = this.props;
     getLeaderboard((index - 1), 10);
+    this.setState({
+      index,
+    });
   }
 
   prevPage = () => {
@@ -143,7 +146,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getLeaderboard: (skip, limit) => {
-    dispatch(actions.getLeaderboard(skip, limit));
+    dispatch(actions.getLeaderboard(skip * 10, limit));
   },
 });
 
