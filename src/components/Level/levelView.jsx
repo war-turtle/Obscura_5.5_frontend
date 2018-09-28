@@ -38,7 +38,11 @@ class LevelView extends React.Component {
           </h3>
           <div className="row center-align">
             <div className="col s12 m8 offset-m2 l8 offset-l2">
-              <div id="insert" dangerouslySetInnerHTML={{ __html: html }} />
+              <div className="row center">
+                <div className="col s6 offset-s3">
+                  <div id="insert" dangerouslySetInnerHTML={{ __html: html }} />
+                </div>
+              </div>
               {
                 picture.map(p => (<img key={p} className="responsive-img" src={p} width="50%" alt="level images" />))
               }
