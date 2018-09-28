@@ -58,7 +58,7 @@ class LevelView extends React.Component {
                     Type your Ans
                   </label>
                 </div>
-                <button className="btn waves-effect waves-light" id="submit" type="submit" name="action">
+                <button className="btn waves-effect waves-light" id="submit" type="submit" name="action" onClick="M.toast({html: 'I am a toast'})">
                   Submit
                   <i className="material-icons right">
                     send
