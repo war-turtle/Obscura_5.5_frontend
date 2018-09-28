@@ -34,7 +34,7 @@ class Navigation extends React.Component {
 
   render() {
     const {
-      user, history, levellist, getLevel,
+      user, history, levellist, getLevel, socket,
     } = this.props;
     return (
       <div>
@@ -69,7 +69,7 @@ class Navigation extends React.Component {
         </li>
         <li />
         <li>
-          <a className="waves-effect white-text" onClick={() => { jwtDecode(localStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new!'); }}>
+          <a className="waves-effect white-text" onClick={() => { jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new!', 'error'); }}>
             <i className="material-icons white-text">
             location_searching
             </i>
@@ -132,7 +132,7 @@ class Navigation extends React.Component {
           </ul>
         </li>
         <li>
-          <a className="waves-effect indigo white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/'); }}>
+          <a className="waves-effect indigo white-text" href="#!" onClick={(e) => { e.preventDefault(); socket.emit('disconnect', null); history.push('/'); }}>
             <i className="material-icons white-text">
             exit_to_app
             </i>

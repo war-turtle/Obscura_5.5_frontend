@@ -88,7 +88,7 @@ const acceptRequest = (requesterId, socket) => (dispatch) => {
     (response) => {
       if (response.success) {
         dispatch(success('ACCEPT_SUCCESS', response));
-        dispatch(getTeam(jwtDecode(localStorage.getItem('jwtToken')).user.team_id));
+        dispatch(getTeam(jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id));
       } else {
         dispatch(failure('ACCEPT_FAILURE', response));
       }
@@ -101,7 +101,7 @@ const deleteRequest = (requesterId, socket) => (dispatch) => {
     (response) => {
       if (response.success) {
         dispatch(success('DELETE_SUCCESS', response));
-        dispatch(getTeam(jwtDecode(localStorage.getItem('jwtToken')).user.team_id));
+        dispatch(getTeam(jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id));
       } else {
         dispatch(failure('DELETE_FAILURE', response));
       }
@@ -133,6 +133,7 @@ const getAlias = () => (dispatch) => {
       if (response.success) {
         dispatch(success('ALIAS_SUCCESS', response));
       } else {
+        SweetAlert('Level Not Found', 'error');
         dispatch(failure('LEVEL_NOT_CREATED', response));
       }
     },
@@ -147,7 +148,7 @@ const postAns = (ans, alias) => (dispatch) => {
         dispatch(success('RIGHT_ANS', response));
       } else if (!response.success) {
         dispatch(failure('WRONG_ANS', response));
-        SweetAlert('Wrong Answer');
+        SweetAlert('Wrong Answer', 'error');
         dispatch(showSnack('myUniqueId', {
           label: response.message,
           timeout: 2000,
@@ -172,7 +173,7 @@ const getTeamList = () => (dispatch) => {
         const a = [];
         response.data.teams.map((t) => {
           t.requests.map((ri) => {
-            if (ri.requester_id === jwtDecode(localStorage.getItem('jwtToken')).user._id) {
+            if (ri.requester_id === jwtDecode(sessionStorage.getItem('jwtToken')).user._id) {
               a.push(t._id);
             }
           });

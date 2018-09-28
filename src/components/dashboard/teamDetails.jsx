@@ -8,13 +8,13 @@ const TeamDetails = (props) => {
       <div className="row">
         <div className="col s12">
           <div className="col s12 m8 offset-m2 l6 offset-l3">
-            <div className="card-panel grey lighten-5 z-depth-1">
+            <div className="card-panel indigo z-depth-1">
               <div className="row">
                 <div className="col s2 valign-wrapper">
                   <img src={team.picture} alt="" className="circle responsive-img" />
                 </div>
                 <div className="col s10">
-                  <span className="black-text">
+                  <span className="white-text">
                     <h6>
                       Team
                       {' '}

@@ -2,8 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-// import LineChart from './linechart';
-import SweetAlert from '../sweetAlert';
+
+const jwtDecode = require('jwt-decode');
 
 class Leaderboard extends React.Component {
   constructor(props) {
@@ -11,7 +11,9 @@ class Leaderboard extends React.Component {
     this.state = {
       index: 1,
     };
-    SweetAlert();
+
+    const { socket } = props;
+    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
@@ -83,7 +85,7 @@ class Leaderboard extends React.Component {
                    list.map((l, i) => (
                      <tr>
                        <td>
-                         {i + 1}
+                         {10 * (this.state.index - 1) + i + 1}
                        </td>
                        <td>
                          <img className="responsive-img" src={l.picture} alt="avatar" width="45" />
