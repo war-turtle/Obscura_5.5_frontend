@@ -5,10 +5,10 @@ const Twitter = () => (
   <Timeline
     dataSource={{
       sourceType: 'profile',
-      screenName: 'obscura_nit_kkr',
+      screenName: 'obscura_NITKKR',
     }}
     options={{
-      username: 'obscura_nit_kkr',
+      username: 'obscura_NITKKR',
       height: '90vh',
     }}
   />

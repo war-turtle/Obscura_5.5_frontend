@@ -55,7 +55,7 @@ class Level extends React.Component {
       });
     } else {
       // eslint-disable-next-line
-      // eval(nextProps.level.js)
+      eval(nextProps.level.js)
     }
   }
 
