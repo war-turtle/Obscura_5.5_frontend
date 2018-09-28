@@ -133,6 +133,7 @@ const getAlias = () => (dispatch) => {
       if (response.success) {
         dispatch(success('ALIAS_SUCCESS', response));
       } else {
+        SweetAlert('Level Not Found', 'error');
         dispatch(failure('LEVEL_NOT_CREATED', response));
       }
     },
