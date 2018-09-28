@@ -25,6 +25,9 @@ class Leaderboard extends React.Component {
     const { getLeaderboard } = this.props;
     const { index } = this.state;
     getLeaderboard((index), 10);
+    this.setState({
+      index: index + 1,
+    });
   }
 
   goToPage = (index) => {
@@ -39,6 +42,9 @@ class Leaderboard extends React.Component {
     const { getLeaderboard } = this.props;
     const { index } = this.state;
     getLeaderboard((index - 2), 10);
+    this.setState({
+      index: index - 1,
+    });
   }
 
   render() {
@@ -107,7 +113,7 @@ class Leaderboard extends React.Component {
 
 
               <ul className="pagination">
-                <li className={index > 1 ? 'waves-effect' : 'disabled'} onClick={(e) => { e.preventDefault(); this.prevPage; }}>
+                <li className={index > 1 ? 'waves-effect' : 'disabled'}>
                   <a href="#!">
                     <i className="material-icons">
                       chevron_left
@@ -119,7 +125,7 @@ class Leaderboard extends React.Component {
                     i
                   ))
                 }
-                <li className={index < pager.length ? 'waves-effect' : 'disabled'} onClick={(e) => { e.preventDefault(); this.nextPage; }}>
+                <li className={index < pager.length ? 'waves-effect' : 'disabled'}>
                   <a href="#!">
                     <i className="material-icons">
                       chevron_right

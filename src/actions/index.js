@@ -144,9 +144,9 @@ const getAlias = () => (dispatch) => {
 const postAns = (ans, alias) => (dispatch) => {
   services.postAns(ans, alias).then(
     (response) => {
-      if (response.success) {
+      if (response.success && response.ansCorrect) {
         dispatch(success('RIGHT_ANS', response));
-      } else if (!response.success) {
+      } else if (response.success && !response.ansCorrect) {
         dispatch(failure('WRONG_ANS', response));
         SweetAlert('Wrong Answer', 'error');
         dispatch(showSnack('myUniqueId', {

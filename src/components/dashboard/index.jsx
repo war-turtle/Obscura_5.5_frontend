@@ -6,6 +6,7 @@ import actions from '../../actions';
 import TeamDetails from './teamDetails';
 import Team from '../onboard/team';
 import config from '../../config';
+import SweetAlert from '../sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -32,6 +33,7 @@ class Dashboard extends React.Component {
       cb: () => {
         props.getCurrentLevelAlias();
         props.getLevelList();
+        SweetAlert('Game has started! You may enter.', 'success');
       },
     };
 
@@ -65,9 +67,6 @@ class Dashboard extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.alias) {
-      nextProps.history.push(`/level/${nextProps.alias}`);
-    }
     if (nextProps.team) {
       this.setState({
         teamExist: true,
