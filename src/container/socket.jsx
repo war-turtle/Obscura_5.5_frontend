@@ -5,10 +5,10 @@ import SweetAlert from '../components/sweetAlert';
 const jwtDecode = require('jwt-decode');
 
 const checkOnboard = () => {
-  if (!localStorage.getItem('jwtToken')) {
+  if (!sessionStorage.getItem('jwtToken')) {
     return false;
   }
-  return (!jwtDecode(localStorage.getItem('jwtToken')).user.onboard);
+  return (!jwtDecode(sessionStorage.getItem('jwtToken')).user.onboard);
 };
 
 const renderMergedProps = (component, ...rest) => {
@@ -22,7 +22,7 @@ const Socket = ({ component: Component, ...rest }) => {
   const { history, socket } = rest;
   socket.on('stopUser', () => {
     history.push('/');
-    SweetAlert('Someone is active from this account on another device.');
+    SweetAlert('Someone is active from this account on another device.', 'error');
   });
   return (
     <Route

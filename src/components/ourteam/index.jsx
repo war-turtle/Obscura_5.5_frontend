@@ -28,7 +28,7 @@ const DisplayImage = (props) => {
 
 const Team = (props) => {
   const { socket } = props;
-  socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
+  socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   const developersArray = [
     { name: 'Anuj Sharma', url: 'AnujSharma.jpg' },
     { name: 'Kartik Yadav', url: 'KartikYadav.jpg' },
@@ -54,6 +54,9 @@ const Team = (props) => {
     { name: 'Tanvi Singla', url: 'TanviSingla.jpg' },
     { name: 'Vedant Nepal', url: 'VedantNepal.jpg' },
     { name: 'Abhinav Mishra', url: 'AbhinavMishra.jpg' },
+    { name: 'Abhimanyu Singh', url: 'AbhimanyuSingh.jpg' },
+    { name: 'Thorvi Ramteke', url: 'ThorviRamteke.jpg' },
+    { name: 'Yaseen Gouse Samudri', url: 'YaseenGouseSamudri.jpg' },
   ];
 
   return (
@@ -61,7 +64,7 @@ const Team = (props) => {
       <div className="row center">
         <div className="col s12">
           <h3>
-	        Meet the team behind Electric Pulp
+	        Meet the team behind Obscura
           </h3>
         </div>
         <div className="row">

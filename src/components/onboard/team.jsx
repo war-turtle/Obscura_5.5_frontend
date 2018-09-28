@@ -6,6 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import actions from '../../actions';
 import Avatar from './avatar';
+import sweetAlert from '../sweetAlert';
 
 class Team extends React.Component {
   constructor(props) {
@@ -43,8 +44,13 @@ class Team extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { createTeam } = this.props;
-    createTeam(this.state);
+
+    if (this.state.picture == '') {
+      sweetAlert('Please Select An Avatar', 'error');
+    } else {
+      const { createTeam } = this.props;
+      createTeam(this.state);
+    }
   }
 
   changeAvatar = (avatar) => {

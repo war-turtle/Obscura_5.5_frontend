@@ -69,7 +69,7 @@ class Navigation extends React.Component {
         </li>
         <li />
         <li>
-          <a className="waves-effect white-text" onClick={() => { jwtDecode(localStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new!'); }}>
+          <a className="waves-effect white-text" onClick={() => { jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new!', 'error'); }}>
             <i className="material-icons white-text">
             location_searching
             </i>

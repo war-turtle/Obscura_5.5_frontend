@@ -26,7 +26,7 @@ const login = (token, provider) => {
     .then(response => response.json())
     .then((user) => {
       if (user && user.token) {
-        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
       }
       return user;
     });
@@ -39,10 +39,10 @@ const onBoardUser = (formData) => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'PUT';
   reqOptions.body = JSON.stringify(formData);
-  return fetch(`${config.api.url}/players/${jwtDecode(localStorage.getItem('jwtToken')).user._id}`, reqOptions)
+  return fetch(`${config.api.url}/players/${jwtDecode(sessionStorage.getItem('jwtToken')).user._id}`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
@@ -54,7 +54,7 @@ const fetchLeaderboard = (skip, limit) => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   return fetch(`${config.api.url}/teams?skip=${skip}&limit=${limit}&sort=true`, reqOptions)
     .then(response => response.json())
     .then(response => response);
@@ -67,7 +67,7 @@ const getLevelList = () => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   return fetch(`${config.api.url}/levels?action=getAllLevels`, reqOptions)
     .then(response => response.json())
     .then(response => response);
@@ -80,7 +80,7 @@ const fetchLevel = (alias) => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
   return fetch(`${config.api.url}/levels?action=getAliasLevel&alias=${alias}`, reqOptions).then(response => response.json());
 };
@@ -92,7 +92,7 @@ const getAlias = () => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
   return fetch(`${config.api.url}/levels?action=getLevelAlias`, reqOptions)
     .then(response => response.json())
@@ -108,7 +108,7 @@ const postAns = (ans, alias) => {
   };
   reqOptions.method = 'POST';
   reqOptions.body = JSON.stringify(ans);
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   return fetch(`${config.api.url}/levels/${alias}`, reqOptions)
     .then(response => response.json())
     .then(response => response);
@@ -121,7 +121,7 @@ const getTeamList = () => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
   return fetch(`${config.api.url}/teams`, reqOptions)
     .then(response => response.json())
@@ -135,7 +135,7 @@ const getTeam = (teamId) => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'GET';
   return fetch(`${config.api.url}/teams/${teamId}`, reqOptions)
     .then(response => response.json())
@@ -149,7 +149,7 @@ const sendTeamRequest = (teamId) => {
       'Content-Type': 'application/json',
     },
   };
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'PUT';
   return fetch(`${config.api.url}/teams/${teamId}?action=request`, reqOptions)
     .then(response => response.json())
@@ -164,7 +164,7 @@ const createTeam = (formData) => {
     },
   };
   reqOptions.body = JSON.stringify(formData);
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'POST';
   return fetch(`${config.api.url}/teams`, reqOptions)
     .then(response => response.json())
@@ -179,7 +179,7 @@ const sendMessage = (formData) => {
     },
   };
   reqOptions.body = JSON.stringify(formData);
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'POST';
   return fetch(`${config.api.url}/messages?action=email&to=admin`, reqOptions)
     .then(response => response.json())
@@ -195,8 +195,8 @@ const acceptRequest = (reqId) => {
   };
   reqOptions.body = JSON.stringify({ reqId });
   reqOptions.method = 'PUT';
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
-  return fetch(`${config.api.url}/teams/${jwtDecode(localStorage.getItem('jwtToken')).user.team_id}?action=accept_request`, reqOptions)
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/teams/${jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id}?action=accept_request`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };
@@ -210,8 +210,8 @@ const deleteRequest = (reqId) => {
   };
   reqOptions.body = JSON.stringify({ reqId });
   reqOptions.method = 'PUT';
-  reqOptions.headers.Authorization = localStorage.getItem('jwtToken');
-  return fetch(`${config.api.url}/teams/${jwtDecode(localStorage.getItem('jwtToken')).user.team_id}?action=delete`, reqOptions)
+  reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
+  return fetch(`${config.api.url}/teams/${jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id}?action=delete`, reqOptions)
     .then(response => response.json())
     .then(response => response);
 };

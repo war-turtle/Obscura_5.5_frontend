@@ -22,7 +22,7 @@ class Level extends React.Component {
       html: '',
     };
     const { socket } = props;
-    socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
+    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
@@ -41,7 +41,7 @@ class Level extends React.Component {
     });
 
     if (nextProps.nextalias !== nextalias && nextProps.nextalias !== '' && nextProps.ansCheck) {
-      SweetAlert('Congratulations');
+      SweetAlert('Congratulations', 'success');
       const { history } = this.props;
       history.push(`/level/${nextProps.nextalias}`);
       const { getLevel, getLevelList } = this.props;

@@ -17,7 +17,7 @@ const renderMergedProps = (component, ...rest) => {
 
 const SideBar = ({ component: Component, ...rest }) => {
   $('link[rel=stylesheet][href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"]').remove();
-  const user = localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null;
+  const user = sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null;
 
   if (!user) {
     return <Redirect to="/" />;
@@ -25,7 +25,7 @@ const SideBar = ({ component: Component, ...rest }) => {
   const { history, socket } = rest;
   socket.on('stopUser', () => {
     history.push('/');
-    SweetAlert('Someone is active from this account on another device.');
+    SweetAlert('Someone is active from this account on another device.', 'error');
   });
   return (
     <div>
@@ -42,10 +42,10 @@ const SideBar = ({ component: Component, ...rest }) => {
           <Route
             {...rest}
             render={(matchProps) => {
-              if (!localStorage.getItem('jwtToken')) {
+              if (!sessionStorage.getItem('jwtToken')) {
                 return <Redirect to="/" />;
               }
-              return jwtDecode(localStorage.getItem('jwtToken')).user.onboard ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/onboard" />;
+              return jwtDecode(sessionStorage.getItem('jwtToken')).user.onboard ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/onboard" />;
             }
           }
           />

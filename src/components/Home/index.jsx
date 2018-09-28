@@ -10,7 +10,7 @@ class Home extends React.Component {
 
     loadjs('/js/init.js');
 
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
   render() {

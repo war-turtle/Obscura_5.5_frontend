@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
       css: '',
     };
     this.startTime = config.startTimestamp;
-    this.user = localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null;
+    this.user = sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null;
     this.OPTIONS = {
       endDate: config.startDate,
       prefix: 'until game starts!',
@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
     };
 
     const { socket } = props;
-    socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
+    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
