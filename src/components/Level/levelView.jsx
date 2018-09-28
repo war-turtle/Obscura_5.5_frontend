@@ -20,15 +20,18 @@ class LevelView extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    const formData = {};
     const { postAns } = this.props;
+    for (const field in this.refs) {
+      formData[field] = this.refs[field].value;
+      document.getElementById('myform').reset();
+    }
     const alias = this.props.match.params.alias;
-    postAns(this.state, alias);
-    this.setState({ ans: '' });
+    postAns(formData, alias);
+    e.preventDefault();
   }
 
   render() {
-    const { ans } = this.state;
     const { name, html, picture } = this.props;
     return (
       <div className="row">
@@ -50,7 +53,7 @@ class LevelView extends React.Component {
             <div className="col s12">
               <form onSubmit={this.handleSubmit} id="myform">
                 <div className="input-field inline">
-                  <input id="ans" type="text" value={ans} className="validate" name="ans" onChange={this.onChange} />
+                  <input id="ans" type="text" ref="ans" className="validate" name="ans" />
                   <label htmlFor="ans">
                     Type your Ans
                   </label>
