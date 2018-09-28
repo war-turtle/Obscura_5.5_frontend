@@ -36,7 +36,7 @@ const user = (state = initialState.user, action) => {
         sentRequests: [],
       };
     case 'SUCCESS_LOGIN':
-      localStorage.setItem('jwtToken', action.data.data.token);
+      sessionStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
         userData: jwtDecode(action.data.data.token).user,
         loggedin: true,
@@ -44,7 +44,7 @@ const user = (state = initialState.user, action) => {
       });
 
     case 'SIGNUP_REQUIRED':
-      localStorage.setItem('jwtToken', action.data.data.token);
+      sessionStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
         userData: jwtDecode(action.data.data.token).user,
         loggedin: true,
@@ -52,7 +52,7 @@ const user = (state = initialState.user, action) => {
       });
 
     case 'SIGNUP_SUCCESS':
-      localStorage.setItem('jwtToken', action.data.data.token);
+      sessionStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
         loggedin: true,
         jwtToken: action.data.data.token,
@@ -71,7 +71,7 @@ const user = (state = initialState.user, action) => {
         sentRequests: state.sentRequests.concat(action.data),
       });
     case 'TEAM_CREATE_SUCCESS':
-      localStorage.setItem('jwtToken', action.data.data.token);
+      sessionStorage.setItem('jwtToken', action.data.data.token);
       return Object.assign({}, state, {
         team: action.data.data.team,
       });

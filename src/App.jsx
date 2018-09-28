@@ -24,12 +24,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.socket = socketIOClient(config.api.url);
-    if (localStorage.getItem('jwtToken') ? jwtDecode(localStorage.getItem('jwtToken')) : null) {
-      this.socket.username = jwtDecode(localStorage.getItem('jwtToken')).user.username;
-      this.socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
+    if (sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null) {
+      this.socket.username = jwtDecode(sessionStorage.getItem('jwtToken')).user.username;
+      this.socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
       this.socket.on('accepted', (token) => {
         props.getTeam(jwtDecode(token).user.team_id);
-        localStorage.setItem('jwtToken', token);
+        sessionStorage.setItem('jwtToken', token);
       });
     }
   }
@@ -37,7 +37,7 @@ class App extends React.Component {
   componentDidMount = () => {
   //   const { history } = this.props;
   //   this.socket.on('stopUser', () => {
-  //     SweetAlert('stop');
+  //     SweetAlert('stop', 'error');
   //     history.push('/');
   //   });
   };
@@ -51,8 +51,8 @@ class App extends React.Component {
           path="/onboard"
           component={Onboard}
           socket={this.socket}
-          user={localStorage.getItem('jwtToken')
-            ? jwtDecode(localStorage.getItem('jwtToken'))
+          user={sessionStorage.getItem('jwtToken')
+            ? jwtDecode(sessionStorage.getItem('jwtToken'))
             : null
           }
         />
@@ -61,8 +61,8 @@ class App extends React.Component {
           path="/dashboard"
           component={Dashboard}
           user={
-            localStorage.getItem('jwtToken')
-              ? jwtDecode(localStorage.getItem('jwtToken'))
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
               : null
           }
           socket={this.socket}
@@ -71,8 +71,8 @@ class App extends React.Component {
           path="/level/:alias"
           component={Level}
           user={
-            localStorage.getItem('jwtToken')
-              ? jwtDecode(localStorage.getItem('jwtToken'))
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
               : null
           }
           socket={this.socket}
@@ -81,8 +81,8 @@ class App extends React.Component {
           path="/our-team"
           component={Team}
           user={
-            localStorage.getItem('jwtToken')
-              ? jwtDecode(localStorage.getItem('jwtToken'))
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
               : null
           }
           socket={this.socket}
@@ -91,8 +91,8 @@ class App extends React.Component {
           path="/support"
           component={Support}
           user={
-            localStorage.getItem('jwtToken')
-              ? jwtDecode(localStorage.getItem('jwtToken'))
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
               : null
           }
           socket={this.socket}
@@ -101,8 +101,8 @@ class App extends React.Component {
           path="/leaderboard"
           component={Leaderboard}
           user={
-            localStorage.getItem('jwtToken')
-              ? jwtDecode(localStorage.getItem('jwtToken'))
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
               : null
           }
           socket={this.socket}

@@ -13,7 +13,7 @@ class Leaderboard extends React.Component {
     };
 
     const { socket } = props;
-    socket.emit('checkUser', jwtDecode(localStorage.getItem('jwtToken')).user);
+    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
@@ -85,7 +85,7 @@ class Leaderboard extends React.Component {
                    list.map((l, i) => (
                      <tr>
                        <td>
-                         {i + 1}
+                         {10 * (this.state.index - 1) + i + 1}
                        </td>
                        <td>
                          <img className="responsive-img" src={l.picture} alt="avatar" width="45" />
