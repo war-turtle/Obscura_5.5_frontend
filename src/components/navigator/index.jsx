@@ -36,12 +36,13 @@ class Navigation extends React.Component {
     const {
       user, history, levellist, getLevel, socket,
     } = this.props;
+    levellist.sort((a, b) => a.levelNo - b.levelNo);
     return (
       <div>
         <li>
           <div className="user-view">
             <div className="background">
-              <img src="images/office.jpg" alt="backgroundImage" />
+              <img src="http://obscuranitkkr.co.in/images/office.jpg" alt="backgroundImage" />
             </div>
             <a href="#user">
               <img className="circle" src={user.user.picture} alt="user" />
@@ -78,33 +79,6 @@ class Navigation extends React.Component {
         </li>
         <li />
         <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}>
-            <i className="material-icons white-text">
-            format_list_numbered
-            </i>
-            Leaderboard
-          </a>
-        </li>
-        <li />
-        <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}>
-            <i className="material-icons white-text">
-            group
-            </i>
-            Our Team
-          </a>
-        </li>
-        <li />
-        {/* <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
-            <i className="material-icons white-text">
-            headset_mic
-            </i>
-            Support
-          </a>
-        </li>
-        <li /> */}
-        <li>
           <a className="dropdown-trigger waves-effect white-text" href="#" data-target="dropdown1">
             <i className="material-icons white-text">
             whatshot
@@ -131,6 +105,34 @@ class Navigation extends React.Component {
             }
           </ul>
         </li>
+        <li>
+          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}>
+            <i className="material-icons white-text">
+            format_list_numbered
+            </i>
+            Leaderboard
+          </a>
+        </li>
+        <li />
+        <li>
+          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}>
+            <i className="material-icons white-text">
+            group
+            </i>
+            Our Team
+          </a>
+        </li>
+        <li />
+        {/* <li>
+          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
+            <i className="material-icons white-text">
+            headset_mic
+            </i>
+            Support
+          </a>
+        </li>
+        <li /> */}
+
         <li>
           <a className="waves-effect indigo white-text" href="#!" onClick={(e) => { e.preventDefault(); socket.emit('disconnect', null); history.push('/'); }}>
             <i className="material-icons white-text">

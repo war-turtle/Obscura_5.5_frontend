@@ -5,7 +5,13 @@ class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      options: {
+        scales: {
+          xAxes: [{
+            barPercentage: 0.1,
+          }],
+        },
+      },
     };
     this.colors = ['#ff5b57', '#0ac38f', '#348fe2', '#9c72b6', '#f59c1a', '#99052c', '#4c66bf', '#49c7f3', '#ffcd56', '#55ed74'];
     this.labels = [];
@@ -46,6 +52,7 @@ class BarChart extends React.Component {
             width={5}
             height={2}
             data={this.state.data}
+            options={this.state.options}
           />
         </div>
       </div>

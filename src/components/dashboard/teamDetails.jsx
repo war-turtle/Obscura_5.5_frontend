@@ -80,7 +80,11 @@ const TeamDetails = (props) => {
         </div>
         <div className="row">
           <div className="col s12">
-            <BarChart players={team.players} />
+            <div className="row">
+              <div className="col s12">
+                <BarChart players={team.players} />
+              </div>
+            </div>
           </div>
         </div>
         <div className="row">
