@@ -9,7 +9,9 @@ const Footer = () => (
   >
     <div className="row" style={{ margin: '0px' }}>
       <div className="col s12">
-        <img src="http://obscuranitkkr.co.in/images/CNLOGO.jpg" alt="coding ninja logo" style={{ width: 'auto', height: '50px' }} />
+        <a href="https://www.codingninjas.in/">
+          <img src="http://obscuranitkkr.co.in/images/CNLOGO.jpg" alt="coding ninja logo" style={{ width: 'auto', height: '50px' }} />
+        </a>
       </div>
       <div style={{ position: 'absolute', bottom: '10px', right: '20px' }}>
         <b>

@@ -17,10 +17,19 @@ class BarChart extends React.Component {
     this.labels = [];
     this.datasets = {};
     this.data = [];
+    const { players } = this.props;
+    if (players) {
+      this.makeData(players);
+    }
   }
 
+
   componentWillReceiveProps = (nextProps) => {
-    nextProps.players.map((d) => {
+    this.makeData(nextProps.players);
+  }
+
+  makeData = (players) => {
+    players.map((d) => {
       this.labels.push(d.username);
       this.data.push(d.level_cleared);
     });
@@ -34,7 +43,6 @@ class BarChart extends React.Component {
         datasets: [this.datasets],
       },
     };
-    console.log(this.state.data);
   }
 
   render = () => (

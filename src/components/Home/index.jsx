@@ -44,6 +44,9 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+        <a href="https://www.codingninjas.in/">
+          <img id="codingNinja" src="images/CNLOGO.png" alt="coding ninja logo" />
+        </a>
 
         <a
           id="GAWDSLink"
@@ -52,7 +55,7 @@ class Home extends React.Component {
           // target="_blank"
         >
 
-          <img id="codingNinja" src="images/CNLOGO.png" alt="coding ninja logo" />
+
           <span className="glyphicon glyphicon-cutlery" />
 
           <svg
