@@ -50,6 +50,14 @@ a {
   margin-top: 0.5rem;
 }
 
+#codingNinja{
+  position: fixed;
+  bottom: 1rem;
+  left: 6rem;
+  width: 8rem;
+  height: auto;
+}
+
 .menu-container {
   min-height: 100vh;
 
@@ -101,6 +109,13 @@ a {
     height: auto;
     fill: #262626;
     margin-top: 0.5rem;
+  }
+
+  #codingNinja{
+    position: fixed;
+    width: 4rem;
+    bottom: 3.5rem;
+    left: 1rem;
   }
 }
 

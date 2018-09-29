@@ -57,6 +57,8 @@ class LevelView extends React.Component {
                   <label htmlFor="ans">
                     Type your Ans
                   </label>
+                </div>
+                <button className="btn waves-effect waves-light" id="submit" type="submit" name="action" onClick="M.toast({html: 'I am a toast'})">
                 </div> */}
                 <div className="input-field col s6 offset-s3">
                   <input id="ans" type="text" ref="ans" className="validate" name="ans" />

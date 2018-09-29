@@ -51,6 +51,8 @@ class Home extends React.Component {
           title="Graphics and Web Development Squad, click to know more."
           // target="_blank"
         >
+
+          <img id="codingNinja" src="images/CNLOGO.png" alt="coding ninja logo" />
           <span className="glyphicon glyphicon-cutlery" />
 
           <svg
