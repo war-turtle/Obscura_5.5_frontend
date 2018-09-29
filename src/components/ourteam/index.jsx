@@ -34,7 +34,7 @@ const Team = (props) => {
     { name: 'Kartik Yadav', url: 'KartikYadav.jpg' },
     { name: 'Avinash Bharti', url: 'AvinashBharti.jpg' },
     { name: 'Aryan Kaul', url: 'AryanKaul.jpg' },
-    { name: 'Anshul Malik', url: 'AnshulMalik.jpg' },
+    { name: 'Anshul Malik (The Great)', url: 'AnshulMalik.jpg' },
   ];
   const architectArray1 = [
     { name: 'Sushant Adlakha', url: 'SushantAdla.jpg' },
