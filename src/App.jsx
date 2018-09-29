@@ -16,6 +16,7 @@ import Leaderboard from './components/Leaderboard/index';
 import './App.css';
 import actions from './actions';
 import config from './config';
+import NotFound from './components/notfound';
 
 
 const jwtDecode = require('jwt-decode');
@@ -68,6 +69,7 @@ class App extends React.Component {
           socket={this.socket}
         />
         <SideBar
+          exact
           path="/level/:alias"
           component={Level}
           user={
@@ -88,6 +90,7 @@ class App extends React.Component {
           socket={this.socket}
         />
         <SideBar
+          exact
           path="/support"
           component={Support}
           user={
@@ -98,6 +101,7 @@ class App extends React.Component {
           socket={this.socket}
         />
         <SideBar
+          exact
           path="/leaderboard"
           component={Leaderboard}
           user={
@@ -107,6 +111,7 @@ class App extends React.Component {
           }
           socket={this.socket}
         />
+        <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
   );

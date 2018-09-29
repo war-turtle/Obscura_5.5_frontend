@@ -21,3 +21,7 @@ $(document).ready(() => {
 });
 
 $('.dropdown-trigger').dropdown();
+
+$(document).ready(() => {
+  $('.collapsible').collapsible();
+});
