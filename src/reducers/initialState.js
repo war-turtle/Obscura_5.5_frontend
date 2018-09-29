@@ -19,6 +19,7 @@ const initialState = {
   url: '/',
   nextalias: '',
   messageSent: false,
+  otherTeam: {},
 };
 
 export default initialState;

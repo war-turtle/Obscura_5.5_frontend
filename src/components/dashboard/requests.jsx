@@ -27,7 +27,7 @@ class Requests extends React.Component {
             <ul className="collapsible">
               <li>
                 <div className="collapsible-header grey darken-3 white-text">
-                  <i className="material-icons">
+                  <i className="material-icons ">
                     face
                   </i>
                   Requests (
@@ -60,12 +60,12 @@ class Requests extends React.Component {
                       {t.username}
                     </td>
                     <td>
-                      <i className="material-icons" onClick={() => { acceptRequest(t.requester_id, socket); }}>
+                      <i className="material-icons select-pointer" onClick={() => { acceptRequest(t.requester_id, socket); }}>
                       check
                       </i>
                     </td>
                     <td>
-                      <i className="material-icons" onClick={() => { deleteRequest(t.requester_id, socket); }}>
+                      <i className="material-icons select-pointer" onClick={() => { deleteRequest(t.requester_id, socket); }}>
                       cancel
                       </i>
                     </td>

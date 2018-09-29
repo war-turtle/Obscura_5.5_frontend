@@ -24,6 +24,15 @@ const message = (state = initialState.messageSent, action) => {
   }
 };
 
+const otherTeam = (state = initialState.otherTeam, action) => {
+  switch (action.type) {
+    case 'OTHER_TEAM_FETCH':
+      return action.data.data;
+    default:
+      return state;
+  }
+};
+
 const user = (state = initialState.user, action) => {
   switch (action.type) {
     case 'CLEAR_USER':
@@ -169,6 +178,7 @@ const rootReducer = combineReducers({
   teams,
   snackbar: snackbarReducer,
   message,
+  otherTeam,
 });
 
 export default rootReducer;

@@ -3,7 +3,7 @@ import Requests from './requests';
 import BarChart from './graph';
 
 const TeamDetails = (props) => {
-  const { team } = props;
+  const { team, requests, hidden } = props;
   if (team) {
     return (
       <div className="row">
@@ -87,7 +87,8 @@ const TeamDetails = (props) => {
             </div>
           </div>
         </div>
-        <div className="row">
+        {requests}
+        <div className={hidden ? 'row hide' : 'row'}>
           <div className="col s12">
             <Requests requests={team.requests} />
           </div>

@@ -50,8 +50,10 @@ const getLevelList = () => (dispatch) => {
 const getTeam = teamId => (dispatch) => {
   services.getTeam(teamId).then(
     (response) => {
-      if (response.success) {
+      if (response.success && response.data._id === jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id) {
         dispatch(success('TEAM_FETCH_SUCCESS', response));
+      } else if (response.success) {
+        dispatch(success('OTHER_TEAM_FETCH', response));
       } else {
         dispatch(failure('TEAM_FETCH_FAILURE', response));
       }

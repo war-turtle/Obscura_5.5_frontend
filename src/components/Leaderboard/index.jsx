@@ -21,13 +21,27 @@ class Leaderboard extends React.Component {
     getLeaderboard(0, 10);
   }
 
-  nextPage = () => {
-    const { getLeaderboard } = this.props;
-    const { index } = this.state;
-    getLeaderboard((index), 10);
-    this.setState({
-      index: index + 1,
-    });
+  // nextPage = () => {
+  //   const { getLeaderboard } = this.props;
+  //   const { index } = this.state;
+  //   getLeaderboard((index), 10);
+  //   this.setState({
+  //     index: index + 1,
+  //   });
+  // }
+
+  // prevPage = () => {
+  //   const { getLeaderboard } = this.props;
+  //   const { index } = this.state;
+  //   getLeaderboard((index - 2), 10);
+  //   this.setState({
+  //     index: index - 1,
+  //   });
+  // }
+
+  goToTeamPage = (id) => {
+    const { history } = this.props;
+    history.push(`/team/${id}`);
   }
 
   goToPage = (index) => {
@@ -35,15 +49,6 @@ class Leaderboard extends React.Component {
     getLeaderboard((index - 1), 10);
     this.setState({
       index,
-    });
-  }
-
-  prevPage = () => {
-    const { getLeaderboard } = this.props;
-    const { index } = this.state;
-    getLeaderboard((index - 2), 10);
-    this.setState({
-      index: index - 1,
     });
   }
 
@@ -92,7 +97,7 @@ class Leaderboard extends React.Component {
                 <tbody>
                   {
                    list.map((l, i) => (
-                     <tr>
+                     <tr className="select-pointer" onClick={(e) => { e.preventDefault(); this.goToTeamPage(l._id); }}>
                        <td>
                          {10 * (this.state.index - 1) + i + 1}
                        </td>

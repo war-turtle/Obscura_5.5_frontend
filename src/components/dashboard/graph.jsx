@@ -16,12 +16,15 @@ class BarChart extends React.Component {
     this.colors = ['#ff5b57', '#0ac38f', '#348fe2', '#9c72b6', '#f59c1a', '#99052c', '#4c66bf', '#49c7f3', '#ffcd56', '#55ed74'];
     this.labels = [];
     this.datasets = {};
-    const data = [];
-    props.players.map((d) => {
+    this.data = [];
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    nextProps.players.map((d) => {
       this.labels.push(d.username);
-      data.push(d.level_cleared);
+      this.data.push(d.level_cleared);
     });
-    this.datasets.data = data;
+    this.datasets.data = this.data;
     this.datasets.label = 'Team contribution';
     this.datasets.backgroundColor = 'rgb(255, 99, 132)';
     this.datasets.borderColor = 'rgb(255, 99, 132)';
@@ -31,6 +34,7 @@ class BarChart extends React.Component {
         datasets: [this.datasets],
       },
     };
+    console.log(this.state.data);
   }
 
   render = () => (

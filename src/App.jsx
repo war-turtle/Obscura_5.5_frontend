@@ -17,6 +17,7 @@ import './App.css';
 import actions from './actions';
 import config from './config';
 import NotFound from './components/notfound';
+import TeamPage from './components/TeamPage';
 
 
 const jwtDecode = require('jwt-decode');
@@ -82,6 +83,17 @@ class App extends React.Component {
         <SideBar
           path="/our-team"
           component={Team}
+          user={
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          exact
+          path="/team/:id"
+          component={TeamPage}
           user={
             sessionStorage.getItem('jwtToken')
               ? jwtDecode(sessionStorage.getItem('jwtToken'))

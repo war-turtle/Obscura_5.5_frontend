@@ -14,7 +14,7 @@ const jwtDecode = require('jwt-decode');
 const Decide = (props) => {
   const { teamExist, team, socket } = props;
   if (teamExist) {
-    return <TeamDetails team={team} socket={socket} />;
+    return <TeamDetails team={team} socket={socket} requests="" />;
   }
   return <Team />;
 };
