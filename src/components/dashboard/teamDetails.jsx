@@ -7,8 +7,8 @@ const TeamDetails = (props) => {
     return (
       <div className="row">
         <div className="col s12">
-          <div className="col s12 m8 offset-m2 l6 offset-l3">
-            <div className="card-panel indigo z-depth-1">
+          <div className="col s12">
+            {/* <div className="card-panel indigo z-depth-1">
               <div className="row">
                 <div className="col s2 valign-wrapper">
                   <img src={team.picture} alt="" className="circle responsive-img" />
@@ -28,6 +28,77 @@ const TeamDetails = (props) => {
                     {' '}
                     {team.level_no}
                   </span>
+                </div>
+              </div>
+            </div> */}
+
+            <div className="row">
+              <div className="col s12 center">
+                <img src={team.picture} alt="" className="circle responsive-img" width="15%" />
+                <h5>
+                  {' '}
+                  Team
+                  {' '}
+                  <b>
+                    {team.name}
+                  </b>
+                </h5>
+                <div className="row">
+                  <div className="col s12">
+
+
+                    <div className="card z-index-4">
+
+                      <ul className="collapsible">
+                        <li>
+                          <div className="collapsible-header grey darken-3 white-text">
+                            <i className="material-icons">
+                            group
+                            </i>
+                          Team Members
+                          </div>
+                          <div className="collapsible-body">
+                            <span>
+                            Lorem ipsum dolor sit amet
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+
+                      <table className="highlight centered responsive-table">
+                        <thead>
+                          <tr>
+                            <th>
+                              Avatar
+                            </th>
+                            <th>
+                              Player Username
+                            </th>
+                            <th>
+                              Level Cleared
+                            </th>
+                          </tr>
+                        </thead>
+
+                        {team.players.map(p => (
+                          <tbody>
+                            <tr>
+                              <td>
+                                <img src={p.picture} alt="player_avatar" width="15%" className="responsive-img circle" />
+                              </td>
+                              <td>
+                                {p.username}
+                              </td>
+                              <td>
+                                {p.level_cleared}
+                              </td>
+                            </tr>
+                          </tbody>
+                        ))}
+                      </table>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>

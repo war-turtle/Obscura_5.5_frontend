@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Countdown from 'react-count-down';
+import loadjs from 'loadjs';
 import actions from '../../actions';
 import TeamDetails from './teamDetails';
 import Team from '../onboard/team';
@@ -25,6 +26,7 @@ class Dashboard extends React.Component {
       teamExist: false,
       css: '',
     };
+    loadjs('/js/init.js');
     this.startTime = config.startTimestamp;
     this.user = sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null;
     this.OPTIONS = {

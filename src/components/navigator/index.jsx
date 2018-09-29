@@ -95,7 +95,7 @@ class Navigation extends React.Component {
           </a>
         </li>
         <li />
-        <li>
+        {/* <li>
           <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
             <i className="material-icons white-text">
             headset_mic
@@ -103,7 +103,7 @@ class Navigation extends React.Component {
             Support
           </a>
         </li>
-        <li />
+        <li /> */}
         <li>
           <a className="dropdown-trigger waves-effect white-text" href="#" data-target="dropdown1">
             <i className="material-icons white-text">
