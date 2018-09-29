@@ -17,47 +17,63 @@ class Requests extends React.Component {
     } = this.props;
     if (requests.length) {
       return (
-        <div className="card z-index-5 request-back">
+        <div className="request-back">
           <h5>
             Team Requests
           </h5>
-          <table className="highlight centered responsive-table">
-            <thead>
-              <tr>
-                <th>
-                  Avatar
-                </th>
-                <th>
-                  Username
-                </th>
-                <th />
-                <th />
-              </tr>
-            </thead>
 
-            <tbody>
-              {requests.map(t => (
-                <tr key={t.name}>
-                  <td>
-                    <img className="responsive-img circle" src={t.picture} alt="avatar" width="45" />
-                  </td>
-                  <td>
-                    {t.username}
-                  </td>
-                  <td>
-                    <i className="material-icons" onClick={() => { acceptRequest(t.requester_id, socket); }}>
-                      check
-                    </i>
-                  </td>
-                  <td>
-                    <i className="material-icons" onClick={() => { deleteRequest(t.requester_id, socket); }}>
-                      cancel
-                    </i>
-                  </td>
+          <div className="card z-index-4">
+
+            <ul className="collapsible">
+              <li>
+                <div className="collapsible-header grey darken-3 white-text">
+                  <i className="material-icons">
+                    face
+                  </i>
+                  Requests (
+                  {requests.length}
+                  )
+                </div>
+              </li>
+            </ul>
+            <table className="highlight centered responsive-table">
+              <thead>
+                <tr>
+                  <th>
+                  Avatar
+                  </th>
+                  <th>
+                  Username
+                  </th>
+                  <th />
+                  <th />
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {requests.map(t => (
+                  <tr key={t.requester_id}>
+                    <td>
+                      <img className="responsive-img circle" src={t.picture} alt="avatar" width="45" />
+                    </td>
+                    <td>
+                      {t.username}
+                    </td>
+                    <td>
+                      <i className="material-icons" onClick={() => { acceptRequest(t.requester_id, socket); }}>
+                      check
+                      </i>
+                    </td>
+                    <td>
+                      <i className="material-icons" onClick={() => { deleteRequest(t.requester_id, socket); }}>
+                      cancel
+                      </i>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       );
     }
