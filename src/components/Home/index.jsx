@@ -136,7 +136,7 @@ class Home extends React.Component {
                 <div className="col-12 col-md-6">
                   <div id="spinning-circle">
                     <img
-                      src="images/logo2.svg"
+                      src="images/logo6.png"
                       height="100%"
                       width="100%"
                       alt="svg"
