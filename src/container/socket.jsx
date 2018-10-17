@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
-import SweetAlert from '../components/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -18,20 +17,13 @@ const renderMergedProps = (component, ...rest) => {
   );
 };
 
-const Socket = ({ component: Component, ...rest }) => {
-  const { history, socket } = rest;
-  socket.on('stopUser', () => {
-    history.push('/');
-    SweetAlert('Someone is active from this account on another device.', 'error');
-  });
-  return (
-    <Route
-      {...rest}
-      render={matchProps => (checkOnboard() ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/" />)
+const Socket = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={matchProps => (checkOnboard() ? renderMergedProps(Component, matchProps, rest) : <Redirect to="/" />)
     }
-    />
-  );
-};
+  />
+);
 
 Socket.propTypes = {
   component: () => null,

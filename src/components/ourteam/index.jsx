@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const jwtDecode = require('jwt-decode');
-
 const DisplayImage = (props) => {
   const { images } = props;
   return (
@@ -26,9 +24,7 @@ const DisplayImage = (props) => {
 };
 
 
-const Team = (props) => {
-  const { socket } = props;
-  socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
+const Team = () => {
   const developersArray = [
     { name: 'Anuj Sharma', url: 'AnujSharma.jpg' },
     { name: 'Kartik Yadav', url: 'KartikYadav.jpg' },

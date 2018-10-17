@@ -1,6 +1,6 @@
 const dev = {
   api: {
-    url: 'http://api.obscuranitkkr.co.in',
+    url: 'http://localhost:8000',
   },
   cypher: {
     algo: 'aes256',

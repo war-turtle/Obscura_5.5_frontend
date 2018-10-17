@@ -20,7 +20,9 @@ $(document).ready(() => {
   $('.sidenav').sidenav();
 });
 
-$('.dropdown-trigger').dropdown();
+$(document).ready(() => {
+  $('.dropdown-trigger').dropdown();
+});
 
 $(document).ready(() => {
   $('.collapsible').collapsible();

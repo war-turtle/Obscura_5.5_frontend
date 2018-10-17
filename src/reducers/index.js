@@ -1,5 +1,9 @@
-import { combineReducers } from 'redux';
-import { snackbarReducer } from 'react-redux-snackbar';
+import {
+  combineReducers,
+} from 'redux';
+import {
+  snackbarReducer,
+} from 'react-redux-snackbar';
 import initialState from './initialState';
 import history from '../utils/history';
 
@@ -149,8 +153,12 @@ const level = (state = initialState.level, action) => {
     case 'RIGHT_ANS':
       return Object.assign({}, state, {
         ansCheck: true,
-        nextalias: action.data.data.alias,
-        alias: action.data.data.alias,
+        nextLevelAlias: action.data.data.alias,
+      });
+
+    case 'CLEAR_JS':
+      return Object.assign({}, state, {
+        js: '',
       });
 
     case 'WRONG_ANS':
@@ -170,6 +178,17 @@ const level = (state = initialState.level, action) => {
   }
 };
 
+const clearLevel = (state = initialState.clearLevel, action) => {
+  switch (action.type) {
+    case 'CLEAR_LEVEL':
+      return true;
+    case 'SET_LEVEL':
+      return false;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   user,
   leaderboard,
@@ -179,6 +198,7 @@ const rootReducer = combineReducers({
   snackbar: snackbarReducer,
   message,
   otherTeam,
+  clearLevel,
 });
 
 export default rootReducer;

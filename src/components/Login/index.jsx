@@ -4,12 +4,16 @@ import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import loadjs from 'loadjs';
+import SweetAlert from '../sweetAlert';
 import actions from '../../actions';
 
+declare var M;
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    loadjs('/js/init.js');
   }
 
   componentDidMount = () => {
@@ -28,19 +32,21 @@ class Login extends React.Component {
 
   responseGoogle = (response) => {
     if (!response.tokenId) {
-      alert('try aganin');
+      SweetAlert('Google login failed! Try Again', 'error');
       // return;
     }
+    M.toast({ html: 'Logging you in!', classes: 'rounded' });
     const { login } = this.props;
     login(response.tokenId, 'google');
   };
 
   responseFacebook = (response) => {
     if (!response.accessToken) {
-      alert('try aganin');
+      SweetAlert('Facebook login failed! Try Again', 'error');
       // return;
     }
     const { login } = this.props;
+    M.toast({ html: 'Logging you in!', classes: 'rounded' });
     login(response.accessToken, 'facebook');
   };
 

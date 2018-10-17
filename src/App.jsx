@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   BrowserRouter, Switch, Route,
@@ -26,23 +27,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.socket = socketIOClient(config.api.url);
-    if (sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null) {
-      this.socket.username = jwtDecode(sessionStorage.getItem('jwtToken')).user.username;
-      this.socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
-      this.socket.on('accepted', (token) => {
-        props.getTeam(jwtDecode(token).user.team_id);
-        sessionStorage.setItem('jwtToken', token);
-      });
-    }
   }
-
-  componentDidMount = () => {
-  //   const { history } = this.props;
-  //   this.socket.on('stopUser', () => {
-  //     SweetAlert('stop', 'error');
-  //     history.push('/');
-  //   });
-  };
 
   render = () => (
     <BrowserRouter>

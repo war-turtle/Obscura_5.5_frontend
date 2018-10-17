@@ -85,7 +85,7 @@ const getLeaderboard = (skip, limit) => (dispatch) => {
   );
 };
 
-const acceptRequest = (requesterId, socket) => (dispatch) => {
+const acceptRequest = requesterId => (dispatch) => {
   services.acceptRequest(requesterId).then(
     (response) => {
       if (response.success) {
@@ -98,7 +98,7 @@ const acceptRequest = (requesterId, socket) => (dispatch) => {
   );
 };
 
-const deleteRequest = (requesterId, socket) => (dispatch) => {
+const deleteRequest = requesterId => (dispatch) => {
   services.deleteRequest(requesterId).then(
     (response) => {
       if (response.success) {
@@ -111,10 +111,25 @@ const deleteRequest = (requesterId, socket) => (dispatch) => {
   );
 };
 
+const clearLevel = () => (dispatch) => {
+  dispatch(success('CLEAR_LEVEL', null));
+};
+
+const setLevel = () => (dispatch) => {
+  dispatch(success('SET_LEVEL', null));
+};
+
+const clearJs = () => (dispatch) => {
+  dispatch(success('CLEAR_JS', null));
+};
+
 const getLevel = alias => (dispatch) => {
+  dispatch(clearLevel());
+  dispatch(clearJs());
   services.fetchLevel(alias).then(
     (response) => {
       if (response.success) {
+        dispatch(setLevel());
         dispatch(success('LEVEL_SUCCESS', response));
       } else {
         dispatch(failure('LEVEL_FAILURE', response.status));
@@ -147,6 +162,7 @@ const postAns = (ans, alias) => (dispatch) => {
   services.postAns(ans, alias).then(
     (response) => {
       if (response.success && response.ansCorrect) {
+        dispatch(getAlias());
         dispatch(success('RIGHT_ANS', response));
       } else if (response.success && !response.ansCorrect) {
         dispatch(failure('WRONG_ANS', response));
@@ -205,6 +221,7 @@ const createTeam = formData => (dispatch) => {
   services.createTeam(formData).then(
     (response) => {
       if (response.success) {
+        dispatch(getAlias());
         dispatch(success('TEAM_CREATE_SUCCESS', response));
       } else {
         dispatch(failure('ERROR_TEAM_CREATE', null));
@@ -229,6 +246,7 @@ const clearUser = () => (dispatch) => {
   dispatch(success('CLEAR_USER', null));
 };
 
+
 export default {
   login,
   getLevelList,
@@ -245,4 +263,5 @@ export default {
   acceptRequest,
   deleteRequest,
   clearUser,
+  clearLevel,
 };

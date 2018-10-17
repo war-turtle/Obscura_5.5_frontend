@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import TeamDetails from '../dashboard/teamDetails';
+import TeamDetails from '../shared/teamDetails';
 import actions from '../../actions';
 
 class TeamPage extends React.Component {
@@ -16,7 +16,7 @@ class TeamPage extends React.Component {
   }
 
   componentDidMount = () => {
-    const id = this.props.match.params.id;
+    const { id } = this.props.match.params;
     const { getTeam } = this.props;
     getTeam(id);
   }

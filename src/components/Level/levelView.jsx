@@ -6,12 +6,11 @@ import {
 } from 'react-router-dom';
 import actions from '../../actions';
 
+declare var M;
+
 class LevelView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ans: '',
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -28,6 +27,9 @@ class LevelView extends React.Component {
       document.getElementById('myform').reset();
     }
     const alias = this.props.match.params.alias;
+
+    M.toast({ html: 'Submitting your ans!', classes: 'rounded' });
+
     postAns(formData, alias);
   }
 
@@ -52,16 +54,8 @@ class LevelView extends React.Component {
           <div className="row">
             <div className="col s12">
               <form onSubmit={this.handleSubmit} id="myform">
-                {/* <div className="input-field inline">
-                  <input id="ans" type="text" ref="ans" className="validate" name="ans" />
-                  <label htmlFor="ans">
-                    Type your Ans
-                  </label>
-                </div>
-                <button className="btn waves-effect waves-light" id="submit" type="submit" name="action" onClick="M.toast({html: 'I am a toast'})">
-                </div> */}
                 <div className="input-field col s6 offset-s3">
-                  <input id="ans" type="text" ref="ans" className="validate" name="ans" />
+                  <input id="ans" type="text" ref="ans" className="validate" name="ans" required />
                   <label htmlFor="ans">
                     Type your ans
                   </label>

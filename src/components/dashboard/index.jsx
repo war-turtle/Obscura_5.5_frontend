@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import Countdown from 'react-count-down';
 import loadjs from 'loadjs';
 import actions from '../../actions';
-import TeamDetails from './teamDetails';
-import Team from '../onboard/team';
+import TeamDetails from '../shared/teamDetails';
+import Team from './team';
 import config from '../../config';
 import SweetAlert from '../sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
+// conditional component view if the player is joined
 const Decide = (props) => {
-  const { teamExist, team, socket } = props;
+  const { teamExist, team } = props;
   if (teamExist) {
-    return <TeamDetails team={team} socket={socket} requests="" />;
+    return <TeamDetails team={team} requests="" />;
   }
   return <Team />;
 };
@@ -23,24 +24,26 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamExist: false,
+      teamExist: false, // initialState that player has not joined any team.
       css: '',
     };
-    loadjs('/js/init.js');
-    this.startTime = config.startTimestamp;
+    loadjs('/js/init.js'); // calling materialize init functions.
+    this.startTime = config.startTimestamp; // getting timestamp to start the event.
+
     this.user = sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null;
+
+    // countdown options
     this.OPTIONS = {
       endDate: config.startDate,
       prefix: 'until game starts!',
+
+      // callback function after countdown stops.
       cb: () => {
         props.getCurrentLevelAlias();
         props.getLevelList();
         SweetAlert('Game has started! You may enter.', 'success');
       },
     };
-
-    const { socket } = props;
-    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
@@ -61,6 +64,8 @@ class Dashboard extends React.Component {
         teamExist: true,
       });
     }
+
+    // changing css of the countdown to hide it.
     if (this.startTime < new Date()) {
       this.setState({
         css: 'hide',
@@ -91,7 +96,7 @@ class Dashboard extends React.Component {
   render() {
     const timer = this.renderTimer();
     const { teamExist, css } = this.state;
-    const { team, socket } = this.props;
+    const { team } = this.props;
     return (
       <div>
         <nav
@@ -102,7 +107,7 @@ class Dashboard extends React.Component {
           }}
         >
           <div className="nav-wrapper" style={{ backgroundColor: '#424242' }}>
-            <a href="#" className="brand-logo center">
+            <a href="#!" className="brand-logo center">
               {timer}
             </a>
           </div>
@@ -112,7 +117,7 @@ class Dashboard extends React.Component {
             <h4>
               Dashboard
             </h4>
-            <Decide teamExist={teamExist} team={team} socket={socket} />
+            <Decide teamExist={teamExist} team={team} />
           </div>
         </div>
       </div>

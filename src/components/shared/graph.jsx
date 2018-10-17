@@ -29,6 +29,8 @@ class BarChart extends React.Component {
   }
 
   makeData = (players) => {
+    this.data = [];
+    this.labels = [];
     players.map((d) => {
       this.labels.push(d.username);
       this.data.push(d.level_cleared);
@@ -45,31 +47,37 @@ class BarChart extends React.Component {
     };
   }
 
-  render = () => (
-    <div className="row">
-      <div className="col s12">
-        <div className="card z-index-4">
+  render = () => {
+    const { data, options } = this.state;
+    if (this.data.length) {
+      return (
+        <div className="row">
+          <div className="col s12">
+            <div className="card z-index-4">
 
-          <ul className="collapsible">
-            <li>
-              <div className="collapsible-header grey darken-3 white-text">
-                <i className="material-icons">
-                  insert_chart
-                </i>
-                Contributions
-              </div>
-            </li>
-          </ul>
-          <Bar
-            width={5}
-            height={2}
-            data={this.state.data}
-            options={this.state.options}
-          />
+              <ul className="collapsible">
+                <li>
+                  <div className="collapsible-header grey darken-3 white-text">
+                    <i className="material-icons">
+                      insert_chart
+                    </i>
+                    Contributions
+                  </div>
+                </li>
+              </ul>
+              <Bar
+                width={5}
+                height={2}
+                data={data}
+                options={options}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      );
+    }
+    return <div />;
+  }
 }
 
 export default BarChart;

@@ -3,17 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../actions';
 
-const jwtDecode = require('jwt-decode');
-
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       index: 1,
     };
-
-    const { socket } = props;
-    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
@@ -58,7 +53,12 @@ class Leaderboard extends React.Component {
     const { index } = this.state;
     for (let i = 1, j = 1; i <= count; i += 10, j += 1) {
       pager.push(
-        <li className={index === j ? 'active' : 'waves-effect'} onClick={(e) => { e.preventDefault(); this.goToPage(j); }}>
+        <li
+          className={index === j ? 'active' : 'waves-effect'}
+          onClick={(e) => {
+            e.preventDefault(); this.goToPage(j);
+          }}
+        >
           <a href="#!">
             {j}
           </a>
@@ -96,27 +96,32 @@ class Leaderboard extends React.Component {
 
                 <tbody>
                   {
-                   list.map((l, i) => (
-                     <tr className="select-pointer" onClick={(e) => { e.preventDefault(); this.goToTeamPage(l._id); }}>
-                       <td>
-                         {10 * (this.state.index - 1) + i + 1}
-                       </td>
-                       <td>
-                         <img className="responsive-img" src={l.picture} alt="avatar" width="45" />
-                       </td>
-                       <td>
-                         {l.name}
-                       </td>
-                       <td>
-                         {l.level_no}
-                       </td>
-                     </tr>
-                   ))
-                 }
+                    list.map((l, i) => (
+                      <tr
+                        className="select-pointer"
+                        onClick={(e) => {
+                          e.preventDefault(); this.goToTeamPage(l._id);
+                        }}
+                      >
+                        <td>
+                          {10 * (index - 1) + i + 1}
+                        </td>
+                        <td>
+                          <img className="responsive-img" src={l.picture} alt="avatar" width="45" />
+                        </td>
+                        <td>
+                          {l.name}
+                        </td>
+                        <td>
+                          {l.level_no}
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
 
-
+              {/* PAGINATOR */}
               <ul className="pagination">
                 <li className={index > 1 ? 'waves-effect' : 'disabled'}>
                   <a href="#!">
@@ -149,13 +154,13 @@ class Leaderboard extends React.Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   count: state.leaderboard.count,
   list: state.leaderboard.list,
 });
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getLeaderboard: (skip, limit) => {
     dispatch(actions.getLeaderboard(skip * 10, limit));
   },

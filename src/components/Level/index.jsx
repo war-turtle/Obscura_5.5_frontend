@@ -9,8 +9,6 @@ import Twitter from './twitter';
 import actions from '../../actions';
 import SweetAlert from '../sweetAlert';
 
-const jwtDecode = require('jwt-decode');
-
 class Level extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +18,8 @@ class Level extends React.Component {
       picture: '',
       alias: '',
       html: '',
+      firstTimejs: true,
     };
-    const { socket } = props;
-    socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
   }
 
   componentDidMount = () => {
@@ -32,30 +29,51 @@ class Level extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const { nextalias } = this.props;
-    this.setState({
-      name: nextProps.level.name,
-      picture: nextProps.level.picture,
-      alias: nextProps.level.alias,
-      html: nextProps.level.html,
-    });
+    const { nextLevelAlias } = this.props;
 
-    if (nextProps.nextalias !== nextalias && nextProps.nextalias !== '' && nextProps.ansCheck) {
+    const { firstTimejs } = this.state;
+
+    if (nextProps.level.name) {
+      this.setState({
+        name: nextProps.level.name,
+        picture: nextProps.level.picture,
+        html: nextProps.level.html,
+      }, () => {
+        const { name } = this.state;
+        if (firstTimejs && name && nextProps.level.js !== '') {
+          // eslint-disable-next-line
+          eval(nextProps.level.js);
+          this.setState({
+            firstTimejs: false,
+          });
+        }
+      });
+    }
+
+    if (nextProps.nextLevelAlias !== nextLevelAlias && nextProps.nextLevelAlias !== '' && nextProps.ansCheck) {
       SweetAlert('Congratulations', 'success');
       const { history } = this.props;
-      history.push(`/level/${nextProps.nextalias}`);
+      history.push(`/level/${nextProps.nextLevelAlias}`);
       const { getLevel, getLevelList } = this.props;
-      getLevel(nextProps.nextalias);
+      getLevel(nextProps.nextLevelAlias);
       getLevelList();
       this.setState({
         name: '',
         picture: '',
         alias: '',
         html: '',
+        firstTimejs: true,
       });
-    } else {
-      // eslint-disable-next-line
-      eval(nextProps.level.js)
+    }
+
+    if (nextProps.clearLevel) {
+      this.setState({
+        name: '',
+        picture: '',
+        alias: '',
+        html: '',
+        firstTimejs: true,
+      });
     }
   }
 
@@ -63,44 +81,43 @@ class Level extends React.Component {
     const {
       name, picture, html, alias,
     } = this.state;
-    if (name !== '') {
-      return (
-        <div className="row">
-          <div className="col s12">
-            <div className="row">
-              <div className="col s12 m12 l8 center">
+    return (
+      <div className="row">
+        <div className="col s12">
+          <div className="row">
+            <div className="col s12 m12 l8 center">
+
+              {name ? (
                 <LevelView
                   name={name}
                   picture={picture}
                   alias={alias}
                   html={html}
                 />
-              </div>
-              <div className="col l4">
-                <div className="row hide-on-med-and-down">
-                  <div className="col s12">
-                    <Twitter />
+              ) : (
+                <div className="loader">
+                  <div className="preloader-wrapper big active">
+                    <div className="spinner-layer spinner-blue-only">
+                      <div className="circle-clipper left">
+                        <div className="circle" />
+                      </div>
+                      <div className="gap-patch">
+                        <div className="circle" />
+                      </div>
+                      <div className="circle-clipper right">
+                        <div className="circle" />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
+
             </div>
-          </div>
-        </div>
-      );
-    }
-    return (
-      <div className="row">
-        <div className="col s2 offset-s5 loader">
-          <div className="preloader-wrapper big active">
-            <div className="spinner-layer spinner-blue-only">
-              <div className="circle-clipper left">
-                <div className="circle" />
-              </div>
-              <div className="gap-patch">
-                <div className="circle" />
-              </div>
-              <div className="circle-clipper right">
-                <div className="circle" />
+            <div className="col l4">
+              <div className="row hide-on-med-and-down">
+                <div className="col s12">
+                  <Twitter />
+                </div>
               </div>
             </div>
           </div>
@@ -117,7 +134,7 @@ Level.propTypes = {
   name: PropTypes.string,
   html: PropTypes.string,
   ansCheck: PropTypes.bool,
-  nextalias: PropTypes.string,
+  nextLevelAlias: PropTypes.string,
   picture: PropTypes.arrayOf(PropTypes.string),
   level: PropTypes.objectOf(PropTypes.string),
   history: () => null,
@@ -131,19 +148,20 @@ Level.defaultProps = {
   picture: [],
   getLevel: () => null,
   alias: '',
-  nextalias: '',
+  nextLevelAlias: '',
   level: {},
   history: () => null,
   // match: '',
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   level: state.level,
-  nextalias: state.level.nextalias,
+  nextLevelAlias: state.level.nextLevelAlias,
   ansCheck: state.level.ansCheck,
+  clearLevel: state.clearLevel,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getLevel: (alias) => {
     dispatch(actions.getLevel(alias));
   },

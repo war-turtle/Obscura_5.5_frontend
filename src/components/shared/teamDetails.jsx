@@ -1,5 +1,5 @@
 import React from 'react';
-import Requests from './requests';
+import Requests from '../dashboard/requests';
 import BarChart from './graph';
 
 const TeamDetails = (props) => {
@@ -58,7 +58,7 @@ const TeamDetails = (props) => {
                           <tbody key={p.username}>
                             <tr>
                               <td>
-                                <img src={p.picture} alt="player_avatar" width="15%" className="responsive-img circle" />
+                                <img src={p.picture} alt="player_avatar" width="65" className="responsive-img circle" />
                               </td>
                               <td>
                                 {p.username}

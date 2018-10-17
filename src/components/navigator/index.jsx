@@ -26,15 +26,20 @@ class Navigation extends React.Component {
   }
 
   openCurrentLevel = () => {
-    const { history, alias } = this.props;
+    const {
+      history, alias, getLevel, getCurrentLevelAlias,
+    } = this.props;
     if (alias !== '') {
+      getLevel(alias);
       history.push(`/level/${alias}`);
+    } else {
+      getCurrentLevelAlias();
     }
   }
 
   render() {
     const {
-      user, history, levellist, getLevel, socket,
+      user, history, levellist, getLevel,
     } = this.props;
     levellist.sort((a, b) => a.levelNo - b.levelNo);
     return (
@@ -42,14 +47,16 @@ class Navigation extends React.Component {
         <li>
           <div className="user-view">
             <div className="background">
-              <img src="http://obscuranitkkr.co.in/images/office.jpg" alt="backgroundImage" />
+              <img src="/images/office.jpg" alt="backgroundImage" />
             </div>
             <a href="#user">
               <img className="circle" src={user.user.picture} alt="user" />
             </a>
             <a href="#name">
-              <span className="white-text name">
-                {user.user.name}
+              <span className="white-text name card-title">
+                <h6>
+                  {user.user.name}
+                </h6>
               </span>
             </a>
             <a href="#email">
@@ -61,38 +68,63 @@ class Navigation extends React.Component {
 
         </li>
         <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/dashboard'); }}>
+          <a
+            className="waves-effect white-text"
+            href="#!"
+            onClick={(e) => {
+              e.preventDefault(); history.push('/dashboard');
+            }}
+          >
             <i className="material-icons white-text">
-            folder_shared
+              folder_shared
             </i>
             Dashboard
           </a>
         </li>
         <li />
         <li>
-          <a className="waves-effect white-text" onClick={() => { jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new!', 'error'); }}>
+          <a
+            href="#!"
+            className="waves-effect white-text"
+            onClick={(e) => {
+              e.preventDefault();
+              jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new to PLAY!', 'error');
+            }}
+          >
             <i className="material-icons white-text">
-            location_searching
+              location_searching
             </i>
             Arena
           </a>
         </li>
         <li />
         <li>
-          <a className="dropdown-trigger waves-effect white-text" href="#" data-target="dropdown1">
+          <a
+            className={
+              levellist.length ? 'dropdown-trigger waves-effect white-text' : 'dropdown-trigger waves-effect white-text hide'
+            }
+            href="#!"
+            data-target="dropdown1"
+          >
             <i className="material-icons white-text">
-            whatshot
+              whatshot
             </i>
             Levels
           </a>
           <ul id="dropdown1" className="dropdown-content">
             {
               levellist.map(l => (
-                <div key={l.levelNo} onClick={(e) => { e.preventDefault(); history.push(`/level/${l.url_alias}`); getLevel(l.url_alias); }}>
+                <a
+                  href="#!"
+                  key={l.levelNo}
+                  onClick={(e) => {
+                    e.preventDefault(); history.push(`/level/${l.url_alias}`); getLevel(l.url_alias);
+                  }}
+                >
                   <li>
                     <a href="#!">
                       <i className="material-icons">
-                      whatshot
+                        whatshot
                       </i>
                       Level
                       {' '}
@@ -100,24 +132,32 @@ class Navigation extends React.Component {
                     </a>
                   </li>
                   <li className="divider" tabIndex="-1" />
-                </div>
+                </a>
               ))
             }
           </ul>
         </li>
         <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}>
+          <a
+            className="waves-effect white-text"
+            href="#!"
+            onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}
+          >
             <i className="material-icons white-text">
-            format_list_numbered
+              format_list_numbered
             </i>
             Leaderboard
           </a>
         </li>
         <li />
         <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}>
+          <a
+            className="waves-effect white-text"
+            href="#!"
+            onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}
+          >
             <i className="material-icons white-text">
-            group
+              group
             </i>
             Our Team
           </a>
@@ -134,9 +174,13 @@ class Navigation extends React.Component {
         <li /> */}
 
         <li>
-          <a className="waves-effect indigo white-text" href="#!" onClick={(e) => { e.preventDefault(); socket.emit('disconnect', null); history.push('/'); }}>
+          <a
+            className="waves-effect indigo white-text"
+            href="#!"
+            onClick={(e) => { e.preventDefault(); history.push('/'); }}
+          >
             <i className="material-icons white-text">
-            exit_to_app
+              exit_to_app
             </i>
             Logout
           </a>
