@@ -20,6 +20,7 @@ const SideBar = ({ component: Component, ...rest }) => {
   if (!user) {
     return <Redirect to="/" />;
   }
+  const { history } = rest;
   return (
     <div>
       <ul id="slide-out0" className="sidenav sidenav-fixed">
@@ -31,7 +32,7 @@ const SideBar = ({ component: Component, ...rest }) => {
           menu
           </i>
         </a>
-        <Header />
+        <Header history={history} />
         <main>
           <Route
             {...rest}

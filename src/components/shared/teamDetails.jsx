@@ -25,7 +25,6 @@ const TeamDetails = (props) => {
 
 
                     <div className="card z-index-4">
-
                       <ul className="collapsible">
                         <li>
                           <div className="collapsible-header grey darken-3 white-text">

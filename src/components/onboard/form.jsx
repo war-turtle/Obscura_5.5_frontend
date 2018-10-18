@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../actions';
 import Avatar from '../shared/avatar';
-import SweetAlert from '../sweetAlert';
+import SweetAlert from '../shared/sweetAlert';
 
 declare var M;
 class Form extends React.Component {

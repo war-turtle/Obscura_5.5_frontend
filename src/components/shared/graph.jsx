@@ -67,7 +67,7 @@ class BarChart extends React.Component {
               </ul>
               <Bar
                 width={5}
-                height={2}
+                height={1}
                 data={data}
                 options={options}
               />

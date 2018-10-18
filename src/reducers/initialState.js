@@ -22,6 +22,7 @@ const initialState = {
   messageSent: false,
   otherTeam: {},
   clearLevel: false,
+  locator: 'Dashboard',
 };
 
 export default initialState;

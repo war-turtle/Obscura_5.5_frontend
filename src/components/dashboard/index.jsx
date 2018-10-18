@@ -7,7 +7,7 @@ import actions from '../../actions';
 import TeamDetails from '../shared/teamDetails';
 import Team from './team';
 import config from '../../config';
-import SweetAlert from '../sweetAlert';
+import SweetAlert from '../shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -99,7 +99,7 @@ class Dashboard extends React.Component {
     const { team } = this.props;
     return (
       <div>
-        <nav
+        {/* <nav
           className={css}
           style={{
             paddingBottom: '120px',
@@ -111,12 +111,12 @@ class Dashboard extends React.Component {
               {timer}
             </a>
           </div>
-        </nav>
+        </nav> */}
         <div className="row center">
           <div className="col s12">
-            <h4>
+            {/* <h4>
               Dashboard
-            </h4>
+            </h4> */}
             <Decide teamExist={teamExist} team={team} />
           </div>
         </div>

@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import actions from '../../actions';
 import Avatar from '../shared/avatar';
-import sweetAlert from '../sweetAlert';
+import sweetAlert from '../shared/sweetAlert';
 
 declare var M; // Hack to run materialize toast.
 

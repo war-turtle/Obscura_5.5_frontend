@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../actions';
 
+declare var M;
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +41,7 @@ class Leaderboard extends React.Component {
   }
 
   goToPage = (index) => {
+    M.toast({ html: 'Fetching Leaderboard Please Wait!', classes: 'rounded' });
     const { getLeaderboard } = this.props;
     getLeaderboard((index - 1), 10);
     this.setState({

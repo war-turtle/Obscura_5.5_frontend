@@ -2,6 +2,7 @@ html,
 body {
 	height: 100%;
 	margin: 0;
+	overflow-x: hidden;	
 }
 
 /* global list css */
@@ -50,10 +51,6 @@ footer {
 	padding-left: 300px;
 }
 
-.sidenav {
-	background-color: #424242;
-}
-
 @media only screen and (max-width: 992px) {
 
 	nav,
@@ -61,6 +58,19 @@ footer {
 	footer {
 		padding-left: 0;
 	}
+}
+
+main {
+	min-height: 80vh;
+}
+
+/* loader css */
+.progress {
+	margin-top: 0% !important;
+}
+
+.head {
+	margin-bottom: 20px;
 }
 
 /* FOOTER CSS */

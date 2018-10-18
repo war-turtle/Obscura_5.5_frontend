@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import loadjs from 'loadjs';
 import actions from '../../actions';
-import SweetAlert from '../sweetAlert';
+import SweetAlert from '../shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -55,7 +55,9 @@ class Navigation extends React.Component {
             <a href="#name">
               <span className="white-text name card-title">
                 <h6>
-                  {user.user.name}
+                  <b>
+                    {user.user.name}
+                  </b>
                 </h6>
               </span>
             </a>
@@ -69,13 +71,13 @@ class Navigation extends React.Component {
         </li>
         <li>
           <a
-            className="waves-effect white-text"
+            className="waves-effect "
             href="#!"
             onClick={(e) => {
               e.preventDefault(); history.push('/dashboard');
             }}
           >
-            <i className="material-icons white-text">
+            <i className="material-icons ">
               folder_shared
             </i>
             Dashboard
@@ -85,13 +87,13 @@ class Navigation extends React.Component {
         <li>
           <a
             href="#!"
-            className="waves-effect white-text"
+            className="waves-effect "
             onClick={(e) => {
               e.preventDefault();
               jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new to PLAY!', 'error');
             }}
           >
-            <i className="material-icons white-text">
+            <i className="material-icons ">
               location_searching
             </i>
             Arena
@@ -101,12 +103,12 @@ class Navigation extends React.Component {
         <li>
           <a
             className={
-              levellist.length ? 'dropdown-trigger waves-effect white-text' : 'dropdown-trigger waves-effect white-text hide'
+              levellist.length ? 'dropdown-trigger waves-effect ' : 'dropdown-trigger waves-effect  hide'
             }
             href="#!"
             data-target="dropdown1"
           >
-            <i className="material-icons white-text">
+            <i className="material-icons ">
               whatshot
             </i>
             Levels
@@ -139,11 +141,11 @@ class Navigation extends React.Component {
         </li>
         <li>
           <a
-            className="waves-effect white-text"
+            className="waves-effect "
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}
           >
-            <i className="material-icons white-text">
+            <i className="material-icons ">
               format_list_numbered
             </i>
             Leaderboard
@@ -152,11 +154,11 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className="waves-effect white-text"
+            className="waves-effect "
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}
           >
-            <i className="material-icons white-text">
+            <i className="material-icons ">
               group
             </i>
             Our Team
@@ -164,8 +166,8 @@ class Navigation extends React.Component {
         </li>
         <li />
         {/* <li>
-          <a className="waves-effect white-text" href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
-            <i className="material-icons white-text">
+          <a className="waves-effect " href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
+            <i className="material-icons ">
             headset_mic
             </i>
             Support

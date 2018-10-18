@@ -189,6 +189,19 @@ const clearLevel = (state = initialState.clearLevel, action) => {
   }
 };
 
+const loading = (state = initialState.loading, action) => {
+  switch (action.type) {
+    case 'START_LOADER':
+      return true;
+
+    case 'STOP_LOADER':
+      return false;
+
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   user,
   leaderboard,
@@ -199,6 +212,7 @@ const rootReducer = combineReducers({
   message,
   otherTeam,
   clearLevel,
+  loading,
 });
 
 export default rootReducer;

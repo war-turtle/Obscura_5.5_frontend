@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import loadjs from 'loadjs';
-import SweetAlert from '../sweetAlert';
+import SweetAlert from '../shared/sweetAlert';
 import actions from '../../actions';
 
 declare var M;
@@ -34,20 +34,22 @@ class Login extends React.Component {
     if (!response.tokenId) {
       SweetAlert('Google login failed! Try Again', 'error');
       // return;
+    } else {
+      M.toast({ html: 'Logging you in!', classes: 'rounded' });
+      const { login } = this.props;
+      login(response.tokenId, 'google');
     }
-    M.toast({ html: 'Logging you in!', classes: 'rounded' });
-    const { login } = this.props;
-    login(response.tokenId, 'google');
   };
 
   responseFacebook = (response) => {
     if (!response.accessToken) {
       SweetAlert('Facebook login failed! Try Again', 'error');
       // return;
+    } else {
+      const { login } = this.props;
+      M.toast({ html: 'Logging you in!', classes: 'rounded' });
+      login(response.accessToken, 'facebook');
     }
-    const { login } = this.props;
-    M.toast({ html: 'Logging you in!', classes: 'rounded' });
-    login(response.accessToken, 'facebook');
   };
 
   render() {

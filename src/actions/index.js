@@ -1,6 +1,6 @@
 import { showSnack } from 'react-redux-snackbar';
 import services from '../services';
-import SweetAlert from '../components/sweetAlert';
+import SweetAlert from '../components/shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -13,6 +13,15 @@ const failure = (type, data) => ({
   type,
   data,
 });
+
+const startLoader = () => (dispatch) => {
+  dispatch(success('START_LOADER', null));
+};
+
+const stopLoader = () => (dispatch) => {
+  dispatch(success('STOP_LOADER', null));
+};
+
 
 const login = (token, provider) => (dispatch) => {
   services.login(token, provider).then(
@@ -36,8 +45,10 @@ const login = (token, provider) => (dispatch) => {
 
 
 const getLevelList = () => (dispatch) => {
+  dispatch(startLoader());
   services.getLevelList().then(
     (list) => {
+      dispatch(stopLoader());
       if (list.status === 'failure') {
         dispatch(failure('FAILURE_LIST', list));
       } else {
@@ -48,8 +59,10 @@ const getLevelList = () => (dispatch) => {
 };
 
 const getTeam = teamId => (dispatch) => {
+  dispatch(startLoader());
   services.getTeam(teamId).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success && response.data._id === jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id) {
         dispatch(success('TEAM_FETCH_SUCCESS', response));
       } else if (response.success) {
@@ -74,8 +87,10 @@ const onboard = formData => (dispatch) => {
 };
 
 const getLeaderboard = (skip, limit) => (dispatch) => {
+  dispatch(startLoader());
   services.fetchLeaderboard(skip, limit).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(success('LEADERBOARD_SUCCESS', response));
       } else {
@@ -86,8 +101,10 @@ const getLeaderboard = (skip, limit) => (dispatch) => {
 };
 
 const acceptRequest = requesterId => (dispatch) => {
+  dispatch(startLoader());
   services.acceptRequest(requesterId).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(success('ACCEPT_SUCCESS', response));
         dispatch(getTeam(jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id));
@@ -99,8 +116,10 @@ const acceptRequest = requesterId => (dispatch) => {
 };
 
 const deleteRequest = requesterId => (dispatch) => {
+  dispatch(startLoader());
   services.deleteRequest(requesterId).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(success('DELETE_SUCCESS', response));
         dispatch(getTeam(jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id));
@@ -124,10 +143,12 @@ const clearJs = () => (dispatch) => {
 };
 
 const getLevel = alias => (dispatch) => {
+  dispatch(startLoader());
   dispatch(clearLevel());
   dispatch(clearJs());
   services.fetchLevel(alias).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(setLevel());
         dispatch(success('LEVEL_SUCCESS', response));
@@ -145,8 +166,10 @@ const getLevel = alias => (dispatch) => {
 };
 
 const getAlias = () => (dispatch) => {
+  dispatch(startLoader());
   services.getAlias().then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(success('ALIAS_SUCCESS', response));
       } else {
@@ -159,8 +182,10 @@ const getAlias = () => (dispatch) => {
 
 
 const postAns = (ans, alias) => (dispatch) => {
+  dispatch(startLoader());
   services.postAns(ans, alias).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success && response.ansCorrect) {
         dispatch(getAlias());
         dispatch(success('RIGHT_ANS', response));
@@ -185,8 +210,10 @@ const postAns = (ans, alias) => (dispatch) => {
 };
 
 const getTeamList = () => (dispatch) => {
+  dispatch(startLoader());
   services.getTeamList().then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         const a = [];
         response.data.teams.map((t) => {
@@ -206,8 +233,10 @@ const getTeamList = () => (dispatch) => {
 };
 
 const sendTeamRequest = teamId => (dispatch) => {
+  dispatch(startLoader());
   services.sendTeamRequest(teamId).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(success('SUCCESSFULLY_SENT_REQUEST', [teamId]));
       } else {
@@ -218,8 +247,10 @@ const sendTeamRequest = teamId => (dispatch) => {
 };
 
 const createTeam = formData => (dispatch) => {
+  dispatch(startLoader());
   services.createTeam(formData).then(
     (response) => {
+      dispatch(stopLoader());
       if (response.success) {
         dispatch(getAlias());
         dispatch(success('TEAM_CREATE_SUCCESS', response));
