@@ -277,6 +277,21 @@ const clearUser = () => (dispatch) => {
   dispatch(success('CLEAR_USER', null));
 };
 
+const logoutUser = () => (dispatch) => {
+  console.log('hey');
+  services.logoutUser().then(
+    (res) => {
+      if (res.success) {
+        console.log('yiii');
+        dispatch(success('CLEAR_USER_', null));
+      } else {
+        console.log('nopes');
+        dispatch(success('CLEAR_USER_', null));
+      }
+    },
+  );
+};
+
 
 export default {
   login,
@@ -295,4 +310,5 @@ export default {
   deleteRequest,
   clearUser,
   clearLevel,
+  logoutUser,
 };

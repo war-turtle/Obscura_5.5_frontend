@@ -39,7 +39,7 @@ class Navigation extends React.Component {
 
   render() {
     const {
-      user, history, levellist, getLevel,
+      user, history, levellist, getLevel, logoutUser,
     } = this.props;
     levellist.sort((a, b) => a.levelNo - b.levelNo);
     return (
@@ -165,21 +165,25 @@ class Navigation extends React.Component {
           </a>
         </li>
         <li />
-        {/* <li>
-          <a className="waves-effect " href="#!" onClick={(e) => { e.preventDefault(); history.push('/support'); }}>
+        <li>
+          <a
+            className="waves-effect"
+            href="#!"
+            onClick={(e) => { e.preventDefault(); history.push('/support'); }}
+          >
             <i className="material-icons ">
             headset_mic
             </i>
             Support
           </a>
         </li>
-        <li /> */}
+        <li />
 
         <li>
           <a
             className="waves-effect indigo white-text"
             href="#!"
-            onClick={(e) => { e.preventDefault(); history.push('/'); }}
+            onClick={(e) => { e.preventDefault(); history.push('/'); logoutUser(); }}
           >
             <i className="material-icons white-text">
               exit_to_app
@@ -228,6 +232,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getLevel: (alias) => {
     dispatch(actions.getLevel(alias));
+  },
+  logoutUser: () => {
+    dispatch(actions.logoutUser());
   },
 });
 

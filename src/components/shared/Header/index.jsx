@@ -17,7 +17,11 @@ const Header = (props) => {
     pathName = 'Our Team';
   } else if (path.includes('team')) {
     pathName = 'Team Page';
+  } else {
+    pathName = '';
   }
+
+  console.log(path, pathName);
   return (
     <div className="head">
       <nav>

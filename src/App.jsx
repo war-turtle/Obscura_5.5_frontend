@@ -27,6 +27,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.socket = socketIOClient(config.api.url);
+    window.addEventListener('beforeunload', (ev) => {
+      sessionStorage.removeItem('jwtToken');
+      props.logoutUser();
+    });
   }
 
   render = () => (
@@ -128,6 +132,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getLevelList: () => {
     dispatch(actions.getLevelList());
+  },
+  logoutUser: () => {
+    dispatch(actions.logoutUser());
   },
 });
 
