@@ -28,9 +28,14 @@ class App extends React.Component {
     super(props);
     this.socket = socketIOClient(config.api.url);
     window.addEventListener('beforeunload', (ev) => {
-      sessionStorage.removeItem('jwtToken');
       props.logoutUser();
     });
+  }
+
+
+  componentWillUnmount() {
+    const { logoutUser } = this.props;
+    logoutUser();
   }
 
   render = () => (

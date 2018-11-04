@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import loadjs from 'loadjs';
 import actions from '../../actions';
 import SweetAlert from '../shared/sweetAlert';
+import Chat from '../chat';
 
 const jwtDecode = require('jwt-decode');
 
@@ -172,13 +173,31 @@ class Navigation extends React.Component {
             onClick={(e) => { e.preventDefault(); history.push('/support'); }}
           >
             <i className="material-icons ">
-            headset_mic
+              headset_mic
             </i>
             Support
           </a>
         </li>
         <li />
-
+        <li className="no-padding">
+          <ul className="collapsible collapsible-accordion">
+            <li>
+              <a className="collapsible-header">
+                Chat
+                <i className="material-icons">
+                  arrow_drop_down
+                </i>
+              </a>
+              <div className="collapsible-body">
+                <ul>
+                  <li>
+                    <Chat />
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
         <li>
           <a
             className="waves-effect indigo white-text"

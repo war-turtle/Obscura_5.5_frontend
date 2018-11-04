@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleMDE from 'react-simplemde-editor';
+import './index.css';
 import 'simplemde/dist/simplemde.min.css';
 
 class Chat extends React.Component {
@@ -11,42 +11,27 @@ class Chat extends React.Component {
     };
   }
 
-  handleChange = (value) => {
-    this.setState({ mdeValue: value });
-  };
+  render = () => (
+    (
+      <div className="chat-container">
+        hi
 
-  sendMessage = () => {
-    this.setState({ textValue: '' });
-  }
-
-  render = () => {
-    const extraKeys = {
-      Up(cm) {
-        cm.replaceSelection(' surprise. ');
-      },
-      Down(cm) {
-        cm.replaceSelection(' surprise again! ');
-      },
-    };
-    return (
-      (
-        <div>
-          <li>
-            <button onClick={this.sendMessage}>
-              Send
-            </button>
-          </li>
-          <li className="editor">
-            <SimpleMDE
-              value={this.state.textValue}
-              onChange={this.handleChange}
-              extraKeys={extraKeys}
-            />
-          </li>
+        <div className="row">
+          <form className="col s12">
+            <div className="row">
+              <div className="input-field col s12">
+                <input id="icon_prefix" type="text" className="validate" />
+                <label htmlFor="icon_prefix">
+                  Your Message
+                </label>
+              </div>
+            </div>
+          </form>
         </div>
-      )
-    );
-  }
+
+      </div>
+    )
+  )
 }
 
 export default Chat;

@@ -1,29 +1,9 @@
-
-$(document).ready(() => {
-  $('.tabs').tabs();
-});
-
 $(document).ready(() => {
   $('.modal').modal();
-});
-
-$(document).ready(() => {
+  $('.tabs').tabs();
   $('select').formSelect();
-});
-
-$(document).ready(() => {
-  // $('.left').sidenav().options.edge = 'right';
-  $('.left').sidenav({ edge: 'right' });
-});
-
-$(document).ready(() => {
+  $('.panel').sidenav({ edge: 'right' });
   $('.sidenav').sidenav();
-});
-
-$(document).ready(() => {
   $('.dropdown-trigger').dropdown();
-});
-
-$(document).ready(() => {
   $('.collapsible').collapsible();
 });

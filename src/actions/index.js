@@ -22,23 +22,28 @@ const stopLoader = () => (dispatch) => {
   dispatch(success('STOP_LOADER', null));
 };
 
+const clearJs = () => (dispatch) => {
+  dispatch(success('CLEAR_JS', null));
+};
+
+const clearUser = () => (dispatch) => {
+  dispatch(success('CLEAR_USER', null));
+};
 
 const login = (token, provider) => (dispatch) => {
   services.login(token, provider).then(
     (data) => {
-      if (!data.success) {
+      if (!data.success && data.singleDevice) {
         dispatch(failure('SIGNUP_REQUIRED', data));
-      } else if (data.status === 'error') {
-        dispatch(showSnack('myUniqueId', {
-          label: data.message,
-          timeout: 2000,
-          button: {
-            label: 'OK, GOT IT',
-          },
-        }));
+      } else if (!data.success && !data.singleDevice) {
+        SweetAlert('Someone is already active with this account', 'error');
+        dispatch(clearUser());
       } else {
         dispatch(success('SUCCESS_LOGIN', data));
       }
+    },
+    (err) => {
+      console.log(err);
     },
   );
 };
@@ -97,6 +102,9 @@ const getLeaderboard = (skip, limit) => (dispatch) => {
         dispatch(failure('LEADERBOARD_FAILURE', response));
       }
     },
+    (err) => {
+      console.log(err);
+    },
   );
 };
 
@@ -136,10 +144,6 @@ const clearLevel = () => (dispatch) => {
 
 const setLevel = () => (dispatch) => {
   dispatch(success('SET_LEVEL', null));
-};
-
-const clearJs = () => (dispatch) => {
-  dispatch(success('CLEAR_JS', null));
 };
 
 const getLevel = alias => (dispatch) => {
@@ -273,19 +277,13 @@ const sendMessage = data => (dispatch) => {
   );
 };
 
-const clearUser = () => (dispatch) => {
-  dispatch(success('CLEAR_USER', null));
-};
 
 const logoutUser = () => (dispatch) => {
-  console.log('hey');
   services.logoutUser().then(
     (res) => {
       if (res.success) {
-        console.log('yiii');
         dispatch(success('CLEAR_USER_', null));
       } else {
-        console.log('nopes');
         dispatch(success('CLEAR_USER_', null));
       }
     },

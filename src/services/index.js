@@ -3,6 +3,8 @@ import config from '../config';
 
 const jwtDecode = require('jwt-decode');
 
+declare var M;
+
 // const cryptoJSON = require('crypto-json');
 
 
@@ -12,6 +14,25 @@ const jwtDecode = require('jwt-decode');
 //   keys: [],
 // });
 
+const errorHandle = (res) => {
+  switch (res.status) {
+    case 500:
+      M.toast({
+        html: 'Internal server error!',
+        classes: 'rounded',
+      });
+      break;
+
+    case 401:
+    case 403:
+      sessionStorage.remove('jwtToken');
+      break;
+
+    default:
+      break;
+  }
+};
+
 
 const login = (token, provider) => {
   const reqOptions = {
@@ -20,20 +41,25 @@ const login = (token, provider) => {
       'Content-Type': 'application/json',
     }),
     credentials: 'include',
-    body: JSON.stringify({ token, provider }),
+    body: JSON.stringify({
+      token,
+      provider,
+    }),
   };
   return fetch(`${config.api.url}/auth/login`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then((user) => {
       if (user && user.token) {
         sessionStorage.setItem('user', JSON.stringify(user));
       }
       return user;
-    });
+    }).catch(err => err);
 };
 
 const logoutUser = () => {
-  console.log('hey 1');
   const reqOptions = {
     method: 'GET',
     headers: new Headers({
@@ -42,8 +68,12 @@ const logoutUser = () => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/auth/logout`, reqOptions)
-    .then(response => response.json())
-    .then(response => response);
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
+    .then(response => response)
+    .catch(err => err);
 };
 
 const onBoardUser = (formData) => {
@@ -57,7 +87,10 @@ const onBoardUser = (formData) => {
     body: JSON.stringify(formData),
   };
   return fetch(`${config.api.url}/players/${jwtDecode(sessionStorage.getItem('jwtToken')).user._id}`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -70,7 +103,10 @@ const fetchLeaderboard = (skip, limit) => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/teams?skip=${skip}&limit=${limit}&sort=true`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -83,7 +119,10 @@ const getLevelList = () => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/levels?action=getAllLevels`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -95,7 +134,10 @@ const fetchLevel = (alias) => {
     }),
     credentials: 'include',
   };
-  return fetch(`${config.api.url}/levels?action=getAliasLevel&alias=${alias}`, reqOptions).then(response => response.json());
+  return fetch(`${config.api.url}/levels?action=getAliasLevel&alias=${alias}`, reqOptions).then((response) => {
+    errorHandle(response);
+    return response.json();
+  });
 };
 
 const getAlias = () => {
@@ -107,7 +149,10 @@ const getAlias = () => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/levels?action=getLevelAlias`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -122,7 +167,10 @@ const postAns = (ans, alias) => {
     body: JSON.stringify(ans),
   };
   return fetch(`${config.api.url}/levels/${alias}`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -135,7 +183,10 @@ const getTeamList = () => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/teams`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -148,7 +199,10 @@ const getTeam = (teamId) => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/teams/${teamId}`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -162,7 +216,10 @@ const sendTeamRequest = (teamId) => {
     credentials: 'include',
   };
   return fetch(`${config.api.url}/teams/${teamId}?action=request`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -177,7 +234,10 @@ const createTeam = (formData) => {
     body: JSON.stringify(formData),
   };
   return fetch(`${config.api.url}/teams`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -192,7 +252,10 @@ const sendMessage = (formData) => {
   reqOptions.headers.Authorization = sessionStorage.getItem('jwtToken');
   reqOptions.method = 'POST';
   return fetch(`${config.api.url}/messages?action=email&to=admin`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -204,10 +267,15 @@ const acceptRequest = (reqId) => {
       'Content-Type': 'application/json',
     }),
     credentials: 'include',
-    body: JSON.stringify({ reqId }),
+    body: JSON.stringify({
+      reqId,
+    }),
   };
   return fetch(`${config.api.url}/teams/${jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id}?action=accept_request`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
@@ -219,10 +287,15 @@ const deleteRequest = (reqId) => {
       'Content-Type': 'application/json',
     }),
     credentials: 'include',
-    body: JSON.stringify({ reqId }),
+    body: JSON.stringify({
+      reqId,
+    }),
   };
   return fetch(`${config.api.url}/teams/${jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id}?action=delete`, reqOptions)
-    .then(response => response.json())
+    .then((response) => {
+      errorHandle(response);
+      return response.json();
+    })
     .then(response => response);
 };
 
