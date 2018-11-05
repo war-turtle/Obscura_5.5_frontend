@@ -68,7 +68,7 @@ class Team extends React.Component {
             Meet the team behind Obscura
             </h3>
           </div>
-          <div className="row">
+          <div className="row fade">
             <h5 style={{ marginBottom: '50px' }}>
           Developers
             </h5>

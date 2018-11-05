@@ -114,9 +114,6 @@ class Dashboard extends React.Component {
         </nav> */}
         <div className="row center">
           <div className="col s12">
-            {/* <h4>
-              Dashboard
-            </h4> */}
             <Decide teamExist={teamExist} team={team} />
           </div>
         </div>

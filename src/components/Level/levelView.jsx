@@ -36,7 +36,7 @@ class LevelView extends React.Component {
   render() {
     const { name, html, picture } = this.props;
     return (
-      <div className="row">
+      <div className="row fade">
         <div className="col s12">
           <h3 align="center" className="regular">
             {name}

@@ -100,7 +100,7 @@ class Leaderboard extends React.Component {
                   {
                     list.map((l, i) => (
                       <tr
-                        className="select-pointer"
+                        className="select-pointer fade"
                         onClick={(e) => {
                           e.preventDefault(); this.goToTeamPage(l._id);
                         }}

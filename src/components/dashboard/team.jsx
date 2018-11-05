@@ -111,7 +111,7 @@ class Team extends React.Component {
       );
     }
     return (
-      <div className="row">
+      <div className="row fade">
         <div className="col s12 black-text">
 
           <div className="row">

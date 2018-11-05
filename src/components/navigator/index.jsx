@@ -103,42 +103,15 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className={
-              levellist.length ? 'dropdown-trigger waves-effect ' : 'dropdown-trigger waves-effect  hide'
-            }
             href="#!"
-            data-target="dropdown1"
+            data-target="slide-out"
+            className="sidenav-trigger"
           >
             <i className="material-icons ">
               whatshot
             </i>
             Levels
           </a>
-          <ul id="dropdown1" className="dropdown-content">
-            {
-              levellist.map(l => (
-                <a
-                  href="#!"
-                  key={l.levelNo}
-                  onClick={(e) => {
-                    e.preventDefault(); history.push(`/level/${l.url_alias}`); getLevel(l.url_alias);
-                  }}
-                >
-                  <li>
-                    <a href="#!">
-                      <i className="material-icons">
-                        whatshot
-                      </i>
-                      Level
-                      {' '}
-                      {l.levelNo}
-                    </a>
-                  </li>
-                  <li className="divider" tabIndex="-1" />
-                </a>
-              ))
-            }
-          </ul>
         </li>
         <li>
           <a
@@ -210,6 +183,38 @@ class Navigation extends React.Component {
             Logout
           </a>
         </li>
+
+        <ul id="slide-out" className="sidenav">
+          <li>
+            <a href="#">
+              LEVELS
+            </a>
+          </li>
+          <li className="divider" tabIndex="-1" />
+          {
+              levellist.map(l => (
+                <a
+                  href="#!"
+                  key={l.levelNo}
+                  onClick={(e) => {
+                    e.preventDefault(); history.push(`/level/${l.url_alias}`); getLevel(l.url_alias);
+                  }}
+                >
+                  <li>
+                    <a href="#!">
+                      <i className="material-icons">
+                        whatshot
+                      </i>
+                      Level
+                      {' '}
+                      {l.levelNo}
+                    </a>
+                  </li>
+                  <li className="divider" tabIndex="-1" />
+                </a>
+              ))
+            }
+        </ul>
       </div>
     );
   }

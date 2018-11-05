@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   BrowserRouter, Switch, Route,
@@ -19,6 +18,8 @@ import actions from './actions';
 import config from './config';
 import NotFound from './components/notfound';
 import TeamPage from './components/TeamPage';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 const jwtDecode = require('jwt-decode');
@@ -63,6 +64,7 @@ class App extends React.Component {
           }
           socket={this.socket}
         />
+
         <SideBar
           exact
           path="/level/:alias"

@@ -11,7 +11,7 @@ const Requests = (props) => {
   } = props;
   if (requests.length) {
     return (
-      <div className="request-back">
+      <div className="request-back fade">
 
         <h5>
           Team Requests
@@ -91,7 +91,7 @@ const Requests = (props) => {
     );
   }
   return (
-    <div>
+    <div className="fade">
       <h6>
         There are no team joining requests at present
       </h6>

@@ -1,12 +1,13 @@
 import React from 'react';
 import Requests from '../dashboard/requests';
 import BarChart from './graph';
+import Loader from './loader';
 
 const TeamDetails = (props) => {
   const { team, requests, hidden } = props;
   if (team) {
     return (
-      <div className="row">
+      <div className="row fade">
         <div className="col s12">
           <div className="col s12">
             <div className="row">
@@ -97,7 +98,7 @@ const TeamDetails = (props) => {
   }
   return (
     <div>
-      loading....
+      <Loader />
     </div>
   );
 };
