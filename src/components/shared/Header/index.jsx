@@ -21,26 +21,25 @@ const Header = (props) => {
     pathName = '';
   }
 
-  console.log(path, pathName);
   return (
-    <div className="head">
+    <div className="head navbar-fixed">
       <nav>
         <div className="nav-wrapper grey darken-3">
-          <a href="#!" className="breadcrumb" />
+          <div className="breadcumb" />
           <a href="#!" className="breadcrumb">
             {pathName}
           </a>
           <a href="#!" className="brand-logo right">
             <img
-              src="images/logo2.svg"
+              src="/images/logo2.svg"
               width="75"
               alt="logo"
             />
           </a>
         </div>
       </nav>
-      <div className={loading ? 'progress grey lighten-4' : 'progress grey lighten-4 hide'}>
-        <div className="indeterminate grey" />
+      <div className={loading ? 'progress indigo lighten-4' : 'progress indigo lighten-4 hide'}>
+        <div className="indeterminate indigo" />
       </div>
     </div>
   );

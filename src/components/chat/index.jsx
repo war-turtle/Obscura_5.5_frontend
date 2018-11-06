@@ -1,37 +1,46 @@
-import React from 'react';
-import './index.css';
+import React, { Component } from 'react';
 import 'simplemde/dist/simplemde.min.css';
 
-class Chat extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mdeValue: '',
-      textValue: '',
-    };
+class Chat extends Component {
+  componentWillMount() {
   }
 
-  render = () => (
-    (
-      <div className="chat-container">
-        hi
-
-        <div className="row">
-          <form className="col s12">
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="icon_prefix" type="text" className="validate" />
-                <label htmlFor="icon_prefix">
-                  Your Message
-                </label>
-              </div>
-            </div>
-          </form>
+  render() {
+    return (
+      <div>
+        <ul id="slide-out2" className="sidenav">
+          <li>
+            <a href="#!">
+              <i className="material-icons">
+                cloud
+              </i>
+                First Link With Icon
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              Second Link
+            </a>
+          </li>
+          <li>
+            <div className="divider" />
+          </li>
+          <li>
+            <a className="waves-effect" href="#!">
+              Third Link With Waves
+            </a>
+          </li>
+        </ul>
+        <div className="fixed-action-btn">
+          <a href="#!" data-target="slide-out2" className="btn-floating btn-large green sidenav-trigger">
+            <i className="large material-icons">
+              contacts
+            </i>
+          </a>
         </div>
-
       </div>
-    )
-  )
+    );
+  }
 }
 
 export default Chat;
