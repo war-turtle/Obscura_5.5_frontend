@@ -24,16 +24,17 @@ const jwtDecode = require('jwt-decode');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.socket = socketIOClient(config.api.url);
-    window.addEventListener('beforeunload', (ev) => {
-      props.logoutUser();
-    });
+    // this.socket = socketIOClient(config.api.url);
+    this.socket = {};
+    // window.addEventListener('beforeunload', (ev) => {
+    //   props.logoutUser();
+    // });
   }
 
 
   componentWillUnmount() {
-    const { logoutUser } = this.props;
-    logoutUser();
+    // const { logoutUser } = this.props;
+    // logoutUser();
   }
 
   render = () => (

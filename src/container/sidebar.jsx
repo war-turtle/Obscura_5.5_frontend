@@ -49,7 +49,7 @@ const SideBar = ({ component: Component, ...rest }) => {
           />
         </main>
       </div>
-      <Chat />
+      {/* <Chat user={user} /> */}
       <Footer />
     </div>
   );

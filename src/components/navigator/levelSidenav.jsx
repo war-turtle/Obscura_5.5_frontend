@@ -23,7 +23,10 @@ class LevelSideNav extends React.Component {
 
   render() {
     const { levellist } = this.props;
-    levellist.sort((a, b) => a.levelNo - b.levelNo);
+
+    if (levellist) {
+      levellist.sort((a, b) => a.levelNo - b.levelNo);
+    }
     return (
       <ul id="slide-out1" className="sidenav level-sidenav">
         <li className="center-align">
@@ -34,26 +37,32 @@ class LevelSideNav extends React.Component {
         </li>
         <li className="divider" tabIndex="-1" />
         {
-              levellist.map(l => (
-                <a
-                  href="#!"
-                  key={l.levelNo}
-                  onClick={(e) => { this.levelButtonClick(e, l); }}
-                >
-                  <li>
-                    <a href="#!">
-                      <i className="material-icons">
-                        whatshot
-                      </i>
-                      Level
-                      {' '}
-                      {l.levelNo}
-                    </a>
-                  </li>
-                  <li className="divider" tabIndex="-1" />
-                </a>
-              ))
-            }
+          levellist ? (
+            levellist.map(l => (
+              <a
+                href="#!"
+                key={l.levelNo}
+                onClick={(e) => { this.levelButtonClick(e, l); }}
+              >
+                <li>
+                  <a href="#!">
+                    <i className="material-icons">
+                      whatshot
+                    </i>
+                    Level
+                    {' '}
+                    {l.levelNo}
+                  </a>
+                </li>
+                <li className="divider" tabIndex="-1" />
+              </a>
+            ))
+          ) : (
+            <li>
+              No levels
+            </li>
+          )
+        }
       </ul>
     );
   }
