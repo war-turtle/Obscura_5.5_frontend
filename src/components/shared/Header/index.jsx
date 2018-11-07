@@ -38,8 +38,8 @@ const Header = (props) => {
           </a>
         </div>
       </nav>
-      <div className={loading ? 'progress indigo lighten-4' : 'progress indigo lighten-4 hide'}>
-        <div className="indeterminate indigo" />
+      <div className={loading ? 'progress grey lighten-4' : 'progress grey lighten-4 hide'}>
+        <div className="indeterminate grey" />
       </div>
     </div>
   );

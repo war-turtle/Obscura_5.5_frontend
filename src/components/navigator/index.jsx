@@ -51,7 +51,7 @@ class Navigation extends React.Component {
         <li>
           <div className="user-view">
             <div className="background">
-              <img src="/images/office.jpg" alt="backgroundImage" />
+              <img src="https://9cover.com/images/ccovers/1362683988black-abstract-texture.jpg" alt="backgroundImage" />
             </div>
             <a href="#user">
               <img className="circle" src={user.user.picture} alt="user" />

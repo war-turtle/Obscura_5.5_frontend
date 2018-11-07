@@ -30,7 +30,7 @@ class LevelSideNav extends React.Component {
     return (
       <ul id="slide-out1" className="sidenav level-sidenav">
         <li className="center-align">
-          <a href="#!" onClick={() => { this.closeLevelSidenav(); }} className="left indigo white-text" style={{ display: 'inline-block', marginRight: '10' }}>
+          <a href="#!" onClick={(e) => { e.preventDefault(); this.closeLevelSidenav(); }} className="left indigo white-text" style={{ display: 'inline-block', marginRight: '10' }}>
               X
           </a>
             LEVELS
@@ -42,7 +42,7 @@ class LevelSideNav extends React.Component {
               <a
                 href="#!"
                 key={l.levelNo}
-                onClick={(e) => { this.levelButtonClick(e, l); }}
+                onClick={(e) => { e.preventDefault(); this.levelButtonClick(e, l); }}
               >
                 <li>
                   <a href="#!">

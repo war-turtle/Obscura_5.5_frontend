@@ -25,7 +25,7 @@ const SideBar = ({ component: Component, ...rest }) => {
   const { history } = rest;
   return (
     <div>
-      <ul id="slide-out0" className="sidenav sidenav-fixed">
+      <ul id="slide-out0" className="sidenav sidenav-fixed z-depth-2">
         <Navigation user={user} />
       </ul>
       <LevelSideNav />

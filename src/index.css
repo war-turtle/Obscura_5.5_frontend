@@ -129,3 +129,8 @@ footer {
 .select-pointer {
 	cursor: pointer;
 }
+
+/* support-card css */
+.support-card {
+	margin-top: 20px;
+}

@@ -65,7 +65,7 @@ class Team extends React.Component {
         <div className="row center">
           <div className="col s12">
             <h3>
-            Meet the team behind Obscura
+            Meet the team behind ObscurA
             </h3>
           </div>
           <div className="row fade">
