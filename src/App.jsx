@@ -16,6 +16,10 @@ import Leaderboard from './components/Leaderboard/index';
 import './App.css';
 import actions from './actions';
 import config from './config';
+import NotFound from './components/notfound';
+import TeamPage from './components/TeamPage';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 const jwtDecode = require('jwt-decode');
@@ -24,23 +28,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.socket = socketIOClient(config.api.url);
-    if (sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null) {
-      this.socket.username = jwtDecode(sessionStorage.getItem('jwtToken')).user.username;
-      this.socket.emit('checkUser', jwtDecode(sessionStorage.getItem('jwtToken')).user);
-      this.socket.on('accepted', (token) => {
-        props.getTeam(jwtDecode(token).user.team_id);
-        sessionStorage.setItem('jwtToken', token);
-      });
-    }
+    window.addEventListener('beforeunload', (ev) => {
+      props.logoutUser();
+    });
   }
 
-  componentDidMount = () => {
-  //   const { history } = this.props;
-  //   this.socket.on('stopUser', () => {
-  //     SweetAlert('stop', 'error');
-  //     history.push('/');
-  //   });
-  };
+
+  componentWillUnmount() {
+    const { logoutUser } = this.props;
+    logoutUser();
+  }
 
   render = () => (
     <BrowserRouter>
@@ -67,7 +64,9 @@ class App extends React.Component {
           }
           socket={this.socket}
         />
+
         <SideBar
+          exact
           path="/level/:alias"
           component={Level}
           user={
@@ -88,6 +87,18 @@ class App extends React.Component {
           socket={this.socket}
         />
         <SideBar
+          exact
+          path="/team/:id"
+          component={TeamPage}
+          user={
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          exact
           path="/support"
           component={Support}
           user={
@@ -98,6 +109,7 @@ class App extends React.Component {
           socket={this.socket}
         />
         <SideBar
+          exact
           path="/leaderboard"
           component={Leaderboard}
           user={
@@ -107,6 +119,7 @@ class App extends React.Component {
           }
           socket={this.socket}
         />
+        <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
@@ -126,6 +139,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getLevelList: () => {
     dispatch(actions.getLevelList());
+  },
+  logoutUser: () => {
+    dispatch(actions.logoutUser());
   },
 });
 

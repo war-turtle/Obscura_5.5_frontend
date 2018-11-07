@@ -1,14 +1,14 @@
 const dev = {
   api: {
-    url: 'http://api.obscuranitkkr.co.in',
+    url: 'http://localhost:8000',
   },
   cypher: {
     algo: 'aes256',
     passKey: '394rwe78fudhwqpwriufdhr8ehyqr9pe8fud',
     encoding: 'hex',
   },
-  startTimestamp: 1538134200000,
-  startDate: '09/28/2018 05:00 PM',
+  startTimestamp: 1538188200000,
+  startDate: '09/29/2018 08:00 AM',
 };
 
 const prod = {
@@ -20,8 +20,8 @@ const prod = {
     passKey: '394rwe78fudhwqpwriufdhr8ehyqr9pe8fud',
     encoding: 'hex',
   },
-  startTimestamp: 1538134200000,
-  startDate: '09/28/2018 05:00 PM',
+  startTimestamp: 1538188200000,
+  startDate: '09/29/2018 08:00 AM',
 };
 
 const config = process.env.REACT_APP_STAGE === 'production' ? prod : dev;

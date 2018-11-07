@@ -6,12 +6,11 @@ import {
 } from 'react-router-dom';
 import actions from '../../actions';
 
+declare var M;
+
 class LevelView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ans: '',
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -21,24 +20,32 @@ class LevelView extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const formData = {};
     const { postAns } = this.props;
+    for (const field in this.refs) {
+      formData[field] = this.refs[field].value;
+      document.getElementById('myform').reset();
+    }
     const alias = this.props.match.params.alias;
-    postAns(this.state, alias);
-    this.setState({ ans: '' });
+
+    M.toast({ html: 'Submitting your ans!', classes: 'rounded' });
+
+    postAns(formData, alias);
   }
 
   render() {
-    const { ans } = this.state;
     const { name, html, picture } = this.props;
     return (
-      <div className="row">
+      <div className="row fade">
         <div className="col s12">
           <h3 align="center" className="regular">
             {name}
           </h3>
           <div className="row center-align">
             <div className="col s12 m8 offset-m2 l8 offset-l2">
-              <div id="insert" dangerouslySetInnerHTML={{ __html: html }} />
+              <div className="row center">
+                <div id="insert" dangerouslySetInnerHTML={{ __html: html }} />
+              </div>
               {
                 picture.map(p => (<img key={p} className="responsive-img" src={p} width="50%" alt="level images" />))
               }
@@ -47,18 +54,18 @@ class LevelView extends React.Component {
           <div className="row">
             <div className="col s12">
               <form onSubmit={this.handleSubmit} id="myform">
-                <div className="input-field inline">
-                  <input id="ans" type="text" value={ans} className="validate" name="ans" onChange={this.onChange} />
+                <div className="input-field col s6 offset-s3">
+                  <input id="ans" type="text" ref="ans" className="validate" name="ans" required />
                   <label htmlFor="ans">
-                    Type your Ans
+                    Type your ans
                   </label>
-                </div>
-                <button className="btn waves-effect waves-light" id="submit" type="submit" name="action">
+                  <button className="btn waves-effect waves-light" id="submit" type="submit" name="action">
                   Submit
-                  <i className="material-icons right">
+                    <i className="material-icons right">
                     send
-                  </i>
-                </button>
+                    </i>
+                  </button>
+                </div>
               </form>
             </div>
           </div>

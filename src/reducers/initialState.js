@@ -15,10 +15,14 @@ const initialState = {
   },
   level: {
     levellist: [],
+    nextLevelAlias: '', // level alias that comes in response
+    alias: '', // top level alias that is open to user
   },
   url: '/',
-  nextalias: '',
   messageSent: false,
+  otherTeam: {},
+  clearLevel: false,
+  locator: 'Dashboard',
 };
 
 export default initialState;

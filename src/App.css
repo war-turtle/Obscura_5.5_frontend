@@ -5,3 +5,17 @@
 #gradient {
   background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
 }
+
+.fade{
+  opacity: 0;
+  animation: fade-out 1s ease-in forwards;
+}
+
+@keyframes fade-out{
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}

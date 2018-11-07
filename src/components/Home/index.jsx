@@ -44,6 +44,9 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+        <a href="https://www.codingninjas.in/">
+          <img id="codingNinja" src="images/CNLOGO.png" alt="coding ninja logo" />
+        </a>
 
         <a
           id="GAWDSLink"
@@ -51,6 +54,8 @@ class Home extends React.Component {
           title="Graphics and Web Development Squad, click to know more."
           // target="_blank"
         >
+
+
           <span className="glyphicon glyphicon-cutlery" />
 
           <svg
@@ -131,7 +136,7 @@ class Home extends React.Component {
                 <div className="col-12 col-md-6">
                   <div id="spinning-circle">
                     <img
-                      src="images/logo2.svg"
+                      src="images/logo6.png"
                       height="100%"
                       width="100%"
                       alt="svg"

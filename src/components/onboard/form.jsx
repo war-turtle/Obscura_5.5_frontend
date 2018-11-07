@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-import Avatar from './avatar';
+import Avatar from '../shared/avatar';
+import SweetAlert from '../shared/sweetAlert';
 
+declare var M;
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class Form extends React.Component {
       username: '',
       college: '',
       phone: '',
-      picture: (!props.user) ? props.userData.picture : props.user.user.picture,
+      picture: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,8 +24,14 @@ class Form extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { picture } = this.state;
     const { register } = this.props;
-    register(this.state);
+    if (picture !== '') {
+      M.toast({ html: 'Submitting your form!', classes: 'rounded' });
+      register(this.state);
+    } else {
+      SweetAlert('Please choose an Avatar.', 'error');
+    }
   };
 
   changeAvatar = (avatar) => {
@@ -116,14 +124,14 @@ Form.propTypes = {
   register: () => null,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   loggedin: state.user.loggedin,
   registered: state.user.registered,
   onboard: state.user.registered,
   userData: state.user.userData,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   register: (formData) => {
     dispatch(actions.onboard(formData));
   },

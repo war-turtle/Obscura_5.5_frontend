@@ -1,0 +1,5 @@
+.chat-container {
+  height: 30vh;
+  padding: 10px;
+  overflow-y: show;
+}
