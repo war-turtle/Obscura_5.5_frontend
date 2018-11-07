@@ -5,9 +5,9 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import loadjs from 'loadjs';
+import $ from 'jquery';
 import actions from '../../actions';
 import SweetAlert from '../shared/sweetAlert';
-import Chat from '../chat';
 
 const jwtDecode = require('jwt-decode');
 
@@ -38,11 +38,14 @@ class Navigation extends React.Component {
     }
   }
 
+  hideMainSideNav = () => {
+    $('.sidenav-overlay')[0].click();
+  }
+
   render() {
     const {
-      user, history, levellist, getLevel, logoutUser,
+      user, history, logoutUser,
     } = this.props;
-    levellist.sort((a, b) => a.levelNo - b.levelNo);
     return (
       <div>
         <li>
@@ -101,11 +104,24 @@ class Navigation extends React.Component {
           </a>
         </li>
         <li />
-        <li>
+        <li className="hide-on-small-only">
           <a
             href="#!"
-            data-target="slide-out"
+            data-target="slide-out1"
             className="sidenav-trigger"
+          >
+            <i className="material-icons ">
+              whatshot
+            </i>
+            Levels
+          </a>
+        </li>
+        <li className="hide-on-med-and-up">
+          <a
+            href="#!"
+            data-target="slide-out1"
+            className="sidenav-trigger"
+            onClick={() => { this.hideMainSideNav(); }}
           >
             <i className="material-icons ">
               whatshot
@@ -152,25 +168,6 @@ class Navigation extends React.Component {
           </a>
         </li>
         <li />
-        <li className="no-padding">
-          <ul className="collapsible collapsible-accordion">
-            <li>
-              <a className="collapsible-header">
-                Chat
-                <i className="material-icons">
-                  arrow_drop_down
-                </i>
-              </a>
-              <div className="collapsible-body">
-                <ul>
-                  <li>
-                    <Chat />
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </li>
         <li>
           <a
             className="waves-effect indigo white-text"
@@ -183,38 +180,6 @@ class Navigation extends React.Component {
             Logout
           </a>
         </li>
-
-        <ul id="slide-out" className="sidenav">
-          <li>
-            <a href="#">
-              LEVELS
-            </a>
-          </li>
-          <li className="divider" tabIndex="-1" />
-          {
-              levellist.map(l => (
-                <a
-                  href="#!"
-                  key={l.levelNo}
-                  onClick={(e) => {
-                    e.preventDefault(); history.push(`/level/${l.url_alias}`); getLevel(l.url_alias);
-                  }}
-                >
-                  <li>
-                    <a href="#!">
-                      <i className="material-icons">
-                        whatshot
-                      </i>
-                      Level
-                      {' '}
-                      {l.levelNo}
-                    </a>
-                  </li>
-                  <li className="divider" tabIndex="-1" />
-                </a>
-              ))
-            }
-        </ul>
       </div>
     );
   }
@@ -226,7 +191,6 @@ Navigation.propTypes = {
   history: () => null,
   getCurrentLevelAlias: () => null,
   alias: PropTypes.string,
-  levellist: PropTypes.arrayOf(PropTypes.object),
   getLevel: () => null,
 };
 
@@ -237,13 +201,11 @@ Navigation.defaultProps = {
   history: () => null,
   getCurrentLevelAlias: () => null,
   alias: '',
-  levellist: [],
   getLevel: () => null,
 };
 
 const mapStateToProps = state => ({
   alias: state.level.alias,
-  levellist: state.level.levellist,
 });
 
 

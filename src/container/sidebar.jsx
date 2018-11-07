@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
 import Navigation from '../components/navigator';
+import LevelSideNav from '../components/navigator/levelSidenav';
 import Footer from '../components/shared/Footer';
 import Header from '../components/shared/Header';
 import Chat from '../components/chat';
@@ -27,8 +28,9 @@ const SideBar = ({ component: Component, ...rest }) => {
       <ul id="slide-out0" className="sidenav sidenav-fixed">
         <Navigation user={user} />
       </ul>
+      <LevelSideNav />
       <div className="row">
-        <a href="#!" data-target="slide-out0" className="sidenav-trigger hide-on-med-and-up">
+        <a href="#!" data-target="slide-out0" className="sidenav-trigger hide-on-large-only">
           <i className="material-icons">
           menu
           </i>
@@ -47,6 +49,7 @@ const SideBar = ({ component: Component, ...rest }) => {
           />
         </main>
       </div>
+      {/* <Chat user={user} /> */}
       <Footer />
     </div>
   );
