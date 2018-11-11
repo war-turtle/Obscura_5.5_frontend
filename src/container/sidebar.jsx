@@ -30,11 +30,6 @@ const SideBar = ({ component: Component, ...rest }) => {
       </ul>
       <LevelSideNav />
       <div className="row">
-        <a href="#!" data-target="slide-out0" className="sidenav-trigger hide-on-large-only">
-          <i className="material-icons">
-          menu
-          </i>
-        </a>
         <Header history={history} />
         <main>
           <Route

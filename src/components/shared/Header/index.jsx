@@ -24,6 +24,11 @@ const Header = (props) => {
   return (
     <div className="head navbar-fixed">
       <nav>
+      <a href="#!" data-target="slide-out0" className="sidenav-trigger hide-on-large-only left">
+          <i className="material-icons">
+          menu
+          </i>
+        </a>
         <div className="nav-wrapper grey darken-3">
           <div className="breadcumb" />
           <a href="#!" className="breadcrumb">

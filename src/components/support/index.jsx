@@ -22,7 +22,7 @@ class Support extends React.Component {
                 Send us a Message
               </h5>
             </div>
-            <div className="col s7">
+            <div className="col s12 m7 l7">
               <div className="row">
                 <form className="col s12">
                   <div className="row">
