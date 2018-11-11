@@ -74,7 +74,7 @@ class Support extends React.Component {
               </div>
 
             </div>
-            <div className="col s5" style={{ padding: '25px' }}>
+            <div className="col s5 hide-on-med-and-down" style={{ padding: '25px' }}>
               <h6>
                 CONTACT INFORMATION
               </h6>
