@@ -5,7 +5,7 @@ import actions from '../../actions';
 
 const Requests = (props) => {
   const {
-    requests, acceptRequest, deleteRequest,
+    requests, acceptRequest, deleteRequest, socket,
   } = props;
   if (requests.length) {
     return (

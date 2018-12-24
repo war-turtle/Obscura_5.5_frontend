@@ -134,3 +134,7 @@ footer {
 .support-card {
 	margin-top: 20px;
 }
+
+.react-count-down {
+	display: inline;
+}

@@ -24,7 +24,8 @@ const SideBar = ({
   if (!user) {
     return <Redirect to="/" />;
   }
-  const { history } = rest;
+  const { history, socket } = rest;
+  socket.emit('joinRoom', user);
 
   return (
     <div>
@@ -38,7 +39,7 @@ const SideBar = ({
             menu
           </i>
         </a>
-        <Header history={history} />
+        <Header />
         <main>
           <Route
             {...rest}

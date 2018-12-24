@@ -4,7 +4,9 @@ import BarChart from './graph';
 import Loader from './loader';
 
 const TeamDetails = (props) => {
-  const { team, requests, hidden } = props;
+  const {
+    team, requests, hidden, socket,
+  } = props;
   if (team) {
     return (
       <div className="row">
@@ -79,7 +81,7 @@ const TeamDetails = (props) => {
         {requests}
         <div className={hidden ? 'hide' : ''}>
           <div className="col s12">
-            <Requests requests={team.requests} />
+            <Requests requests={team.requests} socket={socket} />
           </div>
         </div>
       </div>
