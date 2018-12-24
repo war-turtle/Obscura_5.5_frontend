@@ -4,7 +4,6 @@ import actions from '../../actions';
 import Avatar from '../shared/avatar';
 import SweetAlert from '../shared/sweetAlert';
 
-declare var M;
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +26,7 @@ class Form extends React.Component {
     const { picture } = this.state;
     const { register } = this.props;
     if (picture !== '') {
-      M.toast({ html: 'Submitting your form!', classes: 'rounded' });
+      window.M.toast({ html: 'Submitting your form!', classes: 'rounded' });
       register(this.state);
     } else {
       SweetAlert('Please choose an Avatar.', 'error');
@@ -48,7 +47,13 @@ class Form extends React.Component {
           Fill out your basic details.
         </h4>
         <div className="row">
-          <img src={picture} className="circle responsive-img" alt="img" width="100" />
+          {this.state.picture === '' ? (
+            <p>
+              No Image Provided
+            </p>
+          ) : (
+            <img src={picture} className="circle responsive-img" alt="img" width="100" />
+          )}
         </div>
         <a className="waves-effect waves-light btn modal-trigger" href="#modal0">
           <i className="material-icons left">

@@ -96,8 +96,8 @@ class Level extends React.Component {
                   html={html}
                 />
               ) : (
-                <Loader />
-              )}
+                  <Loader />
+                )}
 
             </div>
             <div className="col l4">

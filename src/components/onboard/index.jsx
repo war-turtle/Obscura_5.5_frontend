@@ -1,25 +1,28 @@
 import React from 'react';
-import loadjs from 'loadjs';
+// import loadjs from 'loadjs';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Form from './form';
 
-const $ = require('jquery');
+// const $ = require('jquery');
 
 class Onboard extends React.Component {
-  constructor(props) {
-    super(props);
-    loadjs([
-      'js/init.js',
-      'js/materialize.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js',
-    ]);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // loadjs([
+  //   //   'js/init.js',
+  //   //   'js/materialize.min.js',
+  //   //   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js',
+  //   // ]);
+  // }
 
+  // componentDidMount = () => {
+  //   $('link[rel=stylesheet][href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"]').remove();
+  // };
   componentDidMount = () => {
-    $('link[rel=stylesheet][href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"]').remove();
-  };
+    console.log(this.props.user);
+  }
 
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.onboard) {
@@ -65,7 +68,7 @@ const mapStateToProps = state => ({
 Onboard.propTypes = {
   // history: PropTypes.func.isRequired,
   onboard: PropTypes.bool.isRequired,
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 
