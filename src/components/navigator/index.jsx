@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import loadjs from 'loadjs';
+import $ from 'jquery';
 import actions from '../../actions';
 import SweetAlert from '../shared/sweetAlert';
 
@@ -104,28 +105,10 @@ class Navigation extends React.Component {
         <li />
         <li className="hide-on-small-only">
           <a
-<<<<<<< HEAD
-            href="#!"
-            data-target="slide-out1"
-            className="sidenav-trigger"
-          >
-            <i className="material-icons ">
-              whatshot
-            </i>
-            Levels
-          </a>
-        </li>
-        <li className="hide-on-med-and-up">
-          <a
-            href="#!"
-            data-target="slide-out1"
-            className="sidenav-trigger"
-            onClick={() => { this.hideMainSideNav(); }}
-=======
             className="sidenav-trigger sidenav-close waves-effect"
             href="#!"
             data-target="slide-out1"
->>>>>>> 88c506639bf34f045f9bcf4406817a0690d43a11
+            onClick={(e) => { e.preventDefault(); }}
           >
             <i className="material-icons ">
               whatshot

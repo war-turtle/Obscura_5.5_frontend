@@ -23,13 +23,9 @@ const errorHandle = (res) => {
 
     case 401:
     case 403:
-<<<<<<< HEAD
-      sessionStorage.removeItem('jwtToken');
-=======
       if (sessionStorage.getItem('jwtToken') != null) {
         sessionStorage.removeItem('jwtToken');
       }
->>>>>>> 88c506639bf34f045f9bcf4406817a0690d43a11
       break;
 
     default:
