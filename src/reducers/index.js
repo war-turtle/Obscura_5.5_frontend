@@ -9,7 +9,6 @@ import history from '../utils/history';
 
 const jwtDecode = require('jwt-decode');
 
-
 const url = (state = initialState, action) => {
   switch (action.type) {
     case 'URL':
@@ -22,7 +21,17 @@ const url = (state = initialState, action) => {
 const message = (state = initialState.messageSent, action) => {
   switch (action.type) {
     case 'SUCCESSFULLY_SENT_MESSAGE':
+      window.M.toast({
+        html: 'Your support is on the way! :)',
+        classes: 'rounded',
+      });
       return true;
+    case 'ERROR_SENDING_MESSAGE':
+      window.M.toast({
+        html: 'Try Again in some time',
+        classes: 'rounded',
+      });
+      return false;
     default:
       return state;
   }

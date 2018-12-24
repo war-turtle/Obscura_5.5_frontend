@@ -11,7 +11,7 @@ class Support extends React.Component {
       first_name: '',
       last_name: '',
       subject: '',
-      email: ''
+      email: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,10 +22,25 @@ class Support extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+    const { sendMessage } = this.props;
+    sendMessage(this.state);
+    this.setState({
+      description: '',
+      first_name: '',
+      last_name: '',
+      subject: '',
+      email: '',
+    });
+    window.M.toast({
+      html: 'Contacting Support!',
+      classes: 'rounded',
+    });
   }
 
   render() {
+    const {
+      first_name, last_name, email, subject, description,
+    } = this.state;
     return (
       <div className="fade">
         <div className="row center">
@@ -37,16 +52,16 @@ class Support extends React.Component {
             </div>
             <div className="col s12 m7 l7">
               <div className="row">
-                <form className="col s12" onSubmit={this.handleSubmit} >
+                <form className="col s12" onSubmit={this.handleSubmit}>
                   <div className="row">
                     <div className="input-field col s6">
-                      <input id="first_name" type="text" className="validate" required />
+                      <input id="first_name" value={first_name} name="first_name" type="text" className="validate" onChange={this.onChange} required />
                       <label htmlFor="first_name">
                         First Name
                       </label>
                     </div>
                     <div className="input-field col s6">
-                      <input id="last_name" type="text" className="validate" required />
+                      <input id="last_name" value={last_name} name="last_name" type="text" className="validate" onChange={this.onChange} required />
                       <label htmlFor="last_name">
                         Last Name
                       </label>
@@ -54,7 +69,7 @@ class Support extends React.Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s12">
-                      <input id="subject" type="text" className="validate" required />
+                      <input id="subject" value={subject} name="subject" type="text" className="validate" onChange={this.onChange} required />
                       <label htmlFor="subject">
                         Subject
                       </label>
@@ -62,7 +77,7 @@ class Support extends React.Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s12">
-                      <textarea id="description" className="materialize-textarea" required />
+                      <textarea id="description" value={description} name="description" className="materialize-textarea" onChange={this.onChange} required />
                       <label htmlFor="description">
                         Description
                       </label>
@@ -70,7 +85,7 @@ class Support extends React.Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s12">
-                      <input id="email" type="email" className="validate" required />
+                      <input id="email" value={email} type="email" name="email" className="validate" onChange={this.onChange} required />
                       <label htmlFor="email">
                         Email
                       </label>
