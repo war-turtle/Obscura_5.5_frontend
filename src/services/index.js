@@ -3,8 +3,6 @@ import config from '../config';
 
 const jwtDecode = require('jwt-decode');
 
-declare var M;
-
 // const cryptoJSON = require('crypto-json');
 
 
@@ -17,7 +15,7 @@ declare var M;
 const errorHandle = (res) => {
   switch (res.status) {
     case 500:
-      M.toast({
+      window.M.toast({
         html: 'Internal server error!',
         classes: 'rounded',
       });
@@ -25,7 +23,13 @@ const errorHandle = (res) => {
 
     case 401:
     case 403:
+<<<<<<< HEAD
       sessionStorage.removeItem('jwtToken');
+=======
+      if (sessionStorage.getItem('jwtToken') != null) {
+        sessionStorage.removeItem('jwtToken');
+      }
+>>>>>>> 88c506639bf34f045f9bcf4406817a0690d43a11
       break;
 
     default:

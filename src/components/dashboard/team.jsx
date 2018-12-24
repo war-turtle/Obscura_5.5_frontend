@@ -8,8 +8,6 @@ import actions from '../../actions';
 import Avatar from '../shared/avatar';
 import sweetAlert from '../shared/sweetAlert';
 
-declare var M; // Hack to run materialize toast.
-
 class Team extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +55,7 @@ class Team extends React.Component {
       sweetAlert('Please Select An Avatar', 'error');
     } else {
       const { createTeam } = this.props;
-      M.toast({ html: `Creating your Team! ${name}`, classes: 'rounded' }); // Creating your Team.
+      window.M.toast({ html: `Creating your Team! ${name}`, classes: 'rounded' }); // Creating your Team.
       createTeam({
         name, picture, secretKey,
       });
@@ -70,7 +68,7 @@ class Team extends React.Component {
 
   sendRequest(id, teamName) {
     const { sendTeamRequest } = this.props;
-    M.toast({ html: `Sending team joining request to TEAM ${teamName}`, classes: 'rounded' }); // Sending Team Request.
+    window.M.toast({ html: `Sending team joining request to TEAM ${teamName}`, classes: 'rounded' }); // Sending Team Request.
     sendTeamRequest(id);
   }
 
@@ -223,7 +221,13 @@ class Team extends React.Component {
                   </h4>
                   <div className="input-field col s12">
                     <div className="row">
-                      <img src={picture} className="circle responsive-img" alt="img" width="100" />
+                      {picture === '' ? (
+                        <p>
+                          No image provided
+                        </p>
+                      ) : (
+                        <img src={picture} className="circle responsive-img" alt="img" width="100" />
+                      )}
                     </div>
                     <a className="waves-effect waves-light btn modal-trigger" href="#modal2">
                       <i className="material-icons left">

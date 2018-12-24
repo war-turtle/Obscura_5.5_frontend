@@ -4,8 +4,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import loadjs from 'loadjs';
-import $ from 'jquery';
+// import loadjs from 'loadjs';
 import actions from '../../actions';
 import SweetAlert from '../shared/sweetAlert';
 
@@ -17,13 +16,12 @@ class Navigation extends React.Component {
     this.state = {
 
     };
-    loadjs('/js/init.js');
+    // loadjs('/js/init.js');
   }
 
   componentDidMount = () => {
-    const { getCurrentLevelAlias, getLevelList } = this.props;
+    const { getCurrentLevelAlias } = this.props;
     getCurrentLevelAlias();
-    getLevelList();
   }
 
   openCurrentLevel = () => {
@@ -75,7 +73,7 @@ class Navigation extends React.Component {
         </li>
         <li>
           <a
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => {
               e.preventDefault(); history.push('/dashboard');
@@ -91,7 +89,7 @@ class Navigation extends React.Component {
         <li>
           <a
             href="#!"
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             onClick={(e) => {
               e.preventDefault();
               jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new to PLAY!', 'error');
@@ -106,6 +104,7 @@ class Navigation extends React.Component {
         <li />
         <li className="hide-on-small-only">
           <a
+<<<<<<< HEAD
             href="#!"
             data-target="slide-out1"
             className="sidenav-trigger"
@@ -122,6 +121,11 @@ class Navigation extends React.Component {
             data-target="slide-out1"
             className="sidenav-trigger"
             onClick={() => { this.hideMainSideNav(); }}
+=======
+            className="sidenav-trigger sidenav-close waves-effect"
+            href="#!"
+            data-target="slide-out1"
+>>>>>>> 88c506639bf34f045f9bcf4406817a0690d43a11
           >
             <i className="material-icons ">
               whatshot
@@ -131,7 +135,7 @@ class Navigation extends React.Component {
         </li>
         <li>
           <a
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}
           >
@@ -144,7 +148,7 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}
           >
@@ -157,7 +161,7 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className="waves-effect"
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/support'); }}
           >
@@ -180,6 +184,7 @@ class Navigation extends React.Component {
             Logout
           </a>
         </li>
+
       </div>
     );
   }
@@ -187,7 +192,6 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   // user: PropTypes.objectOf(PropTypes.node),
-  getLevelList: () => null,
   history: () => null,
   getCurrentLevelAlias: () => null,
   alias: PropTypes.string,
@@ -197,7 +201,6 @@ Navigation.propTypes = {
 
 Navigation.defaultProps = {
   // user: {},
-  getLevelList: () => null,
   history: () => null,
   getCurrentLevelAlias: () => null,
   alias: '',
@@ -212,9 +215,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCurrentLevelAlias: () => {
     dispatch(actions.getAlias());
-  },
-  getLevelList: () => {
-    dispatch(actions.getLevelList());
   },
   getLevel: (alias) => {
     dispatch(actions.getLevel(alias));
