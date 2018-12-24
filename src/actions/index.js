@@ -33,7 +33,9 @@ const clearUser = () => (dispatch) => {
 const login = (token, provider) => (dispatch) => {
   services.login(token, provider).then(
     (data) => {
+      console.log(data);
       if (!data.success && data.singleDevice) {
+        SweetAlert('Some error occured while login you. Try Again', 'error');
         dispatch(failure('SIGNUP_REQUIRED', data));
       } else if (!data.success && !data.singleDevice) {
         SweetAlert('Someone is already active with this account', 'error');
@@ -187,6 +189,10 @@ const getAlias = () => (dispatch) => {
 
 const postAns = (ans, alias) => (dispatch) => {
   dispatch(startLoader());
+  const errorMsg = status => ({
+    type: 'ERROR',
+    status,
+  });
   services.postAns(ans, alias).then(
     (response) => {
       dispatch(stopLoader());
@@ -206,11 +212,6 @@ const postAns = (ans, alias) => (dispatch) => {
       }
     },
   );
-
-  const errorMsg = status => ({
-    type: 'ERROR',
-    status,
-  });
 };
 
 const getTeamList = () => (dispatch) => {

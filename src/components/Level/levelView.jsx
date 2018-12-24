@@ -6,8 +6,6 @@ import {
 } from 'react-router-dom';
 import actions from '../../actions';
 
-declare var M;
-
 class LevelView extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +26,7 @@ class LevelView extends React.Component {
     }
     const alias = this.props.match.params.alias;
 
-    M.toast({ html: 'Submitting your ans!', classes: 'rounded' });
+    window.M.toast({ html: 'Submitting your ans!', classes: 'rounded' });
 
     postAns(formData, alias);
   }
@@ -60,9 +58,9 @@ class LevelView extends React.Component {
                     Type your ans
                   </label>
                   <button className="btn waves-effect waves-light" id="submit" type="submit" name="action">
-                  Submit
+                    Submit
                     <i className="material-icons right">
-                    send
+                      send
                     </i>
                   </button>
                 </div>

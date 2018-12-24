@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   BrowserRouter, Switch, Route,
@@ -27,16 +26,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.socket = socketIOClient(config.api.url);
-    window.addEventListener('beforeunload', (ev) => {
-      props.logoutUser();
-    });
+    // sessionStorage.setItem({ online: 'yeep' });
+    // window.addEventListener('beforeunload', (ev) => {
+    //   props.logoutUser();
+    // });
   }
 
 
-  componentWillUnmount() {
-    const { logoutUser } = this.props;
-    logoutUser();
-  }
+  // componentWillUnmount() {
+  //   const { logoutUser } = this.props;
+  //   logoutUser();
+  // }
 
   render = () => (
     <BrowserRouter>

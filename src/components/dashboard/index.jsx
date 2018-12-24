@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Countdown from 'react-count-down';
-import loadjs from 'loadjs';
+// import loadjs from 'loadjs';
 import actions from '../../actions';
 import TeamDetails from '../shared/teamDetails';
 import Team from './team';
@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
       teamExist: false, // initialState that player has not joined any team.
       css: '',
     };
-    loadjs('/js/init.js'); // calling materialize init functions.
+    // loadjs('/js/init.js'); // calling materialize init functions.
     this.startTime = config.startTimestamp; // getting timestamp to start the event.
 
     this.user = sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null;

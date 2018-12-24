@@ -4,10 +4,9 @@ import {
   withRouter,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import loadjs from 'loadjs';
+// import loadjs from 'loadjs';
 import actions from '../../actions';
 import SweetAlert from '../shared/sweetAlert';
-import Chat from '../chat';
 
 const jwtDecode = require('jwt-decode');
 
@@ -17,13 +16,12 @@ class Navigation extends React.Component {
     this.state = {
 
     };
-    loadjs('/js/init.js');
+    // loadjs('/js/init.js');
   }
 
   componentDidMount = () => {
-    const { getCurrentLevelAlias, getLevelList } = this.props;
+    const { getCurrentLevelAlias } = this.props;
     getCurrentLevelAlias();
-    getLevelList();
   }
 
   openCurrentLevel = () => {
@@ -40,9 +38,8 @@ class Navigation extends React.Component {
 
   render() {
     const {
-      user, history, levellist, getLevel, logoutUser,
+      user, history, logoutUser,
     } = this.props;
-    levellist.sort((a, b) => a.levelNo - b.levelNo);
     return (
       <div>
         <li>
@@ -72,7 +69,7 @@ class Navigation extends React.Component {
         </li>
         <li>
           <a
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => {
               e.preventDefault(); history.push('/dashboard');
@@ -88,7 +85,7 @@ class Navigation extends React.Component {
         <li>
           <a
             href="#!"
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             onClick={(e) => {
               e.preventDefault();
               jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id ? this.openCurrentLevel() : SweetAlert('Please join a team or create a new to PLAY!', 'error');
@@ -103,46 +100,19 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className={
-              levellist.length ? 'dropdown-trigger waves-effect ' : 'dropdown-trigger waves-effect  hide'
-            }
+            className="sidenav-trigger sidenav-close waves-effect"
             href="#!"
-            data-target="dropdown1"
+            data-target="slide-out1"
           >
             <i className="material-icons ">
               whatshot
             </i>
             Levels
           </a>
-          <ul id="dropdown1" className="dropdown-content">
-            {
-              levellist.map(l => (
-                <a
-                  href="#!"
-                  key={l.levelNo}
-                  onClick={(e) => {
-                    e.preventDefault(); history.push(`/level/${l.url_alias}`); getLevel(l.url_alias);
-                  }}
-                >
-                  <li>
-                    <a href="#!">
-                      <i className="material-icons">
-                        whatshot
-                      </i>
-                      Level
-                      {' '}
-                      {l.levelNo}
-                    </a>
-                  </li>
-                  <li className="divider" tabIndex="-1" />
-                </a>
-              ))
-            }
-          </ul>
         </li>
         <li>
           <a
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/leaderboard'); }}
           >
@@ -155,7 +125,7 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className="waves-effect "
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/our-team'); }}
           >
@@ -168,7 +138,7 @@ class Navigation extends React.Component {
         <li />
         <li>
           <a
-            className="waves-effect"
+            className="waves-effect sidenav-close"
             href="#!"
             onClick={(e) => { e.preventDefault(); history.push('/support'); }}
           >
@@ -179,25 +149,6 @@ class Navigation extends React.Component {
           </a>
         </li>
         <li />
-        <li className="no-padding">
-          <ul className="collapsible collapsible-accordion">
-            <li>
-              <a className="collapsible-header">
-                Chat
-                <i className="material-icons">
-                  arrow_drop_down
-                </i>
-              </a>
-              <div className="collapsible-body">
-                <ul>
-                  <li>
-                    <Chat />
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </li>
         <li>
           <a
             className="waves-effect indigo white-text"
@@ -210,6 +161,7 @@ class Navigation extends React.Component {
             Logout
           </a>
         </li>
+
       </div>
     );
   }
@@ -217,37 +169,29 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   // user: PropTypes.objectOf(PropTypes.node),
-  getLevelList: () => null,
   history: () => null,
   getCurrentLevelAlias: () => null,
   alias: PropTypes.string,
-  levellist: PropTypes.arrayOf(PropTypes.object),
   getLevel: () => null,
 };
 
 
 Navigation.defaultProps = {
   // user: {},
-  getLevelList: () => null,
   history: () => null,
   getCurrentLevelAlias: () => null,
   alias: '',
-  levellist: [],
   getLevel: () => null,
 };
 
 const mapStateToProps = state => ({
   alias: state.level.alias,
-  levellist: state.level.levellist,
 });
 
 
 const mapDispatchToProps = dispatch => ({
   getCurrentLevelAlias: () => {
     dispatch(actions.getAlias());
-  },
-  getLevelList: () => {
-    dispatch(actions.getLevelList());
   },
   getLevel: (alias) => {
     dispatch(actions.getLevel(alias));
