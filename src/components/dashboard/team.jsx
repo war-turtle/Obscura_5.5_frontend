@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import actions from '../../actions';
 import Avatar from '../shared/avatar';
-import sweetAlert from '../shared/sweetAlert';
+import SweetAlert from '../shared/sweetAlert';
 
 class Team extends React.Component {
   constructor(props) {
@@ -52,10 +52,10 @@ class Team extends React.Component {
     e.preventDefault();
     const { picture, name, secretKey } = this.state;
     if (picture === '') {
-      sweetAlert('Please Select An Avatar', 'error');
+      SweetAlert('Please Select An Avatar', 'error');
     } else {
       const { createTeam } = this.props;
-      window.M.toast({ html: `Creating your Team! ${name}`, classes: 'rounded' }); // Creating your Team.
+      SweetAlert(`Creating your Team! ${name}`, 'success');
       createTeam({
         name, picture, secretKey,
       });
@@ -68,7 +68,7 @@ class Team extends React.Component {
 
   sendRequest(id, teamName) {
     const { sendTeamRequest } = this.props;
-    window.M.toast({ html: `Sending team joining request to TEAM ${teamName}`, classes: 'rounded' }); // Sending Team Request.
+    SweetAlert(`Sending team joining request to TEAM ${teamName}`, 'success');
     sendTeamRequest(id);
   }
 

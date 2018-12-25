@@ -34,7 +34,7 @@ class Login extends React.Component {
       SweetAlert('Google login failed! Try Again', 'error');
       // return;
     } else {
-      window.M.toast({ html: 'Logging you in!', classes: 'rounded' });
+      SweetAlert('Logging you in!', 'success');
       const { login } = this.props;
       login(response.tokenId, 'google');
     }
@@ -46,7 +46,7 @@ class Login extends React.Component {
       // return;
     } else {
       const { login } = this.props;
-      window.M.toast({ html: 'Logging you in!', classes: 'rounded' });
+      SweetAlert('Logging you in!', 'success');
       login(response.accessToken, 'facebook');
     }
   };

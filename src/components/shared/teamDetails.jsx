@@ -9,7 +9,7 @@ const TeamDetails = (props) => {
   } = props;
   if (team) {
     return (
-      <div className="row">
+      <div className="row fade">
         <div className="col s12 center">
           <img src={team.picture} alt="" className="circle responsive-img" width="15%" />
           <h5>

@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import SweetAlert from '../shared/sweetAlert';
 
 class Leaderboard extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Leaderboard extends React.Component {
   }
 
   goToPage = (index) => {
-    window.M.toast({ html: 'Fetching Leaderboard Please Wait!', classes: 'rounded' });
+    SweetAlert('Fetching Leaderboard Please Wait!', 'success');
     const { getLeaderboard } = this.props;
     getLeaderboard((index - 1), 10);
     this.setState({

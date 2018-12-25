@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import config from '../config';
+import SweetAlert from '../components/shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -15,10 +16,7 @@ const jwtDecode = require('jwt-decode');
 const errorHandle = (res) => {
   switch (res.status) {
     case 500:
-      window.M.toast({
-        html: 'Internal server error!',
-        classes: 'rounded',
-      });
+      SweetAlert('Internal server error!', 'error');
       break;
 
     case 401:

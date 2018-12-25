@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actions from '../../actions';
+import SweetAlert from '../shared/sweetAlert';
 
 const Requests = (props) => {
   const {
@@ -58,7 +59,7 @@ const Requests = (props) => {
                       className="material-icons select-pointer"
                       onClick={
                         () => {
-                          window.M.toast({ html: 'Accepting the request!', classes: 'rounded' });
+                          SweetAlert('Accepting the request!', 'success');
                           acceptRequest(t.requester_id);
                         }}
                     >
@@ -70,7 +71,7 @@ const Requests = (props) => {
                       className="material-icons select-pointer"
                       onClick={
                         () => {
-                          window.M.toast({ html: 'Deleting the request!', classes: 'rounded' });
+                          SweetAlert('Deleting the request!', 'success');
                           deleteRequest(t.requester_id);
                         }
                       }
