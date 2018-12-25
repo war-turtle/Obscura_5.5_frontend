@@ -24,7 +24,10 @@ class Level extends React.Component {
   }
 
   componentDidMount = () => {
-    const { getLevel } = this.props;
+    const { getLevel, socket, history } = this.props;
+    socket.on('openNextLevel', (alias) => {
+      history.push(`/level/${alias}`);
+    });
     const alias = this.props.match.params.alias;
     getLevel(alias);
   }
@@ -96,8 +99,8 @@ class Level extends React.Component {
                   html={html}
                 />
               ) : (
-                  <Loader />
-                )}
+                <Loader />
+              )}
 
             </div>
             <div className="col l4">

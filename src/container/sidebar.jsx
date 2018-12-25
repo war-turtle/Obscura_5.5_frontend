@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Navigation from '../components/navigator';
 import Footer from '../components/shared/Footer';
 import Header from '../components/shared/Header';
 import LevelSidebar from './levelSidebar';
+import actions from '../actions';
 
 const jwtDecode = require('jwt-decode');
 
@@ -23,8 +25,15 @@ const SideBar = ({
   if (!user) {
     return <Redirect to="/" />;
   }
-  const { history, socket } = rest;
+  const { history, socket, getTeam } = rest;
   socket.emit('joinRoom', user);
+  socket.on('accepted', (token) => {
+    window.sessionStorage.setItem('jwtToken', token);
+    getTeam(jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id);
+  });
+  socket.on('openNextLevel', (alias) => {
+    history.push(`/level/${alias}`);
+  });
 
   return (
     <div>
@@ -66,4 +75,11 @@ SideBar.defaultProps = {
   component: () => null,
 };
 
-export default withRouter(SideBar);
+
+const mapDispatchToProps = dispatch => ({
+  getTeam: (teamId) => {
+    dispatch(actions.getTeam(teamId));
+  },
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(SideBar));
