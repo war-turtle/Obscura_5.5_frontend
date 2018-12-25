@@ -6,6 +6,7 @@ import {
 } from 'react-redux-snackbar';
 import initialState from './initialState';
 import history from '../utils/history';
+import SweetAlert from '../components/shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
@@ -21,16 +22,10 @@ const url = (state = initialState, action) => {
 const message = (state = initialState.messageSent, action) => {
   switch (action.type) {
     case 'SUCCESSFULLY_SENT_MESSAGE':
-      window.M.toast({
-        html: 'Your support is on the way! :)',
-        classes: 'rounded',
-      });
+      SweetAlert('Your support is on the way! :)', 'success');
       return true;
     case 'ERROR_SENDING_MESSAGE':
-      window.M.toast({
-        html: 'Try Again in some time',
-        classes: 'rounded',
-      });
+      SweetAlert('Try Again in some time', 'error');
       return false;
     default:
       return state;

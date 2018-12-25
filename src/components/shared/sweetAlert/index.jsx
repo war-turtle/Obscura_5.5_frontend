@@ -1,11 +1,10 @@
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+// const SweetAlert = (content, state) => MySwal.fire({
+//   title: content,
+//   type: state,
+// });
 
-const MySwal = withReactContent(Swal);
-
-const SweetAlert = (content, state) => MySwal.fire({
-  title: content,
-  type: state,
-});
+const SweetAlert = (content, state) => {
+  window.M.toast({ html: content, classes: `toast-${state}` });
+};
 
 export default SweetAlert;

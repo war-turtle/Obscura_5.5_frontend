@@ -5,6 +5,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 import actions from '../../actions';
+import SweetAlert from '../shared/sweetAlert';
 
 class LevelView extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class LevelView extends React.Component {
     }
     const alias = this.props.match.params.alias;
 
-    window.M.toast({ html: 'Submitting your ans!', classes: 'rounded' });
+    SweetAlert('Submitting your ans!', 'success');
 
     postAns(formData, alias);
   }

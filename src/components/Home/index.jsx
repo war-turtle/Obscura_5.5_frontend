@@ -2,8 +2,7 @@ import React from 'react';
 // import loadjs from 'loadjs';
 import Login from '../Login';
 
-import './index.css';
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Home extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -14,10 +13,13 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+
         <h1>
           Welcome to home page
         </h1>
+
         <Login />
+
       </div>
     );
   }

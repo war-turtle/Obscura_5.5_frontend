@@ -26,7 +26,7 @@ class Form extends React.Component {
     const { picture } = this.state;
     const { register } = this.props;
     if (picture !== '') {
-      window.M.toast({ html: 'Submitting your form!', classes: 'rounded' });
+      SweetAlert('Submitting your form!', 'success');
       register(this.state);
     } else {
       SweetAlert('Please choose an Avatar.', 'error');

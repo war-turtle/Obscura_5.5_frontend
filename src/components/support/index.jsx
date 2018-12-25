@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import actions from '../../actions';
+import SweetAlert from '../shared/sweetAlert';
 
 class Support extends React.Component {
   constructor(props) {
@@ -31,10 +32,7 @@ class Support extends React.Component {
       subject: '',
       email: '',
     });
-    window.M.toast({
-      html: 'Contacting Support!',
-      classes: 'rounded',
-    });
+    SweetAlert('Contacting Support!', 'success');
   }
 
   render() {
