@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
 import Navigation from '../components/navigator';
-import LevelSideNav from '../components/navigator/levelSidenav';
 import Footer from '../components/shared/Footer';
 import Header from '../components/shared/Header';
 import LevelSidebar from './levelSidebar';
