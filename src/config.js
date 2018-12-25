@@ -8,7 +8,7 @@ const dev = {
     encoding: 'hex',
   },
   startTimestamp: 1538188200000,
-  startDate: '09/29/2018 08:00 AM',
+  startDate: '12/29/2019 08:00 AM',
 };
 
 const prod = {

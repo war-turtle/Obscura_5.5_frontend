@@ -20,7 +20,7 @@ class Avatar extends React.Component {
 
   render() {
     const avatarName = [];
-    for (let i = 2; i <= 60; i += 1) {
+    for (let i = 1; i <= 99; i += 1) {
       avatarName.push(`/images/avatars/${i}.png`);
     }
     return (

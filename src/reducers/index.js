@@ -133,8 +133,9 @@ const level = (state = initialState.level, action) => {
       });
 
     case 'FAILURE_LIST':
-      return null;
-
+      return Object.assign({}, state, {
+        levellist: [],
+      });
     case 'ALIAS_SUCCESS':
       return Object.assign({}, state, {
         alias: action.data.data.alias,

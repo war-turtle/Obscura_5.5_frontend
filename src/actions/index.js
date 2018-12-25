@@ -56,7 +56,7 @@ const getLevelList = () => (dispatch) => {
   services.getLevelList().then(
     (list) => {
       dispatch(stopLoader());
-      if (list.status === 'failure') {
+      if (!list.success) {
         dispatch(failure('FAILURE_LIST', list));
       } else {
         dispatch(success('SUCCESS_LIST', list));

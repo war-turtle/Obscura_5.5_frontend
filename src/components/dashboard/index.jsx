@@ -1,21 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Countdown from 'react-count-down';
 import loadjs from 'loadjs';
 import actions from '../../actions';
 import TeamDetails from '../shared/teamDetails';
 import Team from './team';
 import config from '../../config';
-import SweetAlert from '../shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
 // conditional component view if the player is joined
 const Decide = (props) => {
-  const { teamExist, team } = props;
+  const { teamExist, team, socket } = props;
   if (teamExist) {
-    return <TeamDetails team={team} requests="" />;
+    return <TeamDetails team={team} requests="" socket={socket} />;
   }
   return <Team />;
 };
@@ -31,24 +29,11 @@ class Dashboard extends React.Component {
     this.startTime = config.startTimestamp; // getting timestamp to start the event.
 
     this.user = sessionStorage.getItem('jwtToken') ? jwtDecode(sessionStorage.getItem('jwtToken')) : null;
-
-    // countdown options
-    this.OPTIONS = {
-      endDate: config.startDate,
-      prefix: 'until game starts!',
-
-      // callback function after countdown stops.
-      cb: () => {
-        props.getCurrentLevelAlias();
-        props.getLevelList();
-        SweetAlert('Game has started! You may enter.', 'success');
-      },
-    };
   }
 
   componentDidMount = () => {
     const {
-      getTeam, history,
+      getTeam, history, socket,
     } = this.props;
     if (this.user === null) {
       history.push('/');
@@ -65,12 +50,10 @@ class Dashboard extends React.Component {
       });
     }
 
-    // changing css of the countdown to hide it.
-    if (this.startTime < new Date()) {
-      this.setState({
-        css: 'hide',
-      });
-    }
+    socket.on('requestRecieved', (id) => {
+      console.log('recieved signal');
+      getTeam(this.user.user.team_id);
+    });
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -81,40 +64,15 @@ class Dashboard extends React.Component {
     }
   }
 
-  renderTimer = () => {
-    const shouldShowTimer = this.startTime > new Date();
-    if (shouldShowTimer) {
-      return (
-        <h5>
-          <Countdown options={this.OPTIONS} />
-        </h5>
-      );
-    }
-    return '';
-  }
 
   render() {
-    const timer = this.renderTimer();
     const { teamExist, css } = this.state;
-    const { team } = this.props;
+    const { team, socket } = this.props;
     return (
       <div>
-        {/* <nav
-          className={css}
-          style={{
-            paddingBottom: '120px',
-            backgroundColor: '#424242',
-          }}
-        >
-          <div className="nav-wrapper" style={{ backgroundColor: '#424242' }}>
-            <a href="#!" className="brand-logo center">
-              {timer}
-            </a>
-          </div>
-        </nav> */}
         <div className="row center">
           <div className="col s12">
-            <Decide teamExist={teamExist} team={team} />
+            <Decide teamExist={teamExist} team={team} socket={socket} />
           </div>
         </div>
       </div>

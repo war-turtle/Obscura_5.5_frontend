@@ -75,6 +75,7 @@ class App extends React.Component {
           socket={this.socket}
         />
         <SideBar
+          exact
           path="/our-team"
           component={Team}
           user={

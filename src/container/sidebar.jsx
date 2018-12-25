@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom';
 import Navigation from '../components/navigator';
-import LevelSideNav from '../components/navigator/levelSidenav';
 import Footer from '../components/shared/Footer';
 import Header from '../components/shared/Header';
 import LevelSidebar from './levelSidebar';
@@ -24,7 +23,8 @@ const SideBar = ({
   if (!user) {
     return <Redirect to="/" />;
   }
-  const { history } = rest;
+  const { history, socket } = rest;
+  socket.emit('joinRoom', user);
 
   return (
     <div>
@@ -38,7 +38,7 @@ const SideBar = ({
             menu
           </i>
         </a>
-        <Header history={history} />
+        <Header />
         <main>
           <Route
             {...rest}

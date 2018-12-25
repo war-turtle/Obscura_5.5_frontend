@@ -55,7 +55,7 @@ class Form extends React.Component {
             <img src={picture} className="circle responsive-img" alt="img" width="100" />
           )}
         </div>
-        <a className="waves-effect waves-light btn modal-trigger" href="#modal0">
+        <a className="waves-effect waves-light btn modal-trigger grey darken-3" href="#modal0">
           <i className="material-icons left">
             cloud
           </i>
@@ -109,7 +109,7 @@ class Form extends React.Component {
               </label>
             </div>
           </div>
-          <button className="modal-close btn waves-effect waves-light" type="submit">
+          <button className="modal-close btn waves-effect waves-light grey darken-3" type="submit">
             Submit
             <i className="material-icons right">
               send
