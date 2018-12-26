@@ -11,7 +11,6 @@ class LevelSidebar extends React.Component {
 
   render() {
     const { getLevel, levellist, history } = this.props;
-    console.log(levellist);
     levellist.sort((a, b) => a.levelNo - b.levelNo);
     return (
       <ul id="slide-out1" className="sidenav">

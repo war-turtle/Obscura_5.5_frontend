@@ -7,5 +7,4 @@ $(document).ready(() => {
   $('#slide-out2').sidenav({ edge: 'right' });
   $('.dropdown-trigger').dropdown();
   $('.collapsible').collapsible();
-  console.log('ia ma ja');
 });

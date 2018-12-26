@@ -18,7 +18,6 @@ class Chat extends Component {
       this.socket.on('roomJoin', (msg) => {
         if (msg.success) {
           this.setState({ allMessages: msg.messages });
-          console.log(this.state.allMessages);
         } else {
           console.log('can\'t fetch messages');
         }

@@ -25,10 +25,6 @@ const DisplayImage = (props) => {
 
 
 class Team extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
-
   render() {
     const developersArray = [
       { name: 'Anuj Sharma', url: 'AnujSharma.jpg' },

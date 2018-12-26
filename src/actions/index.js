@@ -33,7 +33,6 @@ const clearUser = () => (dispatch) => {
 const login = (token, provider) => (dispatch) => {
   services.login(token, provider).then(
     (data) => {
-      console.log(data);
       if (!data.success && data.singleDevice) {
         SweetAlert('Some error occured while login you. Try Again', 'error');
         dispatch(failure('SIGNUP_REQUIRED', data));
