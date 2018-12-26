@@ -6,7 +6,7 @@ import SweetAlert from '../shared/sweetAlert';
 
 const Requests = (props) => {
   const {
-    requests, acceptRequest, deleteRequest, socket,
+    requests, acceptRequest, deleteRequest
   } = props;
   if (requests.length) {
     return (

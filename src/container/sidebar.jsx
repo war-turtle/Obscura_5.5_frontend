@@ -32,7 +32,7 @@ const SideBar = ({
     getTeam(jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id);
   });
   socket.on('openNextLevel', (alias) => {
-    history.push(`/level/${alias}`);
+    window.location.href = `/level/${alias}`;
   });
 
   return (

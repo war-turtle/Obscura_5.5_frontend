@@ -24,10 +24,7 @@ class Level extends React.Component {
   }
 
   componentDidMount = () => {
-    const { getLevel, socket, history } = this.props;
-    socket.on('openNextLevel', (alias) => {
-      history.push(`/level/${alias}`);
-    });
+    const { getLevel } = this.props;
     const alias = this.props.match.params.alias;
     getLevel(alias);
   }

@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
 
 
   render() {
-    const { teamExist, css } = this.state;
+    const { teamExist } = this.state;
     const { team, socket } = this.props;
     return (
       <div>

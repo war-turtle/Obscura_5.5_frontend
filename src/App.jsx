@@ -18,6 +18,7 @@ import actions from './actions';
 import config from './config';
 import NotFound from './components/notfound';
 import TeamPage from './components/TeamPage';
+import history from './utils/history';
 
 const jwtDecode = require('jwt-decode');
 
@@ -29,6 +30,9 @@ class App extends React.Component {
     // window.addEventListener('beforeunload', (ev) => {
     //   props.logoutUser();
     // });
+    // this.socket.on('openNextLevel', (alias) => {
+    //   history.push(`/level/${alias}`);
+    // });
   }
 
 
@@ -38,7 +42,7 @@ class App extends React.Component {
   // }
 
   render = () => (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <Switch>
         <Route exact path="/" component={Home} />
         <Socket
