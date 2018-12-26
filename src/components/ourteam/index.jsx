@@ -29,8 +29,6 @@ class Team extends React.Component {
     const developersArray = [
       { name: 'Anuj Sharma', url: 'AnujSharma.jpg' },
       { name: 'Kartik Yadav', url: 'KartikYadav.jpg' },
-      { name: 'Avinash Bharti', url: 'AvinashBharti.jpg' },
-      { name: 'Aryan Kaul', url: 'AryanKaul.jpg' },
       { name: 'Anshul Malik (The Great)', url: 'AnshulMalik.jpg' },
     ];
     const architectArray1 = [
@@ -50,7 +48,6 @@ class Team extends React.Component {
     const architectArray2 = [
       { name: 'Tanvi Singhal', url: 'TanviSingla.jpg' },
       { name: 'Vedant Nepal', url: 'VedantNepal.jpg' },
-      { name: 'Abhinav Sankar', url: 'AbhinavMishra.jpg' },
       { name: 'Abhimanyu Singh', url: 'AbhimanyuSingh.jpg' },
       { name: 'Thorvi Ramteke', url: 'ThorviRamteke.jpg' },
       { name: 'Yaseen Gouse Samudri', url: 'YaseenGouseSamudri.jpg' },
