@@ -7,8 +7,9 @@ RUN npm i
 
 COPY . .
 
-RUN npm run build
+RUN npm run prod
 
 FROM nginx:alpine
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 3000
