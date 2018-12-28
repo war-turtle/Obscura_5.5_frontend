@@ -6,3 +6,9 @@ before_install:
   - docker build -t warturtle/obscura6-frontend -f Dockerfile.dev .
 script:
   - docker run warturtle/obscura6-frontend npm run test -- --coverage
+
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: develop
