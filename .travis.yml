@@ -8,6 +8,8 @@ before_install:
 script:
   - docker run warturtle/obscura6-frontend npm run test -- --coverage
 
+before_deploy:
+  - apt install python-pip
 deploy:
   provider: script
   script: bash deploy.sh
