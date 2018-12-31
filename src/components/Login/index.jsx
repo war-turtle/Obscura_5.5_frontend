@@ -4,7 +4,6 @@ import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import loadjs from 'loadjs';
 import SweetAlert from '../shared/sweetAlert';
 import actions from '../../actions';
 
@@ -12,7 +11,6 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // loadjs('/js/init.js');
   }
 
   componentDidMount = () => {
@@ -53,17 +51,17 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="center-align">
         <div>
           <GoogleLogin
             clientId="802725431757-hjgkfe6valnvupeletpn8jjfgo2p80fk.apps.googleusercontent.com"
-            buttonText="Login With Google"
+            buttonText="Google Login"
             onSuccess={this.responseGoogle}
             onFailure={this.responseGoogle}
-            className="btn waves-effect red waves-light login"
+            className="btn z-depth-0 loginButton"
           />
         </div>
-        <div>
+        <div style={{ marginTop: '10px' }}>
           <FacebookLogin
             socialId="482076445491176"
             language="en_US"
@@ -72,8 +70,8 @@ class Login extends React.Component {
             xfbml
             fields="id,email,name,picture"
             version="v2.5"
-            className="btn waves-effect waves-light login indigo"
-            buttonText="Login With Facebook"
+            className="btn z-depth-0 loginButton"
+            buttonText="Facebook Login"
           />
         </div>
       </div>

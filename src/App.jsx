@@ -18,7 +18,6 @@ import actions from './actions';
 import config from './config';
 import NotFound from './components/notfound';
 import TeamPage from './components/TeamPage';
-import history from './utils/history';
 
 const jwtDecode = require('jwt-decode');
 
@@ -42,7 +41,7 @@ class App extends React.Component {
   // }
 
   render = () => (
-    <BrowserRouter history={history}>
+    <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         <Socket
