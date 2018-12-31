@@ -7,9 +7,9 @@ env:
     - SHA=$(git rev-parse HEAD)
 
 before_install:
-  - docker build -t warturtle/obscura6-frontend -f Dockerfile.dev .
+  - docker build -t warturtle/obscura6-frontend-test -f Dockerfile.dev .
 script:
-  - docker run warturtle/obscura6-frontend npm run test -- --coverage
+  - docker run warturtle/obscura6-frontend-test npm run test -- --coverage
 
 deploy:
   provider: script
