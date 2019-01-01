@@ -25,7 +25,7 @@ const SideBar = ({
   if (!user) {
     return <Redirect to="/" />;
   }
-  const { history, socket, getTeam } = rest;
+  const { socket, getTeam } = rest;
   socket.emit('joinRoom', user);
   socket.on('accepted', (token) => {
     window.sessionStorage.setItem('jwtToken', token);
