@@ -54,12 +54,7 @@ class Login extends React.Component {
       <div className="center-align">
         <div>
           <GoogleLogin
-<<<<<<< HEAD
-            // clientId="802725431757-hjgkfe6valnvupeletpn8jjfgo2p80fk.apps.googleusercontent.com"
-            clientId="71101438482-vvine4jnp652cqa82m2m1lkf6ja0ki66.apps.googleusercontent.com"
-=======
             clientId="1078663843737-brnknf8s4ihq8mn8i22ntjha838n5cq9.apps.googleusercontent.com"
->>>>>>> 328b52e349cb1e37bdd99ed53b3bc1b97c238f5a
             buttonText="Google Login"
             onSuccess={this.responseGoogle}
             onFailure={this.responseGoogle}
