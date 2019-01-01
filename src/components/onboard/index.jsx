@@ -28,20 +28,22 @@ class Onboard extends React.Component {
             <div className="card-content white-text">
 
               <div className="row">
-                <div className="col s6" />
-                <div className="col s6">
-                  <ul className="tabs">
+                <div className="col s12 m6" />
+                <div className="col s12 m6">
+                  <ul className="tabs grey-text">
                     <li className="tab col s12">
-                      <a href="#test1">
+                      <a href="#test1" className="grey-text text-darken-3">
                         Basic Details
                       </a>
                     </li>
                   </ul>
                 </div>
-                <div className="col s6">
-                  <img src="/images/avatars/10.png" alt="pockedex" width="100%" />
+                <div className="col s12 m6">
+                  <div className="valign-wrapper" style={{ height: '80vh' }}>
+                    <img src="/images/avatars/10.png" alt="pockedex" width="100%" />
+                  </div>
                 </div>
-                <div className="col s6">
+                <div className="col s12 m6">
                   <div id="test1" className="col s12">
                     <Form user={user} />
                   </div>
