@@ -31,10 +31,12 @@ class BarChart extends React.Component {
   makeData = (players) => {
     this.data = [];
     this.labels = [];
-    players.map((d) => {
-      this.labels.push(d.username);
-      this.data.push(d.level_cleared);
-    });
+    if (players) {
+      players.map((d) => {
+        this.labels.push(d.username);
+        this.data.push(d.level_cleared);
+      });
+    }
     this.datasets.data = this.data;
     this.datasets.label = 'Team contribution';
     this.datasets.backgroundColor = 'rgb(255, 99, 132)';

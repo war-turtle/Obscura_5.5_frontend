@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const DisplayImage = (props) => {
   const { images } = props;
   const className = `col s${Math.floor(12 / images.length)}`;
-  console.log(className);
   return (
     <div className="row">
 

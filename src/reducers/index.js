@@ -34,6 +34,8 @@ const message = (state = initialState.messageSent, action) => {
 
 const otherTeam = (state = initialState.otherTeam, action) => {
   switch (action.type) {
+    case 'TEAM_FETCH_SUCCESS':
+      return action.data.data;
     case 'OTHER_TEAM_FETCH':
       return action.data.data;
     default:
