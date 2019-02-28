@@ -33,13 +33,19 @@ const Home = () => (
         </h3>
         <div className="center-align">
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            * Use of Google is permitted. Whats more, we recommend the use of Google.
           </p>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            * Upper case characters and spaces are not permitted in the answers.
           </p>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            * Out of the box thinking is encouraged as ObscurA puts up questions which require unconventional line of thought.
+          </p>
+          <p>
+            * We give hints only if asked properly.
+          </p>
+          <p>
+            * Keep an eye on our FB profile and Twitter handle as we will regularly post hints and updates there.
           </p>
         </div>
       </div>

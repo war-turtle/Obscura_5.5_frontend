@@ -31,7 +31,7 @@ const TeamDetails = (props) => {
                         group
                       </i>
                       Team Members (
-                      {team.players.length}
+                      {team.players ? team.players.length : 0}
                       )
                     </div>
                   </li>
@@ -52,7 +52,7 @@ const TeamDetails = (props) => {
                     </tr>
                   </thead>
 
-                  {team.players.map(p => (
+                  {team.players ? team.players.map(p => (
                     <tbody key={p.username}>
                       <tr>
                         <td>
@@ -66,7 +66,7 @@ const TeamDetails = (props) => {
                         </td>
                       </tr>
                     </tbody>
-                  ))}
+                  )) : ''}
                 </table>
               </div>
 
@@ -81,7 +81,9 @@ const TeamDetails = (props) => {
         {requests}
         <div className={hidden ? 'hide' : ''}>
           <div className="col s12">
-            <Requests requests={team.requests} socket={socket} />
+            {
+            team.requests ? <Requests requests={team.requests} socket={socket} /> : <div />
+          }
           </div>
         </div>
       </div>
