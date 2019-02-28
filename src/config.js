@@ -7,8 +7,8 @@ const dev = {
     passKey: '394rwe78fudhwqpwriufdhr8ehyqr9pe8fud',
     encoding: 'hex',
   },
-  startTimestamp: 1538188200000,
-  startDate: '12/29/2019 08:00 AM',
+  startTimestamp: 1552044600000,
+  startDate: '03/08/2019 05:00 PM',
 };
 
 const prod = {
@@ -20,8 +20,8 @@ const prod = {
     passKey: '394rwe78fudhwqpwriufdhr8ehyqr9pe8fud',
     encoding: 'hex',
   },
-  startTimestamp: 1538188200000,
-  startDate: '09/29/2018 08:00 AM',
+  startTimestamp: 1552044600000,
+  startDate: '03/08/2019 05:00 PM',
 };
 
 const config = process.env.REACT_APP_STAGE === 'production' ? prod : dev;

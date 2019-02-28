@@ -42,11 +42,6 @@ const SideBar = ({
       </ul>
       <LevelSidebar />
       <div className="row">
-        <a href="#!" data-target="slide-out0" className="sidenav-trigger hide-on-large-only">
-          <i className="material-icons">
-            menu
-          </i>
-        </a>
         <Header />
         <main>
           <Route
