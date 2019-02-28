@@ -7,9 +7,14 @@ RUN npm i
 
 COPY . .
 
-RUN npm run prod
+RUN npm run prod    
 
-FROM nginx:alpine
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/build /usr/share/nginx/html
+FROM node:8-alpine
+
+COPY --from=builder /app/build /app/build
+
+RUN npm install -g serve
+
+CMD [ "serve","-l","3000","-s","app/build" ]
+
 EXPOSE 3000
