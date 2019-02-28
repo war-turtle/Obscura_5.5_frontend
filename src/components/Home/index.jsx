@@ -8,7 +8,7 @@ const Home = () => (
     <div className="col s12 m6">
       <div className="vertical-section">
         <h3>
-          ObscurA 6
+          ObscurA
         </h3>
         <p style={{ fontSize: '20px', textAlign: 'center' }}>
           You know you're playing ObscurA when you can't fall asleep
