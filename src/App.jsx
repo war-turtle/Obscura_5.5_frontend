@@ -25,13 +25,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.socket = socketIOClient(config.api.url);
-    // sessionStorage.setItem({ online: 'yeep' });
-    // window.addEventListener('beforeunload', (ev) => {
-    //   props.logoutUser();
-    // });
-    // this.socket.on('openNextLevel', (alias) => {
-    //   history.push(`/level/${alias}`);
-    // });
   }
 
 
