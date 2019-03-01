@@ -61,19 +61,6 @@ class Login extends React.Component {
             className="btn z-depth-0 loginButton"
           />
         </div>
-        <div style={{ marginTop: '10px' }}>
-          <FacebookLogin
-            socialId="482076445491176"
-            language="en_US"
-            scope="public_profile,email"
-            responseHandler={this.responseFacebook}
-            xfbml
-            fields="id,email,name,picture"
-            version="v2.5"
-            className="btn z-depth-0 loginButton"
-            buttonText="Facebook Login"
-          />
-        </div>
       </div>
     );
   }

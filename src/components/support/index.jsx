@@ -48,7 +48,7 @@ class Support extends React.Component {
                 Send us a Message
               </h5>
             </div>
-            <div className="col s12 m7 l7">
+            <div className="col s12">
               <div className="row">
                 <form className="col s12" onSubmit={this.handleSubmit}>
                   <div className="row">
@@ -100,54 +100,7 @@ class Support extends React.Component {
               </div>
 
             </div>
-            <div className="col s5 hide-on-med-and-down" style={{ padding: '25px' }}>
-              <h6>
-                CONTACT INFORMATION
-              </h6>
-              <ul style={{ padding: '25px' }}>
-                <li>
-                  <div className="row">
-                    <div className="col s2">
-                      <i className="material-icons">
-                        location_on
-                      </i>
-                    </div>
-                    <div className="col s10">
-                      462, Block C, Hostel No 7,
-                      <br />
-                      NIT Kurukshetra,
-                      <br />
-                      Thanesar, Kurukshetra: 136119
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="row">
-                    <div className="col s2">
-                      <i className="material-icons">
-                        phone
-                      </i>
-                    </div>
-                    <div className="col s10">
-                      9729778862
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="row">
-                    <div className="col s2">
-                      <i className="material-icons">
-                        email
-                      </i>
-                    </div>
-                    <div className="col s10">
-                      anujjangra25119@gmail.com
-                    </div>
-                  </div>
-                </li>
 
-              </ul>
-            </div>
           </div>
         </div>
       </div>
