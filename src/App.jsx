@@ -24,7 +24,7 @@ const jwtDecode = require('jwt-decode');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.socket = socketIOClient(config.api.url);
+    this.socket = socketIOClient(config.api.url); //for socket connection
   }
 
 
