@@ -13,7 +13,7 @@ const dev = {
 
 const prod = {
   api: {
-    url: 'http://api.obscuranitkkr.co.in',
+    url: 'http://www.obscuranitkkr.co.in/api',
   },
   cypher: {
     algo: 'aes256',
