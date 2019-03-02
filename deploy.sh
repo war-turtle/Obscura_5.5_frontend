@@ -16,6 +16,7 @@ docker push warturtle/obscura6-frontend:latest
 docker push warturtle/obscura6-frontend:$SHA
 
 gpg --batch --yes --passphrase ${PASS_PHRASE} -o obscura.pem -d obscura.pem.gpg
+sudo chmod 400 obscura.pem
 ssh -o "StrictHostKeyChecking no" -i obscura.pem ubuntu@www.obscuranitkkr.co.in sudo docker service update --image warturtle/obscura6-frontend:$SHA frontend
 
 # kubectl apply -f kubernetes
