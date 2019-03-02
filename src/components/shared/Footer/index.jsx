@@ -12,7 +12,7 @@ const Footer = () => (
             NIT Kurukshetra online crypt hunt game.
           </p>
         </div>
-        <div className="col l4 offset-l2 s12">
+        {/* <div className="col l4 offset-l2 s12">
           <h5 className="white-text">
             Links
           </h5>
@@ -38,7 +38,7 @@ const Footer = () => (
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
     <div className="footer-copyright">
