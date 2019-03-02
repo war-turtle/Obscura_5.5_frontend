@@ -20,6 +20,9 @@
     .swal2-content > .select-wrapper{
       display: none;
     }  
+    .statcounter{
+      display: none;
+    }
   </style>
   <title>Obscura 6</title>
 </head>
@@ -29,6 +32,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="%PUBLIC_URL%/js/init.js"></script>
   <script type="text/javascript" src="%PUBLIC_URL%/js/materialize.min.js"></script>
+  <script>
+    if(window.location.host != 'www.obscuranitkkr.co.in'){
+      window.location.host = 'www.obscuranitkkr.co.in';
+    }
+  </script>
   <!-- Default Statcounter code for Obscura
   http://obscuranitkkr.co.in -->
   <script type="text/javascript">
