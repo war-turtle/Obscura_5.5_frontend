@@ -8,10 +8,15 @@
 # kops get cluster
 # kops export kubecfg --name ${KOPS_CLUSTER_NAME}
 
+sudo apt install gnupg
+
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker build -t warturtle/obscura6-frontend:latest -t warturtle/obscura6-frontend:$SHA .
 docker push warturtle/obscura6-frontend:latest
 docker push warturtle/obscura6-frontend:$SHA
+
+gpg --batch --yes --passphrase ${PASS_PHRASE} -o obscura.pem -d obscura.pem.gpg
+ssh -o "StrictHostKeyChecking no" -i obscura.pem ubuntu@www.obscuranitkkr.co.in sudo docker service update --image warturtle/obscura6-frontend:$SHA frontend
 
 # kubectl apply -f kubernetes
 # kubectl set image deployment/frontend-deployment frontend=warturtle/obscura6-frontend:$SHA
