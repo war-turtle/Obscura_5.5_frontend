@@ -33,11 +33,12 @@ const clearUser = () => (dispatch) => {
 const login = (token, provider) => (dispatch) => {
   services.login(token, provider).then(
     (data) => {
-      if (!data.success && data.singleDevice) {
+      if (!data.success && data.err !== 'log both out') {
         SweetAlert('Some error occured while login you. Try Again', 'error');
         dispatch(failure('SIGNUP_REQUIRED', data));
-      } else if (!data.success && !data.singleDevice) {
+      } else if (!data.success && data.err === 'log both out') {
         SweetAlert('Someone is already active with this account', 'error');
+        SweetAlert('Both Users are now being logged out', 'error');
         dispatch(clearUser());
       } else {
         dispatch(success('SUCCESS_LOGIN', data));

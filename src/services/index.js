@@ -25,7 +25,10 @@ const errorHandle = (res) => {
         sessionStorage.removeItem('jwtToken');
       }
       break;
-
+    case 409:
+      SweetAlert('Some one tried to log in to your account', 'error');
+      window.location.pathname = '/';
+      break;
     default:
       break;
   }

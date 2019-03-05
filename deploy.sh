@@ -11,9 +11,8 @@
 sudo apt install gnupg
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker build -t warturtle/obscura6-frontend:latest -t warturtle/obscura6-frontend:$SHA .
+docker build -t warturtle/obscura6-frontend:latest .
 docker push warturtle/obscura6-frontend:latest
-docker push warturtle/obscura6-frontend:$SHA
 
 gpg --batch --yes --passphrase ${PASS_PHRASE} -o obscura.pem -d obscura.pem.gpg
 sudo chmod 400 obscura.pem
