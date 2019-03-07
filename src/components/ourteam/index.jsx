@@ -31,7 +31,6 @@ const developersArray = [
 ];
 const architectArray1 = [
   { name: 'Sushant Adlakha', url: 'SushantAdla.jpg' },
-  { name: 'Devayan Mishra', url: 'DevayanMishra.jpg' },
   { name: 'Prakhar Maheshwari', url: 'PrakharMaheshwari.jpg' },
   { name: 'Prashant Kumar', url: 'PrashantKumar.jpg' },
 ];
@@ -47,7 +46,6 @@ const architectArray2 = [
   { name: 'Tanvi Singhal', url: 'TanviSingla.jpg' },
   { name: 'Vedant Nepal', url: 'VedantNepal.jpg' },
   { name: 'Abhimanyu Singh', url: 'AbhimanyuSingh.jpg' },
-  { name: 'Thorvi Ramteke', url: 'ThorviRamteke.jpg' },
   { name: 'Yaseen Gouse Samudri', url: 'YaseenGouseSamudri.jpg' },
 ];
 
