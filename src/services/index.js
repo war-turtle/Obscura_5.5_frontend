@@ -4,15 +4,6 @@ import SweetAlert from '../components/shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
-// const cryptoJSON = require('crypto-json');
-
-
-// const decrypt = data => cryptoJSON.decrypt(data, config.cypher.passKey, {
-//   algorithm: config.cypher.algo,
-//   encoding: config.cypher.encoding,
-//   keys: [],
-// });
-
 const errorHandle = (res) => {
   switch (res.status) {
     case 500:

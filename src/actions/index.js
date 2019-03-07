@@ -4,6 +4,15 @@ import SweetAlert from '../components/shared/sweetAlert';
 
 const jwtDecode = require('jwt-decode');
 
+const cryptoJSON = require('crypto-json');
+
+
+const decrypt = data => cryptoJSON.decrypt(data, process.env.REACT_APP_PASSKEY, {
+  algorithm: 'aes256',
+  encoding: 'hex',
+  keys: [],
+});
+
 const success = (type, data) => ({
   type,
   data,
@@ -156,8 +165,10 @@ const getLevel = alias => (dispatch) => {
     (response) => {
       dispatch(stopLoader());
       if (response.success) {
+        const object = {};
+        object.data = decrypt(response.data);
         dispatch(setLevel());
-        dispatch(success('LEVEL_SUCCESS', response));
+        dispatch(success('LEVEL_SUCCESS', object));
       } else {
         dispatch(failure('LEVEL_FAILURE', response.status));
         dispatch(showSnack('myUniqueId', {
