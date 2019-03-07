@@ -11,6 +11,7 @@ class Header extends React.Component {
     this.state = {
       css: '',
     };
+    this.startTime = config.startTimestamp; // getting timestamp to start the event.
 
     // countdown options
     this.OPTIONS = {
@@ -34,8 +35,8 @@ class Header extends React.Component {
   }
 
   renderTimer = () => {
-    const shouldShowTimer = true;
-    // const shouldShowTimer = this.startTime > new Date();
+    // const shouldShowTimer = true;
+    const shouldShowTimer = this.startTime > new Date();
     if (shouldShowTimer) {
       return (
         <a href="#!" className="white-text" style={{ width: '10%' }}>

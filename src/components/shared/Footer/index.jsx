@@ -43,10 +43,14 @@ const Footer = () => (
     </div>
     <div className="footer-copyright">
       <div className="container">
-        © 2019 gawds
-        <a className="grey-text text-lighten-4 right" href="#!">
-          More Links
+        <a href="https://gawds.in">
+          <h6 className="grey-text text-lighten-4">
+            © 2019 gawds
+          </h6>
         </a>
+        {/* <a className="grey-text text-lighten-4 right" href="#!">
+          More Links
+        </a> */}
       </div>
     </div>
   </footer>
