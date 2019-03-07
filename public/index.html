@@ -33,7 +33,7 @@
   <script type="text/javascript" src="%PUBLIC_URL%/js/init.js"></script>
   <script type="text/javascript" src="%PUBLIC_URL%/js/materialize.min.js"></script>
   <script>
-    if(window.location.host != 'www.obscuranitkkr.co.in' && process.env.REACT_APP_STAGE === 'production'){
+    if(window.location.host != 'www.obscuranitkkr.co.in' && window.location.host != 'localhost:3000'){
       window.location.host = 'www.obscuranitkkr.co.in';
     }
   </script>
