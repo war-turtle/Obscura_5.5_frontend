@@ -17,7 +17,6 @@ class Navigation extends React.Component {
     this.state = {
 
     };
-    // loadjs('/js/init.js');
   }
 
   componentDidMount = () => {
@@ -128,7 +127,18 @@ class Navigation extends React.Component {
             Leaderboard
           </a>
         </li>
-        <li />
+        <li>
+          <a
+            className="waves-effect sidenav-close"
+            href="#!"
+            onClick={(e) => { e.preventDefault(); history.push('/hall-of-fame'); }}
+          >
+            <i className="material-icons ">
+            filter_vintage
+            </i>
+            Hall of Fame
+          </a>
+        </li>
         <li>
           <a
             className="waves-effect sidenav-close"

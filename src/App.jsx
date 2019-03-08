@@ -12,6 +12,7 @@ import Dashboard from './components/dashboard';
 import Level from './components/Level';
 import Support from './components/support';
 import Team from './components/ourteam';
+import Hall from './components/hallOfFame';
 import Leaderboard from './components/Leaderboard/index';
 import './App.css';
 import actions from './actions';
@@ -26,12 +27,6 @@ class App extends React.Component {
     super(props);
     this.socket = socketIOClient(config.api.url);
   }
-
-
-  // componentWillUnmount() {
-  //   const { logoutUser } = this.props;
-  //   logoutUser();
-  // }
 
   render = () => (
     <BrowserRouter>
@@ -74,6 +69,17 @@ class App extends React.Component {
           exact
           path="/our-team"
           component={Team}
+          user={
+            sessionStorage.getItem('jwtToken')
+              ? jwtDecode(sessionStorage.getItem('jwtToken'))
+              : null
+          }
+          socket={this.socket}
+        />
+        <SideBar
+          exact
+          path="/hall-of-fame"
+          component={Hall}
           user={
             sessionStorage.getItem('jwtToken')
               ? jwtDecode(sessionStorage.getItem('jwtToken'))

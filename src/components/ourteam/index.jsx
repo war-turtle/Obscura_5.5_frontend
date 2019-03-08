@@ -10,9 +10,10 @@ const DisplayImage = (props) => {
       {images.map((Obj, i) => (
         <div key={i} className={className}>
           <img
-            className="team-img"
+            className={Obj.small ? "master-img" : "team-img"}
             src={`images/team/${Obj.url}`}
             alt="team-pic"
+            height="200"
           />
           <p>
             {Obj.name}
@@ -30,24 +31,34 @@ const developersArray = [
   { name: 'Anshul Malik (The Great)', url: 'AnshulMalik.jpg' },
 ];
 const architectArray1 = [
-  { name: 'Sushant Adlakha', url: 'SushantAdla.jpg' },
-  { name: 'Prakhar Maheshwari', url: 'PrakharMaheshwari.jpg' },
+  { name: 'Vedant Nepal', url: 'VedantNepal.jpg' },
+  { name: 'Tanvi Singhal', url: 'TanviSingla.jpg' },
   { name: 'Prashant Kumar', url: 'PrashantKumar.jpg' },
 ];
 
 const architectArray3 = [
   { name: 'Rajan Nagpal', url: 'RajanNagpal.jpg' },
   { name: 'Saqib Kamal', url: 'SaqibKamal.jpg' },
-  { name: 'Saurabh Nandedkar', url: 'SaurabhNandedkar.jpg' },
-  { name: 'Shubhankar', url: 'Shubhankar.jpg' },
+  { name: 'Shubhankar Prasad', url: 'Shubhankar.jpg' },
 ];
 
 const architectArray2 = [
-  { name: 'Tanvi Singhal', url: 'TanviSingla.jpg' },
-  { name: 'Vedant Nepal', url: 'VedantNepal.jpg' },
+  { name: 'Sushant Adlakha', url: 'SushantAdla.jpg' ,small: true},
+  { name: 'Prakhar Maheshwari', url: 'PrakharMaheshwari.jpg', small: true},
+];
+
+const architectArray4 = [
+  { name: 'Saurabh Nandedkar', url: 'SaurabhNandedkar.jpg' },
   { name: 'Abhimanyu Singh', url: 'AbhimanyuSingh.jpg' },
   { name: 'Yaseen Gouse Samudri', url: 'YaseenGouseSamudri.jpg' },
 ];
+
+const architectArray5 = [
+  { name: 'Hemant Pandey', url: 'IMG_20190211_160435_885.jpg' },
+  { name: 'Ajay Arya', url: 'IMG_20190214_153118.jpg' },
+  { name: 'Saran', url: 'IMG_5996.jpg' },
+];
+
 
 const Team = () => (
   <div>
@@ -63,11 +74,19 @@ const Team = () => (
         </h5>
         <DisplayImage images={developersArray} />
         <h5 style={{ marginBottom: '50px' }}>
-      Architects
+      Elders
         </h5>
         <DisplayImage images={architectArray1} />
         <DisplayImage images={architectArray3} />
+        <h5 style={{ marginBottom: '50px' }}>
+      Masters
+        </h5>
         <DisplayImage images={architectArray2} />
+        <h5 style={{ marginBottom: '50px' }}>
+      Apperentices
+        </h5>
+        <DisplayImage images={architectArray4} />
+        <DisplayImage images={architectArray5} />
       </div>
     </div>
 

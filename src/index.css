@@ -113,6 +113,12 @@ footer {
 	border-radius: 50%;
 }
 
+.master-img {
+	max-width: 45%;
+	height: auto;
+	border-radius: 50%;
+}
+
 .feedback-card {
 	background-color: rgb(114, 114, 114);
 }
