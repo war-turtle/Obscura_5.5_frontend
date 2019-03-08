@@ -80,6 +80,7 @@ const getTeam = teamId => (dispatch) => {
     (response) => {
       dispatch(stopLoader());
       if (response.success && response.data._id === jwtDecode(sessionStorage.getItem('jwtToken')).user.team_id) {
+        localStorage.setItem('key', response.data.secretKey);
         dispatch(success('TEAM_FETCH_SUCCESS', response));
       } else if (response.success) {
         dispatch(success('OTHER_TEAM_FETCH', response));
