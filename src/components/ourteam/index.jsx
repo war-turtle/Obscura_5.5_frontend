@@ -83,7 +83,7 @@ const Team = () => (
         </h5>
         <DisplayImage images={architectArray2} />
         <h5 style={{ marginBottom: '50px' }}>
-      Apperentices
+      Apprentices
         </h5>
         <DisplayImage images={architectArray4} />
         <DisplayImage images={architectArray5} />
