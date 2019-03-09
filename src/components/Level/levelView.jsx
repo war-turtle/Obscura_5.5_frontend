@@ -46,7 +46,7 @@ class LevelView extends React.Component {
                 <div id="insert" dangerouslySetInnerHTML={{ __html: html }} />
               </div>
               {
-                picture.map(p => (<img key={p} className="responsive-img" src={p} width="50%" alt="level images" />))
+                picture.map(p => (<img key={p} id="level_image" className="responsive-img" src={p} width="50%" alt="level images" />))
               }
             </div>
           </div>
