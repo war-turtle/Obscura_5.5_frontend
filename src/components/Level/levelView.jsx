@@ -54,7 +54,7 @@ class LevelView extends React.Component {
                       </video>
                     );
                   }
-                  return (<img key={p} className="responsive-img" src={p} width="50%" alt="level images" />);
+                  return (<img key={p} className="responsive-img" id="level_image" src={p} width="50%" alt="level images" />);
                 })
               }
             </div>
