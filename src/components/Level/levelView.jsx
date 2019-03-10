@@ -45,8 +45,17 @@ class LevelView extends React.Component {
               <div className="row center">
                 <div id="insert" dangerouslySetInnerHTML={{ __html: html }} />
               </div>
-              {
-                picture.map(p => (<img key={p} id="level_image" className="responsive-img" src={p} width="50%" alt="level images" />))
+               {
+                picture.map((p) => {
+                  if (p.substr(p.lastIndexOf('.') + 1) === 'mp4') {
+                    return (
+                      <video className="responsive-video" controls>
+                        <source src={p} type="video/mp4" />
+                      </video>
+                    );
+                  }
+                  return (<img key={p} className="responsive-img" src={p} width="50%" alt="level images" />);
+                })
               }
             </div>
           </div>
